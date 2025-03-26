@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include qp_maintenence *.css
+recursive-include qp_maintenence *.csv
+recursive-include qp_maintenence *.html
+recursive-include qp_maintenence *.ico
+recursive-include qp_maintenence *.js
+recursive-include qp_maintenence *.json
+recursive-include qp_maintenence *.md
+recursive-include qp_maintenence *.png
+recursive-include qp_maintenence *.py
+recursive-include qp_maintenence *.svg
+recursive-include qp_maintenence *.txt
+recursive-exclude qp_maintenence *.pyc
