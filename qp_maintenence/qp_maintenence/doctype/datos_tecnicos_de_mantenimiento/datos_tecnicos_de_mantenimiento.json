@@ -1,0 +1,37 @@
+{
+ "actions": [],
+ "creation": "2025-04-28 14:51:56.546335",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cl_caracteristicas_del_producto",
+  "cl_descripcion"
+ ],
+ "fields": [
+  {
+   "fieldname": "cl_caracteristicas_del_producto",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Caracteristicas del producto"
+  },
+  {
+   "fieldname": "cl_descripcion",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Descripcion"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-05-06 09:35:59.625561",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Datos tecnicos de mantenimiento",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

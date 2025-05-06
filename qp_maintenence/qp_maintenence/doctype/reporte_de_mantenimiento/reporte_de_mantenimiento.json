@@ -1,0 +1,88 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2025-04-24 12:20:47.692273",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "informaci\u00f3n_del_cliente_section",
+  "naming_series",
+  "customer",
+  "customer_name",
+  "column_break1",
+  "fecha_mantenimiento"
+ ],
+ "fields": [
+  {
+   "fieldname": "informaci\u00f3n_del_cliente_section",
+   "fieldtype": "Section Break",
+   "label": "Informaci\u00f3n del Cliente"
+  },
+  {
+   "default": "RM-.YYYY.-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "options": "RM-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "fecha_mantenimiento",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Fecha Mantenimiento",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-06 09:37:35.870557",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Reporte de Mantenimiento",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
