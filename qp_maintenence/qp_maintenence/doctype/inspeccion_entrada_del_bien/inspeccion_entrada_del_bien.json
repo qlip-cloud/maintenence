@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "creation": "2025-04-25 16:02:37.726329",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cl_detalle",
+  "cl_cantidad",
+  "status",
+  "cl_observaciones"
+ ],
+ "fields": [
+  {
+   "fieldname": "cl_detalle",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Detalle",
+   "length": 100
+  },
+  {
+   "fieldname": "cl_cantidad",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cantidad",
+   "length": 20
+  },
+  {
+   "default": "Bueno",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "status",
+   "options": "\nBueno\nRegular\nMalo"
+  },
+  {
+   "fieldname": "cl_observaciones",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Observaciones",
+   "length": 200
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-05-08 08:33:03.026673",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Inspeccion Entrada del Bien",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
