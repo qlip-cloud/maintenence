@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "autoname": "field:nombre",
+ "creation": "2025-05-08 13:25:48.788628",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "nombre",
+  "inspeccion_entrada_del_bien"
+ ],
+ "fields": [
+  {
+   "fieldname": "nombre",
+   "fieldtype": "Data",
+   "label": "Nombre",
+   "unique": 1
+  },
+  {
+   "fieldname": "inspeccion_entrada_del_bien",
+   "fieldtype": "Table",
+   "label": "Inspeccion Entrada del Bien",
+   "options": "Inspeccion Entrada del Bien"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-08 14:15:36.929402",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Plantilla Entrada del Bien",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

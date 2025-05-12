@@ -28,7 +28,7 @@
   "descripci\u00f3n_del_producto",
   "responsable",
   "customer_name",
-  "cl_plantilla_de_proyecto",
+  "cl_plantilla_de_mantenimiento",
   "fecha_y_hora_inicio_real_os",
   "fecha_y_hora_finalizaci\u00f3n_os",
   "contact_info",
@@ -89,6 +89,7 @@
    "search_index": 1
   },
   {
+   "fetch_from": "hoja_de_vida_del_bien.item_code",
    "fieldname": "producto",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -100,7 +101,7 @@
   },
   {
    "depends_on": "eval:doc.production_item",
-   "fetch_from": "Item.item_name",
+   "fetch_from": "hoja_de_vida_del_bien.item_name",
    "fetch_if_empty": 1,
    "fieldname": "item_name",
    "fieldtype": "Data",
@@ -118,6 +119,7 @@
    "read_only": 1
   },
   {
+   "fetch_from": "hoja_de_vida_del_bien.serial_no",
    "fieldname": "item_serial_no",
    "fieldtype": "Link",
    "label": "Item Serial No",
@@ -210,8 +212,9 @@
   },
   {
    "fieldname": "responsable",
-   "fieldtype": "Data",
-   "label": "Responsable"
+   "fieldtype": "Link",
+   "label": "Responsable",
+   "options": "Equipo Tecnico"
   },
   {
    "bold": 1,
@@ -221,14 +224,6 @@
    "in_global_search": 1,
    "label": "Nombre del cliente",
    "reqd": 1
-  },
-  {
-   "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
-   "fieldname": "cl_plantilla_de_proyecto",
-   "fieldtype": "Link",
-   "label": "Plantilla de proyecto",
-   "mandatory_depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
-   "options": "Project Template"
   },
   {
    "fieldname": "fecha_y_hora_inicio_real_os",
@@ -326,6 +321,14 @@
    "fieldname": "observaciones",
    "fieldtype": "Small Text",
    "label": "Observaciones"
+  },
+  {
+   "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
+   "fieldname": "cl_plantilla_de_mantenimiento",
+   "fieldtype": "Link",
+   "label": "Mantenimiento Programado",
+   "mandatory_depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
+   "options": "Project Template"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -352,7 +355,7 @@
    "link_fieldname": "cl_orden_de_trabajo_servicio"
   }
  ],
- "modified": "2025-05-06 09:23:49.268600",
+ "modified": "2025-05-12 09:15:54.370710",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
