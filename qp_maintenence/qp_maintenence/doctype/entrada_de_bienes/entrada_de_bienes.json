@@ -123,27 +123,27 @@
    "fieldname": "cl_tipo_de_bien",
    "fieldtype": "Select",
    "label": "Tipo de bien",
-   "options": "\nMaquinaria & Equipo\nVeh\u00edculo",
+   "options": "\nEquipo\nVeh\u00edculo",
    "reqd": 1
   },
   {
    "bold": 1,
-   "depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "depends_on": "eval:doc.cl_tipo_de_bien ==\"Veh\u00edculo\"",
    "fieldname": "cl_placa",
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_standard_filter": 1,
    "label": "N\u00b0 Placa",
    "length": 10,
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\""
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien ==\"Veh\u00edculo\""
   },
   {
-   "depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "depends_on": "eval:doc.cl_tipo_de_bien ==\"Veh\u00edculo\"",
    "fieldname": "dato_kilometraje",
    "fieldtype": "Data",
    "label": "Kilometraje",
    "length": 10,
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\""
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !==\"Veh\u00edculo\""
   },
   {
    "depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
@@ -198,13 +198,13 @@
    "label": "Recepcion"
   },
   {
-   "fetch_from": "Hoja de Vida del Bien.item_code",
+   "fetch_from": "cl_hoja_de_vida_bien.item_code",
    "fieldname": "item_code",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "in_global_search": 1,
    "in_standard_filter": 1,
    "label": "C\u00f3digo del producto",
-   "options": "Hoja de Vida del Bien",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -212,13 +212,14 @@
    "fieldtype": "Column Break"
   },
   {
+   "fetch_from": "cl_hoja_de_vida_bien.item_name",
    "fetch_if_empty": 1,
    "fieldname": "nombre_del_producto",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "in_global_search": 1,
    "in_standard_filter": 1,
    "label": "Nombre del producto",
-   "options": "Hoja de Vida del Bien"
+   "read_only": 1
   },
   {
    "fieldname": "column_break_15",
@@ -236,11 +237,11 @@
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "Serial No",
+   "fetch_from": "cl_hoja_de_vida_bien.serial_no",
    "fieldname": "serie",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Serie",
-   "options": "Serial No"
+   "read_only": 1
   },
   {
    "fieldname": "section_break_19",
@@ -260,14 +261,15 @@
    "fieldname": "plantilla_inspeccion_entrada_del_bien",
    "fieldtype": "Link",
    "label": "Plantilla Inspecci\u00f3n Entrada del Bien",
-   "options": "Inspeccion Entrada del Bien"
+   "options": "Plantilla Entrada del Bien"
   },
   {
    "columns": 4,
    "fieldname": "table_29",
    "fieldtype": "Table",
    "label": "Datos entrada del bien",
-   "options": "Inspeccion Entrada del Bien"
+   "options": "Inspeccion Entrada del Bien",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_21",
@@ -308,7 +310,7 @@
    "link_fieldname": "entrada_del_bien"
   }
  ],
- "modified": "2025-05-06 09:24:33.308324",
+ "modified": "2025-05-08 13:36:28.772459",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Entrada de Bienes",
