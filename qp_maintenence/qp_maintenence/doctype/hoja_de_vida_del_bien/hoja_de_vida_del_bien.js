@@ -67,14 +67,18 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 										order_by:"idx"
 									})
 			.then((r) => {
-					r.forEach(element => {
-						frm.add_child('datos_de_mantenimiento', 
-							{	'idx':element.idx, 
-								'cl_caracteristicas_del_producto':element.cl_caracteristicas_del_producto, 
-								'cl_descripcion':element.cl_descripcion
-							});
-					});
-					frm.refresh_field('datos_de_mantenimiento')
+
+				frm.set_value('datos_de_mantenimiento', '')
+
+				r.forEach(element => {
+					frm.add_child('datos_de_mantenimiento', 
+						{	'idx':element.idx, 
+							'cl_caracteristicas_del_producto':element.cl_caracteristicas_del_producto, 
+							'cl_descripcion':element.cl_descripcion
+						});
+				});
+				
+				frm.refresh_field('datos_de_mantenimiento')
 			});
 					
 		}else{

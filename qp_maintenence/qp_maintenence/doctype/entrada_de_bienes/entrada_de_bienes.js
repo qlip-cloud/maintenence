@@ -59,6 +59,9 @@ frappe.ui.form.on('Entrada de Bienes', {
 										order_by:"idx"
 									})
 			.then((r) => {
+
+					frm.set_value('table_29', '')
+
 					r.forEach(element => {
 						frm.add_child('table_29', 
 							{	'idx':element.idx, 
@@ -70,6 +73,7 @@ frappe.ui.form.on('Entrada de Bienes', {
 
 							});
 					});
+					
 					frm.refresh_field('table_29')
 			});
 					

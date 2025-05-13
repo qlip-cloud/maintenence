@@ -48,4 +48,38 @@ frappe.ui.form.on('Orden de Servicio', {
 
 		frm.refresh_field('contact_display')
 	},
+	project_type:function(frm){
+		if(frm.doc.project_type){
+			frappe.db.get_list("Project Template Task",
+				{ 
+					filters:{
+						'parent':frm.doc.project_type,
+						'parenttype': "Project Template",
+					},
+					fields:["*"],
+					order_by:"idx"
+				})
+				.then((r) => {
+
+					frm.set_value('tasks','')
+					
+					r.forEach(element => {
+						frm.add_child('tasks', 
+							{	'idx':element.idx, 
+								'task':element.task, 
+								'subject':element.subject,
+								'tiempo_promedio':element.tiempo_promedio,
+								'tecnico_responsable':element.tecnico_responsable
+
+
+							});
+					});
+					frm.refresh_field('tasks')
+			});
+		}else{
+			frm.set_value('tasks','')
+		}
+
+		frm.refresh_field('tasks')
+	}
 });
