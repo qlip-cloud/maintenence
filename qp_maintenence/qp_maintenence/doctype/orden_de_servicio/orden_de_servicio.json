@@ -276,7 +276,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Tareas plantilla de proyecto",
-   "options": "Project Type"
+   "options": "Project Template"
   },
   {
    "columns": 9,
@@ -284,6 +284,7 @@
    "fieldtype": "Table",
    "label": "Tasks",
    "options": "Project Template Task",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -355,7 +356,7 @@
    "link_fieldname": "cl_orden_de_trabajo_servicio"
   }
  ],
- "modified": "2025-05-12 09:15:54.370710",
+ "modified": "2025-05-13 09:09:39.869511",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
