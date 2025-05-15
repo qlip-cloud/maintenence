@@ -1,0 +1,335 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2025-04-24 08:54:31.862392",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "workflow_state",
+  "customer_details",
+  "naming_series",
+  "cliente",
+  "customer_name",
+  "tipo_de_servicio",
+  "cl_plantilla_proyecto",
+  "column_break_3",
+  "posting_date",
+  "cl_tipo_de_bien",
+  "cl_placa",
+  "dato_kilometraje",
+  "concepto_gasolina",
+  "cl_hoja_de_vida_bien",
+  "contact_info",
+  "customer_address",
+  "address_display",
+  "contact_person",
+  "contact_display",
+  "section_break_11",
+  "item_code",
+  "column_break_13",
+  "nombre_del_producto",
+  "column_break_15",
+  "cantidad",
+  "column_break_17",
+  "serie",
+  "section_break_19",
+  "observaciones",
+  "inspeccion_entrada_del_bien",
+  "plantilla_inspeccion_entrada_del_bien",
+  "table_29",
+  "section_break_21",
+  "firma_cliente",
+  "column_break_23",
+  "firma_recepcion",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Workflow State",
+   "options": "Workflow State"
+  },
+  {
+   "fieldname": "customer_details",
+   "fieldtype": "Section Break",
+   "label": "Datos b\u00e1sicos",
+   "options": "fa fa-user"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "no_copy": 1,
+   "options": "EL-.YYYY.-",
+   "print_hide": 1,
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "cliente",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "Cliente",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fetch_if_empty": 1,
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Nombre cliente"
+  },
+  {
+   "fieldname": "tipo_de_servicio",
+   "fieldtype": "Select",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "Tipo de servicio",
+   "options": "\nGarant\u00eda\nMantenimiento Preventivo\nMantenimiento Correctivo\nDiagnostico",
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
+   "fieldname": "cl_plantilla_proyecto",
+   "fieldtype": "Link",
+   "label": "Plantilla de proyecto",
+   "mandatory_depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
+   "options": "Project Template"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "no_copy": 1,
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "cl_tipo_de_bien",
+   "fieldtype": "Select",
+   "label": "Tipo de bien",
+   "options": "\nEquipo\nVeh\u00edculo",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "depends_on": "eval:doc.cl_tipo_de_bien ==\"Veh\u00edculo\"",
+   "fieldname": "cl_placa",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "N\u00b0 Placa",
+   "length": 10,
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien ==\"Veh\u00edculo\""
+  },
+  {
+   "depends_on": "eval:doc.cl_tipo_de_bien ==\"Veh\u00edculo\"",
+   "fieldname": "dato_kilometraje",
+   "fieldtype": "Data",
+   "label": "Kilometraje",
+   "length": 10,
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !==\"Veh\u00edculo\""
+  },
+  {
+   "depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "fieldname": "concepto_gasolina",
+   "fieldtype": "Select",
+   "label": "Nivel de gasolina",
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "options": "Bajo\nMedio\nTotal"
+  },
+  {
+   "fieldname": "cl_hoja_de_vida_bien",
+   "fieldtype": "Link",
+   "label": "Hoja de vida bien",
+   "options": "Hoja de Vida del Bien",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "contact_info",
+   "fieldtype": "Section Break",
+   "label": "Address and Contact",
+   "options": "fa fa-bullhorn"
+  },
+  {
+   "fieldname": "customer_address",
+   "fieldtype": "Link",
+   "label": "Customer Address",
+   "options": "Address",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Link",
+   "label": "Contact Person",
+   "options": "Contact",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "contact_display",
+   "fieldtype": "Small Text",
+   "in_global_search": 1,
+   "label": "Contact"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break",
+   "label": "Recepcion"
+  },
+  {
+   "fetch_from": "cl_hoja_de_vida_bien.item_code",
+   "fieldname": "item_code",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "C\u00f3digo del producto",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "cl_hoja_de_vida_bien.item_name",
+   "fetch_if_empty": 1,
+   "fieldname": "nombre_del_producto",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "Nombre del producto",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "cantidad",
+   "fieldtype": "Float",
+   "label": "Cantidad",
+   "precision": "0"
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "cl_hoja_de_vida_bien.serial_no",
+   "fieldname": "serie",
+   "fieldtype": "Data",
+   "label": "Serie",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "observaciones",
+   "fieldtype": "Small Text",
+   "label": "Observaciones"
+  },
+  {
+   "fieldname": "inspeccion_entrada_del_bien",
+   "fieldtype": "Section Break",
+   "label": "Inspeccion Entrada del Bien"
+  },
+  {
+   "fieldname": "plantilla_inspeccion_entrada_del_bien",
+   "fieldtype": "Link",
+   "label": "Plantilla Inspecci\u00f3n Entrada del Bien",
+   "options": "Plantilla Entrada del Bien"
+  },
+  {
+   "columns": 4,
+   "fieldname": "table_29",
+   "fieldtype": "Table",
+   "label": "Datos entrada del bien",
+   "options": "Inspeccion Entrada del Bien",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Firma cliente",
+   "fieldname": "firma_cliente",
+   "fieldtype": "Signature",
+   "label": "Firma cliente"
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Firma Recepci\u00f3n",
+   "fieldname": "firma_recepcion",
+   "fieldtype": "Signature",
+   "label": "Firma Recepci\u00f3n"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Entrada de Bienes",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "Actividad",
+   "link_doctype": "Orden de Servicio",
+   "link_fieldname": "entrada_del_bien"
+  }
+ ],
+ "modified": "2025-05-08 13:36:28.772459",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Entrada de Bienes",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

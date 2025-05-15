@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "autoname": "item_code",
+ "creation": "2025-04-23 21:38:41.652222",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "type_section01",
+  "naming_series",
+  "item_code",
+  "columna_01",
+  "seccion01",
+  "articulos"
+ ],
+ "fields": [
+  {
+   "fieldname": "type_section01",
+   "fieldtype": "Section Break",
+   "label": "type_section"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "options": "SR-.YYYY.-",
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "Producto",
+   "options": "Item",
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "columna_01",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "seccion01",
+   "fieldtype": "Section Break",
+   "label": "Repuestos"
+  },
+  {
+   "fieldname": "articulos",
+   "fieldtype": "Table",
+   "label": "Articulos",
+   "options": "Articulos Repuestos"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-06 09:38:40.410311",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Maestro de Repuestos",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

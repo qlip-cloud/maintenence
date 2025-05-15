@@ -1,0 +1,68 @@
+{
+ "actions": [],
+ "creation": "2025-04-23 14:29:29.774493",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "historial_de_actividades_section",
+  "tareas_realizadas",
+  "progreso",
+  "fecha",
+  "tiempo_promedio",
+  "feedback"
+ ],
+ "fields": [
+  {
+   "fieldname": "historial_de_actividades_section",
+   "fieldtype": "Section Break",
+   "label": "HISTORIAL DE ACTIVIDADES"
+  },
+  {
+   "fieldname": "tareas_realizadas",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tareas realizadas",
+   "length": 100
+  },
+  {
+   "default": "Abierto",
+   "fieldname": "progreso",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Progreso",
+   "options": "Abierto\nEn progreso\nTerminado\nCancelado"
+  },
+  {
+   "fieldname": "fecha",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fecha"
+  },
+  {
+   "fieldname": "tiempo_promedio",
+   "fieldtype": "Duration",
+   "in_list_view": 1,
+   "label": "Tiempo promedio"
+  },
+  {
+   "fieldname": "feedback",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Feedback",
+   "length": 100
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-05-06 09:34:48.847400",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Historial de actividades",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

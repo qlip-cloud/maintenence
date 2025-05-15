@@ -1,0 +1,382 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2025-04-24 09:14:09.199848",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "workflow_state",
+  "item",
+  "naming_series",
+  "entrada_del_bien",
+  "status",
+  "producto",
+  "item_name",
+  "image",
+  "item_serial_no",
+  "customer",
+  "tipo_de_servicio",
+  "fecha_y_hora_de_solicitud",
+  "fecha_y_hora_prevista_de_entrega",
+  "column_break1",
+  "company",
+  "sales_order",
+  "project",
+  "cl_inspecci\u00f3n_de_calidad",
+  "hoja_de_vida_del_bien",
+  "descripci\u00f3n_del_producto",
+  "responsable",
+  "customer_name",
+  "cl_plantilla_de_mantenimiento",
+  "fecha_y_hora_inicio_real_os",
+  "fecha_y_hora_finalizaci\u00f3n_os",
+  "contact_info",
+  "customer_address",
+  "address_display",
+  "contact_person",
+  "contact_display",
+  "detalle_del_servicio_realizado",
+  "project_type",
+  "tasks",
+  "required_items_section",
+  "items",
+  "lead_time",
+  "amended_from",
+  "section_break_34",
+  "observaciones"
+ ],
+ "fields": [
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Workflow State",
+   "options": "Workflow State"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Section Break",
+   "label": "Datos b\u00e1sicos",
+   "options": "fa fa-gift"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "no_copy": 1,
+   "options": "MTT-WO-.YYYY.-",
+   "print_hide": 1,
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "entrada_del_bien",
+   "fieldtype": "Link",
+   "label": "Entrada del bien",
+   "options": "Entrada de Bienes"
+  },
+  {
+   "default": "Draft",
+   "depends_on": "eval:!doc.__islocal",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "no_copy": 1,
+   "options": "\nDraft\nSubmitted\nNot Started\nIn Process\nCompleted\nStopped\nCancelled",
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "hoja_de_vida_del_bien.item_code",
+   "fieldname": "producto",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "C\u00f3digo del producto",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.production_item",
+   "fetch_from": "hoja_de_vida_del_bien.item_name",
+   "fetch_if_empty": 1,
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "production_item.image",
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Image",
+   "options": "image",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "hoja_de_vida_del_bien.serial_no",
+   "fieldname": "item_serial_no",
+   "fieldtype": "Link",
+   "label": "Item Serial No",
+   "options": "Serial No"
+  },
+  {
+   "bold": 1,
+   "depends_on": "eval:doc.bien !=\"Propio\"",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "mandatory_depends_on": "eval:doc.bien !=\"Propio\"",
+   "options": "Customer",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "tipo_de_servicio",
+   "fieldtype": "Select",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "Tipo de servicio",
+   "options": "\nGarant\u00eda\nMantenimiento Preventivo\nMantenimiento Correctivo\nDiagnostico",
+   "print_hide": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "fecha_y_hora_de_solicitud",
+   "fieldtype": "Datetime",
+   "label": "Fecha y hora de solicitud",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fecha_y_hora_prevista_de_entrega",
+   "fieldtype": "Datetime",
+   "label": "Fecha y hora prevista de entrega"
+  },
+  {
+   "fieldname": "column_break1",
+   "fieldtype": "Column Break",
+   "width": "50%"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_global_search": 1,
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "cl_inspecci\u00f3n_de_calidad",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "N\u00b0 Inspecci\u00f3n de Calidad",
+   "options": "Quality Inspection"
+  },
+  {
+   "fieldname": "hoja_de_vida_del_bien",
+   "fieldtype": "Link",
+   "label": "Hoja de vida del bien",
+   "options": "Hoja de Vida del Bien"
+  },
+  {
+   "bold": 1,
+   "fetch_from": "Hoja de Vida del Bien.item_name",
+   "fetch_if_empty": 1,
+   "fieldname": "descripci\u00f3n_del_producto",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Nombre del producto",
+   "reqd": 1
+  },
+  {
+   "fieldname": "responsable",
+   "fieldtype": "Link",
+   "label": "Responsable",
+   "options": "Equipo Tecnico"
+  },
+  {
+   "bold": 1,
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Nombre del cliente",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fecha_y_hora_inicio_real_os",
+   "fieldtype": "Datetime",
+   "label": "Fecha y hora inicio real OS"
+  },
+  {
+   "fieldname": "fecha_y_hora_finalizaci\u00f3n_os",
+   "fieldtype": "Datetime",
+   "label": "Fecha y hora finalizaci\u00f3n OS"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "contact_info",
+   "fieldtype": "Section Break",
+   "label": "Direcci\u00f3n y Contacto",
+   "options": "fa fa-bullhorn"
+  },
+  {
+   "fieldname": "customer_address",
+   "fieldtype": "Link",
+   "label": "Direcci\u00f3n del cliente",
+   "options": "Address",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "address_display",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Link",
+   "label": "Persona de contacto",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "contact_display",
+   "fieldtype": "Small Text",
+   "in_global_search": 1,
+   "label": "Contact"
+  },
+  {
+   "fieldname": "detalle_del_servicio_realizado",
+   "fieldtype": "Section Break",
+   "label": "Detalle del servicio realizado"
+  },
+  {
+   "fieldname": "project_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tareas plantilla de proyecto",
+   "options": "Project Template"
+  },
+  {
+   "columns": 9,
+   "fieldname": "tasks",
+   "fieldtype": "Table",
+   "label": "Tasks",
+   "options": "Project Template Task",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "required_items_section",
+   "fieldtype": "Section Break",
+   "label": "Productos requeridos"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Opportunity Item"
+  },
+  {
+   "description": "In Mins",
+   "fieldname": "lead_time",
+   "fieldtype": "Float",
+   "label": "Lead Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Orden de Servicio",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_34",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "observaciones",
+   "fieldtype": "Small Text",
+   "label": "Observaciones"
+  },
+  {
+   "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
+   "fieldname": "cl_plantilla_de_mantenimiento",
+   "fieldtype": "Link",
+   "label": "Mantenimiento Programado",
+   "mandatory_depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
+   "options": "Project Template"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "Actividad",
+   "link_doctype": "Material Request",
+   "link_fieldname": "cl_orden_de_trabajo"
+  },
+  {
+   "group": "Actividad",
+   "link_doctype": "Opportunity",
+   "link_fieldname": "cl_orden_de_trabajo_servicio"
+  },
+  {
+   "group": "Actividad",
+   "link_doctype": "Warranty Claim",
+   "link_fieldname": "cl_orden_de_trabajo_servicio"
+  },
+  {
+   "group": "Actividad",
+   "link_doctype": "Quality Inspection",
+   "link_fieldname": "cl_orden_de_trabajo_servicio"
+  }
+ ],
+ "modified": "2025-05-13 09:09:39.869511",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Orden de Servicio",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "track_seen": 1
+}
