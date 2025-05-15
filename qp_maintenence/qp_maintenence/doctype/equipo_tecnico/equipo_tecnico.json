@@ -19,15 +19,13 @@
   "horario_laboral",
   "fecha_vencimiento_licencia",
   "habilidades_y_experiencia_section",
-  "formaci\u00f3n_acad\u00e9mica",
+  "formacion_academica",
   "nivel_de_experiencia",
   "certificaciones_vigentes",
   "column_break_18",
   "\u00e1reas_de_especializaci\u00f3n",
   "valor_hora",
-  "otras_habilidades",
-  "section_break_22",
-  "historial_de_actividades"
+  "otras_habilidades"
  ],
  "fields": [
   {
@@ -44,7 +42,6 @@
    "options": "fa fa-user"
   },
   {
-   "fetch_from": "Employee.employee_number",
    "fieldname": "id_de_empleado",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -54,34 +51,37 @@
    "reqd": 1
   },
   {
-   "fetch_from": "Employee.designation",
+   "fetch_from": "id_de_empleado.designation",
    "fetch_if_empty": 1,
    "fieldname": "rol_desempe\u00f1ado",
    "fieldtype": "Link",
    "label": "Rol desempe\u00f1ado",
-   "options": "Employee",
+   "options": "Designation",
+   "read_only": 1,
    "reqd": 1
   },
   {
+   "fetch_from": "id_de_empleado.cell_number",
    "fieldname": "celular",
    "fieldtype": "Data",
-   "label": "Celular"
+   "label": "Celular",
+   "read_only": 1
   },
   {
    "fieldname": "cl_tipo_de_bien",
    "fieldtype": "Select",
    "label": "Tipo de bien para mantenimiento",
-   "options": "\nMaquinaria & Equipo\nVeh\u00edculo",
+   "options": "\nEquipo\nVeh\u00edculo",
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "depends_on": "eval:doc.cl_tipo_de_bien ==\"Vehiculo\"",
    "fieldname": "categor\u00eda_licencia_de_conducci\u00f3n",
    "fieldtype": "Select",
    "in_global_search": 1,
    "in_standard_filter": 1,
    "label": "Categor\u00eda licencia de conducci\u00f3n",
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien ==\"Vehiculo\"",
    "options": "\nA1\nA2\nB1\nB2\nB3\nC1\nC2\nC3",
    "print_hide": 1
   },
@@ -90,46 +90,49 @@
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "Employee.employee_name",
+   "fetch_from": "id_de_empleado.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
    "label": "Nombre empleado",
+   "read_only": 1,
    "reqd": 1
   },
   {
    "fieldname": "centro_de_costos",
-   "fieldtype": "Data",
-   "label": "Centro de costos"
+   "fieldtype": "Link",
+   "label": "Centro de costos",
+   "options": "Cost Center"
   },
   {
+   "fetch_from": "id_de_empleado.prefered_email",
    "fieldname": "email",
    "fieldtype": "Data",
-   "label": "Email"
+   "label": "Email",
+   "read_only": 1
   },
   {
+   "fetch_from": "id_de_empleado.employment_type",
    "fieldname": "horario_laboral",
-   "fieldtype": "Data",
-   "label": "Horario laboral"
+   "fieldtype": "Link",
+   "label": "Horario laboral",
+   "options": "Employment Type",
+   "read_only": 1
   },
   {
-   "depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "depends_on": "eval:doc.cl_tipo_de_bien ==\"Vehiculo\"",
    "fieldname": "fecha_vencimiento_licencia",
    "fieldtype": "Date",
    "label": "Fecha vencimiento licencia",
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\""
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien ==\"Vehiculo\""
   },
   {
+   "collapsible_depends_on": "eval:doc.id_de_empleado",
+   "depends_on": "eval:doc.id_de_empleado",
    "fieldname": "habilidades_y_experiencia_section",
    "fieldtype": "Section Break",
    "label": "Habilidades y experiencia"
-  },
-  {
-   "fieldname": "formaci\u00f3n_acad\u00e9mica",
-   "fieldtype": "Data",
-   "label": "Formaci\u00f3n acad\u00e9mica",
-   "reqd": 1
   },
   {
    "fieldname": "nivel_de_experiencia",
@@ -161,20 +164,15 @@
    "label": "Otras habilidades"
   },
   {
-   "fieldname": "section_break_22",
-   "fieldtype": "Section Break",
-   "label": "Historial de actividades"
-  },
-  {
-   "fetch_if_empty": 1,
-   "fieldname": "historial_de_actividades",
-   "fieldtype": "Table",
-   "options": "Historial de actividades"
+   "fieldname": "formacion_academica",
+   "fieldtype": "Data",
+   "label": "Formaci\u00f3n acad\u00e9mica",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-06 09:24:46.165956",
+ "modified": "2025-05-15 10:00:29.869893",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Equipo Tecnico",
