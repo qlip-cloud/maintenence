@@ -83,3 +83,33 @@ frappe.ui.form.on('Orden de Servicio', {
 		frm.refresh_field('tasks')
 	}
 });
+
+frappe.ui.form.on("Opportunity Item", {
+    item_code:function(frm, cdt, cdn){
+		
+		let d = frappe.get_doc(cdt, cdn);
+
+		if(d.item_code){
+			frappe.db.get_list("Stock Ledger Entry",
+									{ 
+										filters:{
+											'item_code':d.item_code,
+                                            'qty_after_transaction':['>','0']
+										},
+										fields:["*"],
+									})
+			.then((r) => {
+                    var w = []
+					r.forEach(element => {
+						w.push(element.warehouse);
+					});
+					
+					
+					frappe.model.set_value(cdt, cdn, 'warehouse', w, 'Link');
+			});
+					
+		}else{
+			frappe.model.set_value(cdt, cdn, 'warehouse', '');
+		}
+	}
+});

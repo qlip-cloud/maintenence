@@ -28,9 +28,10 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
                 filters: {"customer": frm.doc.customer}
             };
         });
-
+		
         frm.refresh_field('customer_address')
 		frm.refresh_field('contact_person')
+		
 	},
 	customer_address:function(frm){
 		if(frm.doc.customer_address){
