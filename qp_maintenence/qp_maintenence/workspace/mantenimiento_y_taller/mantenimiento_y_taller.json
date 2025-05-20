@@ -1,7 +1,7 @@
 {
  "category": "Modules",
  "charts": [],
- "creation": "2025-04-23 10:12:15.513913",
+ "creation": "2025-05-20 16:32:31.802572",
  "developer_mode_only": 0,
  "disable_user_customization": 0,
  "docstatus": 0,
@@ -12,7 +12,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "label": "Taller y Mantenimiento",
+ "label": "Mantenimiento y Taller",
  "links": [
   {
    "hidden": 0,
@@ -156,11 +156,11 @@
    "type": "Link"
   }
  ],
- "modified": "2025-05-06 10:05:53.312526",
+ "modified": "2025-05-20 16:32:31.802572",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
- "name": "Taller y Mantenimiento",
- "owner": "ferney.beltran@MENTUM.com.co",
+ "name": "Mantenimiento y Taller",
+ "owner": "Administrator",
  "pin_to_bottom": 0,
  "pin_to_top": 0,
  "shortcuts": []
