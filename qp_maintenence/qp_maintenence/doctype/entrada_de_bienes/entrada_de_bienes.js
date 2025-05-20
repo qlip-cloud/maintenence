@@ -5,24 +5,26 @@ frappe.ui.form.on('Entrada de Bienes', {
 	// refresh: function(frm) {
 
 	// }
-	customer:function(frm){
+	cliente:function(frm){
 
 		frm.set_query("customer_address", function() {
             return {
 				query:"qp_maintenence.qp_maintenence.services.address.handler",
-                filters: {"customer": frm.doc.customer}
+                filters: {"customer": frm.doc.cliente}
             };
         });
 
 		frm.set_query("contact_person", function() {
             return {
 				query:"qp_maintenence.qp_maintenence.services.contact.handler",
-                filters: {"customer": frm.doc.customer}
+                filters: {"customer": frm.doc.cliente}
             };
         });
 
         frm.refresh_field('customer_address')
 		frm.refresh_field('contact_person')
+
+		
 	},
 	customer_address:function(frm){
 		if(frm.doc.customer_address){

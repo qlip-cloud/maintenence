@@ -250,8 +250,7 @@
    "fieldname": "datos_de_mantenimiento",
    "fieldtype": "Table",
    "label": "Datos de mantenimiento",
-   "options": "Datos tecnicos de mantenimiento",
-   "read_only": 1
+   "options": "Datos tecnicos de mantenimiento"
   },
   {
    "fieldname": "section_break_2",
@@ -316,7 +315,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-05-19 10:07:12.643606",
+ "modified": "2025-05-20 16:04:29.014164",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",

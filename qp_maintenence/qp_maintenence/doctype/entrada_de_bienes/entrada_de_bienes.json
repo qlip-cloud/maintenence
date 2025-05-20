@@ -270,8 +270,7 @@
    "fieldname": "table_29",
    "fieldtype": "Table",
    "label": "Datos entrada del bien",
-   "options": "Inspeccion Entrada del Bien",
-   "read_only": 1
+   "options": "Inspeccion Entrada del Bien"
   },
   {
    "fieldname": "section_break_21",
@@ -318,7 +317,7 @@
    "link_fieldname": "entrada_del_bien"
   }
  ],
- "modified": "2025-05-19 09:51:12.483451",
+ "modified": "2025-05-20 16:03:42.423042",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Entrada de Bienes",
