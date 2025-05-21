@@ -13,7 +13,7 @@ def handler(doctype, txt, searchfield, start, page_len, filters):
 			condition += " AND dyl.link_name = {value}".format(value=frappe.db.escape(value))
 		
 	return frappe.db.sql("""
-	SELECT con.*
+	SELECT con.name
 	FROM `tabContact` con, `tabDynamic Link` dyl
 	WHERE dyl.parent = con.name
 	AND dyl.parenttype = 'Contact'

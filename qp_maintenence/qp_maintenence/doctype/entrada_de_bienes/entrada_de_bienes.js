@@ -5,7 +5,7 @@ frappe.ui.form.on('Entrada de Bienes', {
 	// refresh: function(frm) {
 
 	// }
-	cliente:function(frm){
+	cliente:function(frm, cdt, cdn){
 
 		frm.set_query("customer_address", function() {
             return {
@@ -21,9 +21,11 @@ frappe.ui.form.on('Entrada de Bienes', {
             };
         });
 
+		
         frm.refresh_field('customer_address')
 		frm.refresh_field('contact_person')
 
+		
 		
 	},
 	customer_address:function(frm){

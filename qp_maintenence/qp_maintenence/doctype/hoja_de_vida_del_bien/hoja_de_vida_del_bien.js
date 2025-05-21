@@ -31,7 +31,12 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 		
         frm.refresh_field('customer_address')
 		frm.refresh_field('contact_person')
+
+		if (frm.doc.customer_address) frm.set_value('customer_address', frm.doc.customer_address[0])
+		if (frm.doc.contact_person) frm.set_value('contact_person', frm.doc.contact_person[0])
+
 		
+
 	},
 	customer_address:function(frm){
 		if(frm.doc.customer_address){

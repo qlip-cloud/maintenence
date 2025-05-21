@@ -81,35 +81,26 @@ frappe.ui.form.on('Orden de Servicio', {
 		}
 
 		frm.refresh_field('tasks')
-	}
-});
+	},
+	onload: function() {
 
-frappe.ui.form.on("Opportunity Item", {
-    item_code:function(frm, cdt, cdn){
-		
-		let d = frappe.get_doc(cdt, cdn);
-
-		if(d.item_code){
-			frappe.db.get_list("Stock Ledger Entry",
-									{ 
-										filters:{
-											'item_code':d.item_code,
-                                            'qty_after_transaction':['>','0']
-										},
-										fields:["*"],
-									})
-			.then((r) => {
-                    var w = []
-					r.forEach(element => {
-						w.push(element.warehouse);
-					});
-					
-					
-					frappe.model.set_value(cdt, cdn, 'warehouse', w, 'Link');
-			});
-					
-		}else{
-			frappe.model.set_value(cdt, cdn, 'warehouse', '');
+		function get_data(doc, cdt, cdn){
+			const row = locals[cdt][cdn];
+			
+			return { 
+				query: "qp_maintenence.qp_maintenence.services.orden_de_servicio.handler",
+				filters:{
+					item_code: row.item_code
+				}
+			};
 		}
+
+		me.frm.set_query('warehouse', 'items', function(doc, cdt, cdn) {
+			return get_data(doc, cdt, cdn);			
+		});
+
+		me.frm.set_query('warehouse', 'items_consumibles', function(doc, cdt, cdn) {
+			return get_data(doc, cdt, cdn);	
+		});
 	}
 });
