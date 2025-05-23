@@ -14,7 +14,9 @@
   "fecha_garant\u00eda_fin_fabricante",
   "tipo_de_bien",
   "customer",
+  "supplier",
   "customer_name",
+  "supplier_name",
   "column_break0",
   "posting_date",
   "item_name",
@@ -100,27 +102,27 @@
   },
   {
    "bold": 1,
-   "depends_on": "eval:doc.bien !=\"Propio\"",
+   "depends_on": "eval:doc.bien ==\"Cliente\"",
    "fetch_from": "serial_no.customer",
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_global_search": 1,
    "in_standard_filter": 1,
    "label": "Customer",
-   "mandatory_depends_on": "eval:doc.bien !=\"Propio\"",
+   "mandatory_depends_on": "eval:doc.bien ==\"Cliente\"",
    "options": "Customer",
    "print_hide": 1
   },
   {
    "bold": 1,
-   "depends_on": "eval:doc.bien !=\"Propio\"",
+   "depends_on": "eval:doc.bien ==\"Cliente\"",
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_list_view": 1,
    "label": "Customer Name",
-   "mandatory_depends_on": "eval:doc.bien !=\"Propio\"",
+   "mandatory_depends_on": "eval:doc.bien == \"Cliente\"",
    "read_only": 1
   },
   {
@@ -295,6 +297,30 @@
    "fieldname": "documentos_del_bien",
    "fieldtype": "Attach",
    "label": "Documentos del bien"
+  },
+  {
+   "bold": 1,
+   "depends_on": "eval:doc.bien == \"Proveedor\"",
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Supplier Name",
+   "mandatory_depends_on": "eval:doc.bien ==\"Proveedor\"",
+   "read_only": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "bold": 1,
+   "depends_on": "eval:doc.bien ==\"Proveedor\"",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "label": "Supplier",
+   "mandatory_depends_on": "eval:doc.bien ==\"Proveedor\"",
+   "options": "Supplier",
+   "print_hide": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -315,7 +341,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-05-20 16:04:29.014164",
+ "modified": "2025-05-22 11:32:52.908970",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
