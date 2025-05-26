@@ -28,7 +28,7 @@
   "descripci\u00f3n_del_producto",
   "responsable",
   "customer_name",
-  "cl_plantilla_de_proyecto",
+  "cl_plantilla_de_mantenimiento",
   "fecha_y_hora_inicio_real_os",
   "fecha_y_hora_finalizaci\u00f3n_os",
   "contact_info",
@@ -272,7 +272,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Tareas plantilla de proyecto",
-   "options": "Project Type"
+   "options": "Project Template"
   },
   {
    "columns": 9,
@@ -320,9 +320,9 @@
   },
   {
    "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
-   "fieldname": "cl_plantilla_de_proyecto",
+   "fieldname": "cl_plantilla_de_mantenimiento",
    "fieldtype": "Link",
-   "label": "Plantilla de proyecto",
+   "label": "Mantenimiento programado",
    "mandatory_depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
    "options": "Project Template"
   }
@@ -351,7 +351,7 @@
    "link_fieldname": "cl_orden_de_trabajo_servicio"
   }
  ],
- "modified": "2025-05-26 11:47:05.509525",
+ "modified": "2025-05-26 11:52:22.968210",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

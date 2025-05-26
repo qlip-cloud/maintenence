@@ -183,6 +183,8 @@
   },
   {
    "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.bien == \"Cliente\" || eval:doc.bien == \"Proveedor\"",
+   "depends_on": "eval:doc.bien == \"Cliente\" || eval:doc.bien == \"Proveedor\"",
    "fieldname": "contact_info",
    "fieldtype": "Section Break",
    "label": "Address and Contact",
@@ -243,7 +245,7 @@
    "fieldname": "cl_plantilla_datos_tecnicos_de_mantenimiento",
    "fieldtype": "Link",
    "label": "Plantilla Datos t\u00e9cnicos de mantenimiento",
-   "options": "Datos tecnicos de mantenimiento"
+   "options": "Plantilla datos tecnicos de mantenimiento"
   },
   {
    "fieldname": "datos_de_mantenimiento",
@@ -329,7 +331,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-05-26 08:34:20.933634",
+ "modified": "2025-05-26 12:00:22.789171",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
