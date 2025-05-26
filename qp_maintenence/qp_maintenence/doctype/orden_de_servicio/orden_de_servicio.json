@@ -332,11 +332,6 @@
  "links": [
   {
    "group": "Actividad",
-   "link_doctype": "Material Request",
-   "link_fieldname": "cl_orden_de_trabajo"
-  },
-  {
-   "group": "Actividad",
    "link_doctype": "Opportunity",
    "link_fieldname": "cl_orden_de_trabajo_servicio"
   },
@@ -351,7 +346,7 @@
    "link_fieldname": "cl_orden_de_trabajo_servicio"
   }
  ],
- "modified": "2025-05-26 11:52:22.968210",
+ "modified": "2025-05-26 12:21:47.551617",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
