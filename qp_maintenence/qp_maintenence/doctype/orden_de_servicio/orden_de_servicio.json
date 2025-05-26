@@ -78,13 +78,11 @@
   },
   {
    "default": "Draft",
-   "depends_on": "eval:!doc.__islocal",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
    "no_copy": 1,
    "options": "\nDraft\nSubmitted\nNot Started\nIn Process\nCompleted\nStopped\nCancelled",
-   "read_only": 1,
    "reqd": 1,
    "search_index": 1
   },
@@ -353,7 +351,7 @@
    "link_fieldname": "cl_orden_de_trabajo_servicio"
   }
  ],
- "modified": "2025-05-26 08:10:01.682187",
+ "modified": "2025-05-26 11:47:05.509525",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
