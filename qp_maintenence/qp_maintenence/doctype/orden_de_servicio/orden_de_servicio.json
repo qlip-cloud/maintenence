@@ -329,29 +329,8 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "group": "Actividad",
-   "link_doctype": "Opportunity",
-   "link_fieldname": "cl_orden_de_trabajo_servicio"
-  },
-  {
-   "group": "Actividad",
-   "link_doctype": "Warranty Claim",
-   "link_fieldname": "cl_orden_de_trabajo_servicio"
-  },
-  {
-   "group": "Actividad",
-   "link_doctype": "Quality Inspection",
-   "link_fieldname": "cl_orden_de_trabajo_servicio"
-  },
-  {
-   "group": "Actividad",
-   "link_doctype": "Material Request",
-   "link_fieldname": "cl_orden_de_trabajo"
-  }
- ],
- "modified": "2025-05-26 12:25:14.556615",
+ "links": [],
+ "modified": "2025-05-26 12:31:53.768905",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
