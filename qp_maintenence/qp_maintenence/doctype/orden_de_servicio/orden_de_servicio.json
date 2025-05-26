@@ -344,9 +344,14 @@
    "group": "Actividad",
    "link_doctype": "Quality Inspection",
    "link_fieldname": "cl_orden_de_trabajo_servicio"
+  },
+  {
+   "group": "Actividad",
+   "link_doctype": "Material Request",
+   "link_fieldname": "cl_orden_de_trabajo"
   }
  ],
- "modified": "2025-05-26 12:21:47.551617",
+ "modified": "2025-05-26 12:25:14.556615",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
