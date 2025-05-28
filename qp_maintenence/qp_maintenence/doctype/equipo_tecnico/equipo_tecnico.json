@@ -43,7 +43,6 @@
    "options": "fa fa-user"
   },
   {
-   "fetch_from": "Employee.employee_number",
    "fieldname": "id_de_empleado",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -53,12 +52,12 @@
    "reqd": 1
   },
   {
-   "fetch_from": "Employee.designation",
+   "fetch_from": "id_de_empleado.designation",
    "fetch_if_empty": 1,
    "fieldname": "rol_desempe\u00f1ado",
    "fieldtype": "Link",
    "label": "Rol desempe\u00f1ado",
-   "options": "Employee",
+   "options": "Designation",
    "reqd": 1
   },
   {
@@ -70,17 +69,17 @@
    "fieldname": "cl_tipo_de_bien",
    "fieldtype": "Select",
    "label": "Tipo de bien para mantenimiento",
-   "options": "\nMaquinaria & Equipo\nVeh\u00edculo",
+   "options": "Equipo\nVeh\u00edculo",
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
    "fieldname": "categor\u00eda_licencia_de_conducci\u00f3n",
    "fieldtype": "Select",
    "in_global_search": 1,
    "in_standard_filter": 1,
    "label": "Categor\u00eda licencia de conducci\u00f3n",
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
    "options": "\nA1\nA2\nB1\nB2\nB3\nC1\nC2\nC3",
    "print_hide": 1
   },
@@ -89,7 +88,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "Employee.employee_name",
+   "fetch_from": "id_de_empleado.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
    "in_global_search": 1,
@@ -113,11 +112,11 @@
    "label": "Horario laboral"
   },
   {
-   "depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
    "fieldname": "fecha_vencimiento_licencia",
    "fieldtype": "Date",
    "label": "Fecha vencimiento licencia",
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\""
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\""
   },
   {
    "fieldname": "habilidades_y_experiencia_section",
@@ -168,7 +167,7 @@
    "link_fieldname": "responsable"
   }
  ],
- "modified": "2025-05-28 08:41:23.593218",
+ "modified": "2025-05-28 12:01:26.472033",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Equipo Tecnico",
