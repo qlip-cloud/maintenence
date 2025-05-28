@@ -95,11 +95,11 @@ frappe.ui.form.on('Orden de Servicio', {
 			};
 		}
 
-		me.frm.set_query('warehouse', 'items', function(doc, cdt, cdn) {
+		me.frm.set_query('warehouse', 'replacement_items', function(doc, cdt, cdn) {
 			return get_data(doc, cdt, cdn);			
 		});
 
-		me.frm.set_query('warehouse', 'items_consumibles', function(doc, cdt, cdn) {
+		me.frm.set_query('warehouse', 'consumable_items', function(doc, cdt, cdn) {
 			return get_data(doc, cdt, cdn);	
 		});
 	}
