@@ -39,10 +39,12 @@
   "detalle_del_servicio_realizado",
   "project_type",
   "tasks",
-  "required_items_section",
-  "items",
+  "replacement_items_section",
+  "replacement_items",
   "lead_time",
   "amended_from",
+  "consumable_items_section",
+  "consumable_items",
   "section_break_34",
   "observaciones"
  ],
@@ -87,6 +89,8 @@
    "search_index": 1
   },
   {
+   "fetch_from": "entrada_del_bien.item_code",
+   "fetch_if_empty": 1,
    "fieldname": "producto",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -268,6 +272,8 @@
    "label": "Detalle del servicio realizado"
   },
   {
+   "fetch_from": "entrada_del_bien.cl_plantilla_proyecto",
+   "fetch_if_empty": 1,
    "fieldname": "project_type",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -281,17 +287,6 @@
    "label": "Tasks",
    "options": "Project Template Task",
    "reqd": 1
-  },
-  {
-   "fieldname": "required_items_section",
-   "fieldtype": "Section Break",
-   "label": "Productos requeridos"
-  },
-  {
-   "fieldname": "items",
-   "fieldtype": "Table",
-   "label": "Items",
-   "options": "Opportunity Item"
   },
   {
    "description": "In Mins",
@@ -325,6 +320,28 @@
    "label": "Mantenimiento programado",
    "mandatory_depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
    "options": "Project Template"
+  },
+  {
+   "fieldname": "replacement_items_section",
+   "fieldtype": "Section Break",
+   "label": "Respuestos"
+  },
+  {
+   "fieldname": "replacement_items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Opportunity Item"
+  },
+  {
+   "fieldname": "consumable_items_section",
+   "fieldtype": "Section Break",
+   "label": "Consumibles"
+  },
+  {
+   "fieldname": "consumable_items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Opportunity Item"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -351,7 +368,7 @@
    "link_fieldname": "cl_orden_de_trabajo_servicio"
   }
  ],
- "modified": "2025-05-26 12:34:51.757632",
+ "modified": "2025-05-28 09:11:54.499292",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

@@ -102,7 +102,7 @@
    "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
    "fieldname": "cl_plantilla_proyecto",
    "fieldtype": "Link",
-   "label": "Plantilla de proyecto",
+   "label": "Mantenimiento Programado",
    "mandatory_depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
    "options": "Project Template"
   },
@@ -316,7 +316,7 @@
    "link_fieldname": "entrada_del_bien"
   }
  ],
- "modified": "2025-05-22 10:33:06.136116",
+ "modified": "2025-05-28 08:31:15.312965",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Entrada de Bienes",
