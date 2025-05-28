@@ -20,14 +20,13 @@
   "horario_laboral",
   "fecha_vencimiento_licencia",
   "habilidades_y_experiencia_section",
-  "formaci\u00f3n_acad\u00e9mica",
+  "formacion_academica",
   "nivel_de_experiencia",
   "certificaciones_vigentes",
   "column_break_18",
   "\u00e1reas_de_especializaci\u00f3n",
   "valor_hora",
-  "otras_habilidades",
-  "historial_de_actividades"
+  "otras_habilidades"
  ],
  "fields": [
   {
@@ -155,16 +154,10 @@
    "label": "Otras habilidades"
   },
   {
-   "fieldname": "formaci\u00f3n_acad\u00e9mica",
+   "fieldname": "formacion_academica",
    "fieldtype": "Data",
    "label": "Formaci\u00f3n acad\u00e9mica",
    "reqd": 1
-  },
-  {
-   "fetch_if_empty": 1,
-   "fieldname": "historial_de_actividades",
-   "fieldtype": "Table",
-   "options": "Historial de actividades"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -175,7 +168,7 @@
    "link_fieldname": "responsable"
   }
  ],
- "modified": "2025-05-26 09:02:28.778870",
+ "modified": "2025-05-28 08:41:23.593218",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Equipo Tecnico",
