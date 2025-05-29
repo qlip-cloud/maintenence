@@ -79,7 +79,6 @@
    "in_global_search": 1,
    "in_standard_filter": 1,
    "label": "Categor\u00eda licencia de conducci\u00f3n",
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
    "options": "\nA1\nA2\nB1\nB2\nB3\nC1\nC2\nC3",
    "print_hide": 1
   },
@@ -98,8 +97,9 @@
   },
   {
    "fieldname": "centro_de_costos",
-   "fieldtype": "Data",
-   "label": "Centro de costos"
+   "fieldtype": "Link",
+   "label": "Centro de costos",
+   "options": "Cost Center"
   },
   {
    "fieldname": "email",
@@ -115,8 +115,7 @@
    "depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
    "fieldname": "fecha_vencimiento_licencia",
    "fieldtype": "Date",
-   "label": "Fecha vencimiento licencia",
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\""
+   "label": "Fecha vencimiento licencia"
   },
   {
    "fieldname": "habilidades_y_experiencia_section",
@@ -167,7 +166,7 @@
    "link_fieldname": "responsable"
   }
  ],
- "modified": "2025-05-28 12:01:26.472033",
+ "modified": "2025-05-29 09:32:54.151630",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Equipo Tecnico",
