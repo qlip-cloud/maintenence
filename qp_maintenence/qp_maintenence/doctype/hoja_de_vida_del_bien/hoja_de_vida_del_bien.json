@@ -183,8 +183,8 @@
   },
   {
    "collapsible": 1,
-   "collapsible_depends_on": "eval:doc.bien == \"Cliente\" || eval:doc.bien == \"Proveedor\"",
-   "depends_on": "eval:doc.bien == \"Cliente\" || eval:doc.bien == \"Proveedor\"",
+   "collapsible_depends_on": "eval:doc.bien == \"Cliente\" || doc.bien == \"Proveedor\"",
+   "depends_on": "eval:doc.bien == \"Cliente\" || doc.bien == \"Proveedor\"",
    "fieldname": "contact_info",
    "fieldtype": "Section Break",
    "label": "Address and Contact",
@@ -331,7 +331,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-05-26 12:00:22.789171",
+ "modified": "2025-05-29 10:05:42.285343",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
