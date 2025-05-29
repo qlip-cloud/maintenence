@@ -98,8 +98,9 @@
   },
   {
    "fieldname": "centro_de_costos",
-   "fieldtype": "Data",
-   "label": "Centro de costos"
+   "fieldtype": "Link",
+   "label": "Centro de costos",
+   "options": "Cost Center"
   },
   {
    "fieldname": "email",
@@ -167,7 +168,7 @@
    "link_fieldname": "responsable"
   }
  ],
- "modified": "2025-05-28 12:01:26.472033",
+ "modified": "2025-05-29 09:30:39.121313",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Equipo Tecnico",
