@@ -81,5 +81,26 @@ frappe.ui.form.on('Orden de Servicio', {
 		}
 
 		frm.refresh_field('tasks')
+	},
+	onload: function() {
+
+		function get_data(doc, cdt, cdn){
+			const row = locals[cdt][cdn];
+			
+			return { 
+				query: "qp_maintenence.qp_maintenence.services.orden_de_servicio.handler",
+				filters:{
+					item_code: row.item_code
+				}
+			};
+		}
+
+		me.frm.set_query('warehouse', 'replacement_items', function(doc, cdt, cdn) {
+			return get_data(doc, cdt, cdn);			
+		});
+
+		me.frm.set_query('warehouse', 'consumable_items', function(doc, cdt, cdn) {
+			return get_data(doc, cdt, cdn);	
+		});
 	}
 });

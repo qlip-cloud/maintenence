@@ -39,6 +39,7 @@
   "plantilla_inspeccion_entrada_del_bien",
   "table_29",
   "section_break_21",
+  "firma_cliente_column",
   "firma_cliente",
   "column_break_23",
   "firma_recepcion",
@@ -63,13 +64,14 @@
    "fieldtype": "Select",
    "label": "Series",
    "no_copy": 1,
-   "options": "EL-.YYYY.-",
+   "options": "EB-.YYYY.-",
    "print_hide": 1,
    "reqd": 1,
    "set_only_once": 1
   },
   {
    "bold": 1,
+   "fetch_from": "cl_hoja_de_vida_bien.customer",
    "fieldname": "cliente",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -79,7 +81,7 @@
    "reqd": 1
   },
   {
-   "fetch_from": "customer.customer_name",
+   "fetch_from": "cliente.customer_name",
    "fetch_if_empty": 1,
    "fieldname": "customer_name",
    "fieldtype": "Data",
@@ -100,7 +102,7 @@
    "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
    "fieldname": "cl_plantilla_proyecto",
    "fieldtype": "Link",
-   "label": "Plantilla de proyecto",
+   "label": "Mantenimiento Programado",
    "mandatory_depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
    "options": "Project Template"
   },
@@ -138,19 +140,19 @@
    "mandatory_depends_on": "eval:doc.cl_tipo_de_bien ==\"Veh\u00edculo\""
   },
   {
-   "depends_on": "eval:doc.cl_tipo_de_bien ==\"Veh\u00edculo\"",
+   "depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
    "fieldname": "dato_kilometraje",
    "fieldtype": "Data",
    "label": "Kilometraje",
    "length": 10,
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !==\"Veh\u00edculo\""
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\""
   },
   {
-   "depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
    "fieldname": "concepto_gasolina",
    "fieldtype": "Select",
    "label": "Nivel de gasolina",
-   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien !=\"Maquinaria & Equipo\"",
+   "mandatory_depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
    "options": "Bajo\nMedio\nTotal"
   },
   {
@@ -268,8 +270,7 @@
    "fieldname": "table_29",
    "fieldtype": "Table",
    "label": "Datos entrada del bien",
-   "options": "Inspeccion Entrada del Bien",
-   "read_only": 1
+   "options": "Inspeccion Entrada del Bien"
   },
   {
    "fieldname": "section_break_21",
@@ -283,15 +284,16 @@
   },
   {
    "fieldname": "column_break_23",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "label": "Firma Recepci\u00f3n"
   },
   {
-   "default": "Firma Recepci\u00f3n",
    "fieldname": "firma_recepcion",
    "fieldtype": "Signature",
    "label": "Firma Recepci\u00f3n"
   },
   {
+   "description": "Firma Recepci\u00f3n",
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -299,10 +301,14 @@
    "options": "Entrada de Bienes",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "firma_cliente_column",
+   "fieldtype": "Column Break",
+   "label": "Firma Cliente"
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [
   {
    "group": "Actividad",
@@ -310,7 +316,7 @@
    "link_fieldname": "entrada_del_bien"
   }
  ],
- "modified": "2025-05-08 13:36:28.772459",
+ "modified": "2025-05-28 08:31:15.312965",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Entrada de Bienes",
