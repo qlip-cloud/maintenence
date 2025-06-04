@@ -256,7 +256,7 @@
    "fieldname": "project_type",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Tareas plantilla de proyecto",
+   "label": "Tareas mantenimiento programado",
    "options": "Project Template"
   },
   {
@@ -327,27 +327,31 @@
  "is_submittable": 1,
  "links": [
   {
+   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Opportunity",
-   "link_fieldname": "cl_orden_de_trabajo_servicio"
+   "link_fieldname": "orden_de_trabajo_de_servicio"
   },
   {
+   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Material Request",
-   "link_fieldname": "cl_orden_de_trabajo"
+   "link_fieldname": "orden_de_trabajo"
   },
   {
+   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Warranty Claim",
-   "link_fieldname": "cl_orden_de_trabajo_servicio"
+   "link_fieldname": "orden_de_trabajo_de_servicio"
   },
   {
+   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Quality Inspection",
-   "link_fieldname": "cl_orden_de_trabajo_servicio"
+   "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-05-28 12:49:04.355806",
+ "modified": "2025-06-04 11:18:00.059522",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
