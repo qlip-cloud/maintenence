@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "creation": "2025-06-05 16:20:08.325967",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "fecha",
+  "lectura_inicial",
+  "lectura_final",
+  "lectura_acumulada",
+  "observaciones"
+ ],
+ "fields": [
+  {
+   "fieldname": "fecha",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Fecha"
+  },
+  {
+   "default": "0",
+   "fieldname": "lectura_inicial",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Lectura Inicial"
+  },
+  {
+   "default": "0",
+   "fieldname": "lectura_final",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Lectura final"
+  },
+  {
+   "default": "0",
+   "fieldname": "lectura_acumulada",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Lectura acumulada"
+  },
+  {
+   "fieldname": "observaciones",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Observaciones"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-05 16:39:20.336629",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Datos Operativos Mesa",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

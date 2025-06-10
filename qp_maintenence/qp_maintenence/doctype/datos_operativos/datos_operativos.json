@@ -1,0 +1,118 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2025-05-06 12:14:19.454756",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "codigo_de_producto",
+  "responsable",
+  "unidad_de_medida",
+  "column_break_3",
+  "cl_hoja_de_vida_bien",
+  "nombre_de_producto",
+  "tipo_de_bien",
+  "lecturas_section",
+  "lectura",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "cl_hoja_de_vida_bien.item_code",
+   "fetch_if_empty": 1,
+   "fieldname": "codigo_de_producto",
+   "fieldtype": "Link",
+   "label": "Codigo de producto",
+   "options": "Item"
+  },
+  {
+   "fieldname": "responsable",
+   "fieldtype": "Data",
+   "label": "Responsable"
+  },
+  {
+   "fieldname": "unidad_de_medida",
+   "fieldtype": "Select",
+   "label": "Unidad de medida",
+   "options": "\nKms\nHoras"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cl_hoja_de_vida_bien",
+   "fieldtype": "Link",
+   "label": "Hoja de vida bien",
+   "options": "Hoja de Vida del Bien",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "codigo_de_producto.item_name",
+   "fetch_if_empty": 1,
+   "fieldname": "nombre_de_producto",
+   "fieldtype": "Data",
+   "label": "Nombre de producto"
+  },
+  {
+   "fieldname": "tipo_de_bien",
+   "fieldtype": "Select",
+   "label": "Tipo de bien",
+   "options": "\nEquipo\nVeh\u00edculo"
+  },
+  {
+   "fieldname": "lecturas_section",
+   "fieldtype": "Section Break",
+   "label": "Lecturas"
+  },
+  {
+   "fieldname": "lectura",
+   "fieldtype": "Table",
+   "label": "Lectura",
+   "options": "Datos Operativos Mesa"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Datos Operativos",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-06-05 16:37:20.966068",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Datos Operativos",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
