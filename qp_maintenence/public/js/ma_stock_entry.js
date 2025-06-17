@@ -29,22 +29,9 @@ frappe.ui.form.on('Stock Entry', {
                     }
             });
 
-            frm.add_custom_button(__('Quality Inspection'), function() {
-                frappe.model.with_doctype('Quality Inspection', function() {
-
-                    var mr = frappe.model.get_new_doc('Quality Inspection');
-
-                    var items = frm.get_field('items').grid.get_selected_children();
-
-                    if(!items.length) {
-                        items = frm.doc.items;
-                    }
-
-                    mr.item_code = items[0].item_code
-
-                    frappe.set_route('Form', 'Quality Inspection', mr.name);
-                });
-                
+            frm.add_custom_button(__('Quality Inspection(s)'), function() {
+				let transaction_controller = new erpnext.TransactionController({ frm: frm });
+				transaction_controller.make_quality_inspection();
             }, __("Create"));
         }  
 	}
