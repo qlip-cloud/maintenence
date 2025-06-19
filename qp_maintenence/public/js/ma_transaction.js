@@ -163,6 +163,7 @@ erpnext.TransactionController.prototype.make_quality_inspection = function() {
 							"item_code": item.item_code,
 							"item_name": item.item_name,
 							"qty": 1,
+							"sample_size":1,
 							"description": item.description,
 							"serial_no": i,
 							"batch_no": item.batch_no
