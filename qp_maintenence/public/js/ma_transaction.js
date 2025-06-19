@@ -5,7 +5,7 @@ erpnext.TransactionController.prototype.setup_quality_inspection = function() {
 
 		const me = this;
 
-		if(this.frm.doc.doctype in ["Purchase Receipt"]){
+		if(in_list(["Purchase Receipt"], this.frm.doc.doctype)){
 			if (!this.frm.is_new()) {
 				this.frm.add_custom_button(__("Quality Inspection(s)"), () => {
 					me.make_quality_inspection();
