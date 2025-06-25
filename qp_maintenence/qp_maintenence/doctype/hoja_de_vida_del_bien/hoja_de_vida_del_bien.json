@@ -81,8 +81,7 @@
    "fieldname": "serial_no",
    "fieldtype": "Link",
    "label": "N\u00famero de serie",
-   "options": "Serial No",
-   "unique": 1
+   "options": "Serial No"
   },
   {
    "fieldname": "fecha_garant\u00eda_fin_fabricante",
@@ -164,8 +163,7 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "in_standard_filter": 1,
-   "label": "No.placa",
-   "mandatory_depends_on": "eval:doc.tipo_de_bien == \"Veh\u00edculo\""
+   "label": "No.placa"
   },
   {
    "default": "Propio",
@@ -331,7 +329,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-05-30 12:26:46.370499",
+ "modified": "2025-06-25 08:27:26.697015",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
