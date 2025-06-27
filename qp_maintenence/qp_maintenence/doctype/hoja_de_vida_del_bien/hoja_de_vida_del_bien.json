@@ -81,7 +81,8 @@
    "fieldname": "serial_no",
    "fieldtype": "Link",
    "label": "N\u00famero de serie",
-   "options": "Serial No"
+   "options": "Serial No",
+   "unique": 1
   },
   {
    "fieldname": "fecha_garant\u00eda_fin_fabricante",
@@ -329,7 +330,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-06-25 08:27:26.697015",
+ "modified": "2025-06-26 08:49:11.657179",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
