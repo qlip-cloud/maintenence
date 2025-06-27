@@ -59,6 +59,12 @@ frappe.ui.form.on('Purchase Receipt', {
                                                 };
                                                 frappe.set_route("List", 'Hoja de Vida del Bien');
                                             }
+                                        }else{
+                                            frappe.msgprint(
+                                                msg= "No existen productos configurados",
+                                                title='Mensaje',
+                                                raise_exception=FileNotFoundError
+                                            )
                                         }
                                     }
                                 });
