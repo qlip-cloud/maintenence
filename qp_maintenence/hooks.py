@@ -15,6 +15,7 @@ app_license = "MIT"
 # include js, css files in header of desk.html
 # app_include_css = "/assets/qp_maintenence/css/qp_maintenence.css"
 # app_include_js = "/assets/qp_maintenence/js/qp_maintenence.js"
+app_include_js = ["/assets/qp_maintenence/js/ma_transaction.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/qp_maintenence/css/qp_maintenence.css"
@@ -32,7 +33,12 @@ app_license = "MIT"
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
-doctype_js = {"Item" : "public/js/items.js"}
+doctype_js = {
+    "Item" : "public/js/ma_items.js",
+    "Stock Entry" : "public/js/ma_stock_entry.js",
+    "Purchase Receipt" : "public/js/ma_purchase_receipt.js"
+}
+
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -97,6 +103,16 @@ doctype_js = {"Item" : "public/js/items.js"}
 # 		"on_trash": "method"
 #	}
 # }
+doc_events = {
+
+    "Purchase Receipt": {
+		"validate": ["qp_maintenence.qp_maintenence.uses_cases.purchase_receipt.validate.handle"],
+	},
+    "Stock Entry": {
+		"validate": ["qp_maintenence.qp_maintenence.uses_cases.purchase_receipt.validate.handle"],
+	}
+}
+
 
 # Scheduled Tasks
 # ---------------
