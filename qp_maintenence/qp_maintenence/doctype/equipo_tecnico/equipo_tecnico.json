@@ -61,6 +61,8 @@
    "reqd": 1
   },
   {
+   "fetch_from": "id_de_empleado.cell_number",
+   "fetch_if_empty": 1,
    "fieldname": "celular",
    "fieldtype": "Data",
    "label": "Celular"
@@ -102,14 +104,18 @@
    "options": "Cost Center"
   },
   {
+   "fetch_from": "id_de_empleado.prefered_email",
+   "fetch_if_empty": 1,
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email"
   },
   {
+   "fetch_from": "id_de_empleado.employment_type",
    "fieldname": "horario_laboral",
-   "fieldtype": "Data",
-   "label": "Horario laboral"
+   "fieldtype": "Link",
+   "label": "Horario laboral",
+   "options": "Employment Type"
   },
   {
    "depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
@@ -167,7 +173,7 @@
    "link_fieldname": "responsable"
   }
  ],
- "modified": "2025-06-04 12:05:05.222539",
+ "modified": "2025-07-02 09:44:29.101060",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Equipo Tecnico",

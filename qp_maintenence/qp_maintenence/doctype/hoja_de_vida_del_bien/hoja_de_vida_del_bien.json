@@ -85,6 +85,8 @@
    "unique": 1
   },
   {
+   "fetch_from": "serial_no.warranty_expiry_date",
+   "fetch_if_empty": 1,
    "fieldname": "fecha_garant\u00eda_fin_fabricante",
    "fieldtype": "Date",
    "label": "Fecha garant\u00eda fin fabricante"
@@ -113,7 +115,7 @@
   },
   {
    "bold": 1,
-   "depends_on": "eval:doc.bien == \"Cliente\"",
+   "depends_on": "eval:doc.bien == \"Cliente\" && doc.customer",
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
@@ -284,6 +286,7 @@
   {
    "bold": 1,
    "depends_on": "eval:doc.bien == \"Proveedor\"",
+   "fetch_if_empty": 1,
    "fieldname": "supplier",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -294,7 +297,7 @@
   },
   {
    "bold": 1,
-   "depends_on": "eval:doc.bien == \"Proveedor\"",
+   "depends_on": "eval:doc.bien == \"Proveedor\" && doc.supplier",
    "fetch_from": "supplier.supplier_name",
    "fieldname": "supplier_name",
    "fieldtype": "Data",
@@ -330,7 +333,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-06-26 08:49:11.657179",
+ "modified": "2025-07-02 09:31:43.753398",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
