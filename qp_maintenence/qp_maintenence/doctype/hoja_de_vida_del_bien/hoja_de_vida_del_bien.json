@@ -317,7 +317,7 @@
   {
    "fieldname": "fecha_garantia",
    "fieldtype": "Date",
-   "label": "Fecha Garantia"
+   "label": "Fecha de Garantia"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -339,7 +339,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-07-17 11:39:46.016235",
+ "modified": "2025-07-17 13:55:46.469882",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
