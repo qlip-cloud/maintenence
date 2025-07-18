@@ -20,6 +20,7 @@
   "column_break0",
   "posting_date",
   "item_name",
+  "fecha_garantia",
   "fabricante",
   "fecha_garant\u00eda_extendida",
   "placa",
@@ -309,6 +310,11 @@
    "fieldname": "propietario",
    "fieldtype": "Check",
    "label": "Propietario"
+  },
+  {
+   "fieldname": "fecha_garantia",
+   "fieldtype": "Date",
+   "label": "Fecha de Garantia"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -330,7 +336,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-06-26 08:49:11.657179",
+ "modified": "2025-07-17 19:47:59.530919",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
