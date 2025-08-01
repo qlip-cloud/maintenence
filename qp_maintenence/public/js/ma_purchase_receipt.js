@@ -74,5 +74,16 @@ frappe.ui.form.on('Purchase Receipt', {
                     }
             });
         }
-	}
+	},
+    validate:function(frm){
+        $.each(frm.doc.items, function(i, v){
+            if(v.serial_no){
+                $.each(v.serial_no.split('\n'), function(index, value){
+                    if (typeof value == 'undefined' || value.trim() == '') {
+                        frappe.throw(__(`Por favor verifique el prodcuto ${v.item_code} ${v.item_name}. Número de serie en la posición  ${index + 1} tiene un espacio`));
+                    }
+                })
+            }
+        })
+    }
 })
