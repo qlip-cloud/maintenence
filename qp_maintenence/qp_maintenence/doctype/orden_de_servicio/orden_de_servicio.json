@@ -76,7 +76,6 @@
    "options": "Entrada de Bienes"
   },
   {
-   "default": "Submitted",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -351,7 +350,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-08-14 13:25:33.194161",
+ "modified": "2025-08-14 13:27:38.934984",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
