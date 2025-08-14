@@ -39,7 +39,6 @@
   "tasks",
   "replacement_items_section",
   "replacement_items",
-  "lead_time",
   "amended_from",
   "consumable_items_section",
   "consumable_items",
@@ -273,13 +272,6 @@
    "reqd": 1
   },
   {
-   "description": "In Mins",
-   "fieldname": "lead_time",
-   "fieldtype": "Float",
-   "label": "Lead Time",
-   "read_only": 1
-  },
-  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -357,7 +349,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-08-13 10:59:11.105155",
+ "modified": "2025-08-14 13:05:37.377138",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
@@ -378,6 +370,5 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "track_changes": 1,
- "track_seen": 1
+ "track_changes": 1
 }
