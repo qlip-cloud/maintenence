@@ -76,12 +76,12 @@
    "options": "Entrada de Bienes"
   },
   {
+   "default": "Draft",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
    "no_copy": 1,
    "options": "\nDraft\nSubmitted\nNot Started\nIn Process\nCompleted\nStopped\nCancelled",
-   "read_only": 1,
    "reqd": 1,
    "search_index": 1
   },
@@ -350,7 +350,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-08-14 13:27:38.934984",
+ "modified": "2025-08-14 21:14:17.806788",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
