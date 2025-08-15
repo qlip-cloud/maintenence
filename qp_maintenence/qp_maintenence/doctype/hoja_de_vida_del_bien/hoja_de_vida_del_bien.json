@@ -42,7 +42,8 @@
   "brand",
   "eico_model",
   "section_break_1",
-  "description"
+  "description",
+  "amended_from"
  ],
  "fields": [
   {
@@ -318,9 +319,19 @@
    "fieldname": "fecha_garantia",
    "fieldtype": "Date",
    "label": "Fecha de Garantia"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Hoja de Vida del Bien",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [
   {
    "group": "Actividad",
@@ -339,7 +350,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-07-17 17:44:25.435954",
+ "modified": "2025-08-14 14:01:04.216224",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
