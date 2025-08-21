@@ -42,7 +42,8 @@
   "brand",
   "eico_model",
   "section_break_1",
-  "description"
+  "description",
+  "amended_from"
  ],
  "fields": [
   {
@@ -86,6 +87,8 @@
    "unique": 1
   },
   {
+   "fetch_from": "serial_no.warranty_expiry_date",
+   "fetch_if_empty": 1,
    "fieldname": "fecha_garant\u00eda_fin_fabricante",
    "fieldtype": "Date",
    "label": "Fecha garant\u00eda fin fabricante"
@@ -114,7 +117,7 @@
   },
   {
    "bold": 1,
-   "depends_on": "eval:doc.bien == \"Cliente\"",
+   "depends_on": "eval:doc.bien == \"Cliente\" && doc.customer",
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
@@ -285,6 +288,7 @@
   {
    "bold": 1,
    "depends_on": "eval:doc.bien == \"Proveedor\"",
+   "fetch_if_empty": 1,
    "fieldname": "supplier",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -295,7 +299,7 @@
   },
   {
    "bold": 1,
-   "depends_on": "eval:doc.bien == \"Proveedor\"",
+   "depends_on": "eval:doc.bien == \"Proveedor\" && doc.supplier",
    "fetch_from": "supplier.supplier_name",
    "fieldname": "supplier_name",
    "fieldtype": "Data",
@@ -315,9 +319,19 @@
    "fieldname": "fecha_garantia",
    "fieldtype": "Date",
    "label": "Fecha de Garantia"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Hoja de Vida del Bien",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [
   {
    "group": "Actividad",
