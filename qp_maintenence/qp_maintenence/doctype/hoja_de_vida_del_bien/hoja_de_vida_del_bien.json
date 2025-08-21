@@ -344,13 +344,12 @@
    "link_fieldname": "hoja_de_vida_del_bien"
   },
   {
-   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Datos Operativos",
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-08-20 15:44:38.315224",
+ "modified": "2025-08-21 14:11:16.028762",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
