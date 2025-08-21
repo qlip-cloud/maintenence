@@ -327,25 +327,22 @@
  "is_submittable": 1,
  "links": [
   {
-   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Opportunity",
    "link_fieldname": "orden_de_trabajo_de_servicio"
   },
   {
-   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Material Request",
    "link_fieldname": "orden_de_trabajo"
   },
   {
-   "custom": 1,
+
    "group": "Actividad",
    "link_doctype": "Warranty Claim",
    "link_fieldname": "orden_de_trabajo_de_servicio"
   },
   {
-   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Quality Inspection",
    "link_fieldname": "orden_de_trabajo_de_servicio"
