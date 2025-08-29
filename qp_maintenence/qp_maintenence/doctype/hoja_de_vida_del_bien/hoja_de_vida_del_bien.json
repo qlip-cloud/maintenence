@@ -324,9 +324,8 @@
   },
   {
    "fieldname": "descripcion_del_producto",
-   "fieldtype": "Link",
-   "label": "Descripcion del Producto",
-   "options": "Asset"
+   "fieldtype": "Data",
+   "label": "Descripcion del Producto"
   },
   {
    "fieldname": "categoria_del_activo",
@@ -377,7 +376,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-08-28 09:10:56.950497",
+ "modified": "2025-08-29 15:21:20.555461",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",

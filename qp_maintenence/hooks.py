@@ -111,6 +111,9 @@ doc_events = {
 	},
     "Stock Entry": {
 		"validate": ["qp_maintenence.qp_maintenence.uses_cases.purchase_receipt.validate.handle"],
+	},
+	"Asset":{
+        "after_insert":["qp_maintenence.qp_maintenence.uses_cases.asset.after_insert.handle"]
 	}
 }
 
