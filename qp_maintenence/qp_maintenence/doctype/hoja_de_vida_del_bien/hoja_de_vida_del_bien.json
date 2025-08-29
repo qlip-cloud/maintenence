@@ -10,9 +10,13 @@
   "customer_details",
   "naming_series",
   "item_code",
+  "descripcion_del_producto",
   "serial_no",
   "fecha_garant\u00eda_fin_fabricante",
   "tipo_de_bien",
+  "categoria_del_activo",
+  "custodio",
+  "departamento",
   "customer",
   "supplier",
   "customer_name",
@@ -25,6 +29,8 @@
   "fecha_garant\u00eda_extendida",
   "placa",
   "bien",
+  "ubicacion",
+  "centro_de_costos",
   "deshabilitado",
   "propietario",
   "contact_info",
@@ -42,8 +48,7 @@
   "brand",
   "eico_model",
   "section_break_1",
-  "description",
-  "amended_from"
+  "description"
  ],
  "fields": [
   {
@@ -87,8 +92,6 @@
    "unique": 1
   },
   {
-   "fetch_from": "serial_no.warranty_expiry_date",
-   "fetch_if_empty": 1,
    "fieldname": "fecha_garant\u00eda_fin_fabricante",
    "fieldtype": "Date",
    "label": "Fecha garant\u00eda fin fabricante"
@@ -117,7 +120,7 @@
   },
   {
    "bold": 1,
-   "depends_on": "eval:doc.bien == \"Cliente\" && doc.customer",
+   "depends_on": "eval:doc.bien == \"Cliente\"",
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
@@ -288,7 +291,6 @@
   {
    "bold": 1,
    "depends_on": "eval:doc.bien == \"Proveedor\"",
-   "fetch_if_empty": 1,
    "fieldname": "supplier",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -299,7 +301,7 @@
   },
   {
    "bold": 1,
-   "depends_on": "eval:doc.bien == \"Proveedor\" && doc.supplier",
+   "depends_on": "eval:doc.bien == \"Proveedor\"",
    "fetch_from": "supplier.supplier_name",
    "fieldname": "supplier_name",
    "fieldtype": "Data",
@@ -321,17 +323,43 @@
    "label": "Fecha de Garantia"
   },
   {
-   "fieldname": "amended_from",
+   "fieldname": "descripcion_del_producto",
    "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Hoja de Vida del Bien",
-   "print_hide": 1,
-   "read_only": 1
+   "label": "Descripcion del Producto",
+   "options": "Asset"
+  },
+  {
+   "fieldname": "categoria_del_activo",
+   "fieldtype": "Link",
+   "label": "Categoria del Activo",
+   "options": "Asset Category"
+  },
+  {
+   "fieldname": "custodio",
+   "fieldtype": "Link",
+   "label": "Custodio",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "departamento",
+   "fieldtype": "Link",
+   "label": "Departamento",
+   "options": "Department"
+  },
+  {
+   "fieldname": "ubicacion",
+   "fieldtype": "Link",
+   "label": "Ubicacion",
+   "options": "Location"
+  },
+  {
+   "fieldname": "centro_de_costos",
+   "fieldtype": "Link",
+   "label": "Centro de Costos",
+   "options": "Cost Center"
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [
   {
    "group": "Actividad",
@@ -349,7 +377,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-08-21 14:11:16.028762",
+ "modified": "2025-08-28 09:10:56.950497",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
