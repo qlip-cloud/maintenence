@@ -1,5 +1,5 @@
 frappe.ui.form.on("Material Request", {
-    refresh:function(frm){
+    onload:function(frm){
 		if(frm.doc.orden_de_trabajo != null){
 			frappe.db.get_list(
 				"Opportunity Item", 
@@ -17,7 +17,10 @@ frappe.ui.form.on("Material Request", {
                                 item_name:d.item_name,
                                 qty:d.qty,
                                 warehouse:d.warehouse,
-                                item_group:d.item_group
+                                item_group:d.item_group,
+                                uom:d.uom,
+                                description:d.description,
+                                conversion_factor: 1
                             })
                         });
                         frm.refresh_fields()
