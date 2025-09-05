@@ -39,7 +39,6 @@
   "tasks",
   "replacement_items_section",
   "replacement_items",
-  "lead_time",
   "amended_from",
   "consumable_items_section",
   "consumable_items",
@@ -107,6 +106,8 @@
   {
    "bold": 1,
    "depends_on": "eval:doc.bien !=\"Propio\"",
+   "fetch_from": "entrada_del_bien.cliente",
+   "fetch_if_empty": 1,
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -117,6 +118,8 @@
    "print_hide": 1
   },
   {
+   "fetch_from": "entrada_del_bien.tipo_de_servicio",
+   "fetch_if_empty": 1,
    "fieldname": "tipo_de_servicio",
    "fieldtype": "Select",
    "in_global_search": 1,
@@ -127,6 +130,7 @@
    "reqd": 1
   },
   {
+   "default": "Now",
    "fieldname": "fecha_y_hora_de_solicitud",
    "fieldtype": "Datetime",
    "label": "Fecha y hora de solicitud",
@@ -287,6 +291,8 @@
   },
   {
    "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
+   "fetch_from": "entrada_del_bien.cl_plantilla_proyecto",
+   "fetch_if_empty": 1,
    "fieldname": "cl_plantilla_de_mantenimiento",
    "fieldtype": "Link",
    "label": "Mantenimiento programado",
@@ -314,44 +320,33 @@
    "fieldtype": "Table",
    "label": "Items",
    "options": "Opportunity Item"
-  },
-  {
-   "description": "In Mins",
-   "fieldname": "lead_time",
-   "fieldtype": "Float",
-   "label": "Lead Time",
-   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [
   {
-   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Opportunity",
    "link_fieldname": "orden_de_trabajo_de_servicio"
   },
   {
-   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Material Request",
    "link_fieldname": "orden_de_trabajo"
   },
   {
-   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Warranty Claim",
    "link_fieldname": "orden_de_trabajo_de_servicio"
   },
   {
-   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Quality Inspection",
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-09-04 15:42:15.089402",
+ "modified": "2025-09-05 08:13:05.737905",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
@@ -372,6 +367,5 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "track_changes": 1,
- "track_seen": 1
+ "track_changes": 1
 }
