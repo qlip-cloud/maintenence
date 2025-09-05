@@ -302,7 +302,7 @@
   {
    "fieldname": "replacement_items_section",
    "fieldtype": "Section Break",
-   "label": "Respuestos"
+   "label": "Repuestos"
   },
   {
    "fieldname": "replacement_items",
@@ -336,7 +336,6 @@
    "link_fieldname": "orden_de_trabajo"
   },
   {
-
    "group": "Actividad",
    "link_doctype": "Warranty Claim",
    "link_fieldname": "orden_de_trabajo_de_servicio"
@@ -347,7 +346,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-08-21 14:14:23.102290",
+ "modified": "2025-09-05 08:13:05.737905",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

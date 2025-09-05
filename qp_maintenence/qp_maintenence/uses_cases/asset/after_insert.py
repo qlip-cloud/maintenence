@@ -19,7 +19,7 @@ def handle(asset, method):
     mr.centro_de_costos = asset.cost_center
     mr.save()
 
-    frappe.msgprint(_("{0} ha sido credo en Hoja de Vida del Bien").format(mr.name))
+    frappe.msgprint(_("{0} ha sido creado en Hoja de Vida del Bien").format(mr.name))
 
      
     
