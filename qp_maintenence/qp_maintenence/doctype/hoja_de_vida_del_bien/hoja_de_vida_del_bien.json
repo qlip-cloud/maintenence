@@ -10,9 +10,13 @@
   "customer_details",
   "naming_series",
   "item_code",
+  "descripcion_del_producto",
   "serial_no",
   "fecha_garant\u00eda_fin_fabricante",
   "tipo_de_bien",
+  "categoria_del_activo",
+  "custodio",
+  "departamento",
   "customer",
   "supplier",
   "customer_name",
@@ -25,6 +29,8 @@
   "fecha_garant\u00eda_extendida",
   "placa",
   "bien",
+  "ubicacion",
+  "centro_de_costos",
   "deshabilitado",
   "propietario",
   "contact_info",
@@ -315,6 +321,41 @@
    "fieldname": "fecha_garantia",
    "fieldtype": "Date",
    "label": "Fecha de Garantia"
+  },
+  {
+   "fieldname": "descripcion_del_producto",
+   "fieldtype": "Data",
+   "label": "Descripcion del Producto"
+  },
+  {
+   "fieldname": "categoria_del_activo",
+   "fieldtype": "Link",
+   "label": "Categoria del Activo",
+   "options": "Asset Category"
+  },
+  {
+   "fieldname": "custodio",
+   "fieldtype": "Link",
+   "label": "Custodio",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "departamento",
+   "fieldtype": "Link",
+   "label": "Departamento",
+   "options": "Department"
+  },
+  {
+   "fieldname": "ubicacion",
+   "fieldtype": "Link",
+   "label": "Ubicacion",
+   "options": "Location"
+  },
+  {
+   "fieldname": "centro_de_costos",
+   "fieldtype": "Link",
+   "label": "Centro de Costos",
+   "options": "Cost Center"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -330,13 +371,12 @@
    "link_fieldname": "hoja_de_vida_del_bien"
   },
   {
-   "custom": 1,
    "group": "Actividad",
    "link_doctype": "Datos Operativos",
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-08-20 15:44:38.315224",
+ "modified": "2025-09-09 16:43:07.275315",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
