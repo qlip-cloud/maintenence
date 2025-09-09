@@ -29,36 +29,35 @@ frappe.ui.form.on("Material Request", {
 			);
 		}
 	},
-    project:function(frm){
-        if(frm.doc.project != null){
+    project_mr:function(frm){
+        if(frm.doc.project_mr != null){
             $.each(frm.doc.items, function(i, item){
-                item.project = frm.doc.project;
+                item.project = frm.doc.project_mr;
             });
 
-            frm.refresh_fields();
+            frm.refresh_field("items");
         }
     },
-    cost_center:function(frm){
-        if(frm.doc.cost_center != null){
+    cost_center_mr:function(frm){
+        if(frm.doc.cost_center_mr != null){
             $.each(frm.doc.items, function(i, item){
-                item.cost_center = frm.doc.cost_center;
+                item.cost_center = frm.doc.cost_center_mr;
             });
 
-            frm.refresh_fields();
+            frm.refresh_field("items");
         }
     },
     items:function(frm, cdt, cdn){
         var child = locals[cdt][cdn];
 
-        if(frm.doc.project != null){
-            child.project = frm.doc.project;
-        }
-        if(frm.doc.cost_center != null){
-            child.cost_center = frm.doc.cost_center;
+        if(frm.doc.project_mr != null){
+            child.project = frm.doc.project_mr;
         }
 
-        child.refresh_fields();
+        if(frm.doc.cost_center_mr != null){
+            child.cost_center = frm.doc.cost_center_mr;
+        }
+
+        frm.refresh_field("items");
     }
 });
-
-
