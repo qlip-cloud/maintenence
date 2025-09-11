@@ -46,8 +46,11 @@ frappe.ui.form.on("Material Request", {
 
             frm.refresh_field("items");
         }
-    },
-    items:function(frm, cdt, cdn){
+    }
+});
+
+frappe.ui.form.on("Material Request Item", {
+    item_code:function(frm, cdt, cdn){
         var child = locals[cdt][cdn];
 
         if(frm.doc.project_mr != null){
