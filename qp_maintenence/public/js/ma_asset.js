@@ -14,7 +14,8 @@ frappe.ui.form.on("Asset", {
                     mr.departamento = frm.doc.department
                     mr.ubicacion = frm.doc.location
                     mr.centro_de_costos = frm.doc.cost_center
-
+                    mr.asset = frm.doc.name
+                    mr.asset_naming_serie = frm.doc.qp_serie
                     frappe.set_route("Form", 'Hoja de Vida del Bien', mr.name);
 
                 });

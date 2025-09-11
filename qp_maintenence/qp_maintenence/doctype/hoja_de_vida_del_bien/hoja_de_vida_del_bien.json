@@ -17,6 +17,8 @@
   "categoria_del_activo",
   "custodio",
   "departamento",
+  "asset",
+  "asset_naming_serie",
   "customer",
   "supplier",
   "customer_name",
@@ -356,6 +358,16 @@
    "fieldtype": "Link",
    "label": "Centro de Costos",
    "options": "Cost Center"
+  },
+  {
+   "fieldname": "asset",
+   "fieldtype": "Data",
+   "label": "Asset"
+  },
+  {
+   "fieldname": "asset_naming_serie",
+   "fieldtype": "Data",
+   "label": "N\u00famero de serie del Activo"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -376,7 +388,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-08-29 15:21:20.555461",
+ "modified": "2025-09-11 13:34:23.723398",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
