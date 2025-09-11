@@ -46,19 +46,6 @@ frappe.ui.form.on("Material Request", {
 
             frm.refresh_field("items");
         }
-    },
-    items:function(frm, cdt, cdn){
-        var child = locals[cdt][cdn];
-
-        if(frm.doc.project_mr != null){
-            child.project = frm.doc.project_mr;
-        }
-
-        if(frm.doc.cost_center_mr != null){
-            child.cost_center = frm.doc.cost_center_mr;
-        }
-
-        frm.refresh_field("items");
     }
 });
 
