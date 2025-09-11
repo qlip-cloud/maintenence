@@ -17,6 +17,8 @@ def handle(asset, method):
     mr.departamento = asset.department
     mr.ubicacion = asset.location
     mr.centro_de_costos = asset.cost_center
+    mr.asset = asset.name
+    mr.asset_naming_serie = asset.qp_serial
     mr.save()
 
     frappe.msgprint(_("{0} ha sido creado en Hoja de Vida del Bien").format(mr.name))
