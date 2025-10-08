@@ -2,9 +2,13 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Orden de Servicio', {
-	// refresh: function(frm) {
-
-	// }
+	cl_plantilla_de_mantenimiento:function(frm){
+		if(frm.doc.cl_plantilla_de_mantenimiento){
+			frm.doc.project_type = frm.doc.cl_plantilla_de_mantenimiento
+			frm.refresh_field('project_type')
+			frm.trigger('project_type');
+		}
+	},
 	customer:function(frm){
 
 		frm.set_query("customer_address", function() {
