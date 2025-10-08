@@ -37,6 +37,7 @@
   "detalle_del_servicio_realizado",
   "project_type",
   "tasks",
+  "lead_time",
   "replacement_items_section",
   "replacement_items",
   "amended_from",
@@ -346,7 +347,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-09-05 08:13:05.737905",
+ "modified": "2025-09-09 16:46:56.658988",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
