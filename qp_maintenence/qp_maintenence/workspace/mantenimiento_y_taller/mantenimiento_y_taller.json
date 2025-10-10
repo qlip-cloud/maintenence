@@ -132,6 +132,15 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Todo",
+   "link_to": "ToDo",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Reportes",
    "link_type": "DocType",
    "onboard": 0,
@@ -156,7 +165,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-05-20 16:32:31.802572",
+ "modified": "2025-09-02 10:07:30.383948",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Mantenimiento y Taller",
