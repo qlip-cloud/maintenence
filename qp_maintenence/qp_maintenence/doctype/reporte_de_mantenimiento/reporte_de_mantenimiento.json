@@ -11,8 +11,7 @@
   "customer",
   "customer_name",
   "column_break1",
-  "fecha_mantenimiento",
-  "amended_from"
+  "fecha_mantenimiento"
  ],
  "fields": [
   {
@@ -60,21 +59,11 @@
    "in_standard_filter": 1,
    "label": "Fecha Mantenimiento",
    "reqd": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Reporte de Mantenimiento",
-   "print_hide": 1,
-   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2025-08-14 21:13:41.308824",
+ "modified": "2025-05-06 09:37:35.870557",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Reporte de Mantenimiento",

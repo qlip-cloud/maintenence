@@ -107,8 +107,6 @@
   {
    "bold": 1,
    "depends_on": "eval:doc.bien !=\"Propio\"",
-   "fetch_from": "entrada_del_bien.cliente",
-   "fetch_if_empty": 1,
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -119,8 +117,6 @@
    "print_hide": 1
   },
   {
-   "fetch_from": "entrada_del_bien.tipo_de_servicio",
-   "fetch_if_empty": 1,
    "fieldname": "tipo_de_servicio",
    "fieldtype": "Select",
    "in_global_search": 1,
@@ -131,7 +127,6 @@
    "reqd": 1
   },
   {
-   "default": "Now",
    "fieldname": "fecha_y_hora_de_solicitud",
    "fieldtype": "Datetime",
    "label": "Fecha y hora de solicitud",
@@ -273,6 +268,13 @@
    "reqd": 1
   },
   {
+   "description": "In Mins",
+   "fieldname": "lead_time",
+   "fieldtype": "Float",
+   "label": "Lead Time",
+   "read_only": 1
+  },
+  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -292,8 +294,6 @@
   },
   {
    "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
-   "fetch_from": "entrada_del_bien.cl_plantilla_proyecto",
-   "fetch_if_empty": 1,
    "fieldname": "cl_plantilla_de_mantenimiento",
    "fieldtype": "Link",
    "label": "Mantenimiento programado",
@@ -303,7 +303,7 @@
   {
    "fieldname": "replacement_items_section",
    "fieldtype": "Section Break",
-   "label": "Repuestos"
+   "label": "Respuestos"
   },
   {
    "fieldname": "replacement_items",

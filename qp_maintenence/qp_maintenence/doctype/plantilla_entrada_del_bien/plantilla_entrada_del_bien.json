@@ -7,8 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "nombre",
-  "inspeccion_entrada_del_bien",
-  "amended_from"
+  "inspeccion_entrada_del_bien"
  ],
  "fields": [
   {
@@ -22,21 +21,11 @@
    "fieldtype": "Table",
    "label": "Inspeccion Entrada del Bien",
    "options": "Inspeccion Entrada del Bien"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Plantilla Entrada del Bien",
-   "print_hide": 1,
-   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2025-08-14 21:13:11.685494",
+ "modified": "2025-05-08 14:15:36.929402",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Plantilla Entrada del Bien",
