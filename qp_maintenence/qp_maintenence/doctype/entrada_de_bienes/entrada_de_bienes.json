@@ -72,7 +72,6 @@
   {
    "bold": 1,
    "fetch_from": "cl_hoja_de_vida_bien.customer",
-   "fetch_if_empty": 1,
    "fieldname": "cliente",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -123,8 +122,6 @@
    "search_index": 1
   },
   {
-   "fetch_from": "cl_hoja_de_vida_bien.tipo_de_bien",
-   "fetch_if_empty": 1,
    "fieldname": "cl_tipo_de_bien",
    "fieldtype": "Select",
    "label": "Tipo de bien",
@@ -134,8 +131,6 @@
   {
    "bold": 1,
    "depends_on": "eval:doc.cl_tipo_de_bien ==\"Veh\u00edculo\"",
-   "fetch_from": "cl_hoja_de_vida_bien.placa",
-   "fetch_if_empty": 1,
    "fieldname": "cl_placa",
    "fieldtype": "Data",
    "in_global_search": 1,
@@ -314,7 +309,6 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [
   {
    "group": "Actividad",
@@ -322,7 +316,7 @@
    "link_fieldname": "entrada_del_bien"
   }
  ],
- "modified": "2025-08-14 14:01:39.426009",
+ "modified": "2025-05-28 08:31:15.312965",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Entrada de Bienes",

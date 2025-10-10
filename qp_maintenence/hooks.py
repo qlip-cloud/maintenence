@@ -37,7 +37,6 @@ doctype_js = {
     "Item" : "public/js/ma_items.js",
     "Stock Entry" : "public/js/ma_stock_entry.js",
     "Purchase Receipt" : "public/js/ma_purchase_receipt.js",
-    "Asset" : "public/js/ma_asset.js",
     "Material Request" : "public/js/ma_material_request.js"
 }
 
@@ -112,9 +111,6 @@ doc_events = {
 	},
     "Stock Entry": {
 		"validate": ["qp_maintenence.qp_maintenence.uses_cases.purchase_receipt.validate.handle"],
-	},
-	"Asset":{
-        "after_insert":["qp_maintenence.qp_maintenence.uses_cases.asset.after_insert.handle"]
 	}
 }
 

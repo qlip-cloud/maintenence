@@ -7,8 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "nombre",
-  "datos_de_mantenimiento",
-  "amended_from"
+  "datos_de_mantenimiento"
  ],
  "fields": [
   {
@@ -22,21 +21,11 @@
    "fieldtype": "Data",
    "label": "Nombre",
    "unique": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Plantilla datos tecnicos de mantenimiento",
-   "print_hide": 1,
-   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2025-08-14 21:12:59.314309",
+ "modified": "2025-05-07 09:20:19.383819",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Plantilla datos tecnicos de mantenimiento",

@@ -26,8 +26,7 @@
   "column_break_18",
   "\u00e1reas_de_especializaci\u00f3n",
   "valor_hora",
-  "otras_habilidades",
-  "amended_from"
+  "otras_habilidades"
  ],
  "fields": [
   {
@@ -62,8 +61,6 @@
    "reqd": 1
   },
   {
-   "fetch_from": "id_de_empleado.cell_number",
-   "fetch_if_empty": 1,
    "fieldname": "celular",
    "fieldtype": "Data",
    "label": "Celular"
@@ -105,18 +102,14 @@
    "options": "Cost Center"
   },
   {
-   "fetch_from": "id_de_empleado.prefered_email",
-   "fetch_if_empty": 1,
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email"
   },
   {
-   "fetch_from": "id_de_empleado.employment_type",
    "fieldname": "horario_laboral",
-   "fieldtype": "Link",
-   "label": "Horario laboral",
-   "options": "Employment Type"
+   "fieldtype": "Data",
+   "label": "Horario laboral"
   },
   {
    "depends_on": "eval:doc.cl_tipo_de_bien == \"Veh\u00edculo\"",
@@ -164,19 +157,9 @@
    "fieldtype": "Data",
    "label": "Formaci\u00f3n acad\u00e9mica",
    "reqd": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Equipo Tecnico",
-   "print_hide": 1,
-   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [
   {
    "group": "Actividad",
@@ -184,7 +167,7 @@
    "link_fieldname": "responsable"
   }
  ],
- "modified": "2025-08-14 21:10:51.129419",
+ "modified": "2025-06-04 12:05:05.222539",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Equipo Tecnico",
