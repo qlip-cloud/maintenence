@@ -9,6 +9,35 @@ frappe.ui.form.on('Orden de Servicio', {
 			frm.trigger('project_type');
 		}
 	},
+	refresh: function(frm) {
+		if(!frm.is_new()){
+			frappe.db.get_list('Novedades', { filters:{'orden_de_servicio':frm.doc.name}, fields:['*']})
+					 .then(v => {
+
+						if(v.length > 0){
+							v.forEach((rn) => {
+
+								frm.add_child('novedades', {
+									fecha_reporte:rn.fecha_reporte,
+									descripcion:rn.descripcion,
+									tipo_de_novedad:rn.tipo_de_novedad,
+									quien_reporta:rn.quien_reporta,
+									area_ejecutora:rn.area_ejecutora,
+									fuente_de_la_novedad:rn.fuente_de_la_novedad,
+									state:rn.state,
+									orden_de_servicio:rn.orden_de_servicio,
+									fecha_de_cierre_os:rn.fecha_de_cierre_os
+								})
+							})
+						}
+
+						refresh_field("novedades")
+					})
+		}
+	},
+	validate:function(frm){
+		frm.doc.novedades = null;
+	},
 	customer:function(frm){
 
 		frm.set_query("customer_address", function() {
