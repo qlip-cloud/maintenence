@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "creation": "2025-10-15 14:50:45.227672",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "fecha_reporte",
+  "descripcion",
+  "tipo_de_novedad",
+  "quien_reporta",
+  "area_ejecutora",
+  "fuente_de_la_novedad",
+  "state",
+  "orden_de_servicio",
+  "fecha_de_cierre_os"
+ ],
+ "fields": [
+  {
+   "fieldname": "fecha_reporte",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fecha reporte"
+  },
+  {
+   "fieldname": "descripcion",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Descripcion"
+  },
+  {
+   "fieldname": "tipo_de_novedad",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tipo de novedad",
+   "options": "\nEl\u00e9ctrica\nMec\u00e1nica\nHidr\u00e1ulica\nNeum\u00e1tica\nInfraestructura\nSeguridad Industrial\nTecnol\u00f3gica"
+  },
+  {
+   "fieldname": "quien_reporta",
+   "fieldtype": "Data",
+   "label": "Quien reporta"
+  },
+  {
+   "fieldname": "area_ejecutora",
+   "fieldtype": "Data",
+   "label": "Area ejecutora"
+  },
+  {
+   "fieldname": "fuente_de_la_novedad",
+   "fieldtype": "Select",
+   "label": "Fuente de la novedad",
+   "options": "\nEmail\nTarjeta de observaci\u00f3n Sharp\nOrden de servicio\nWhatsApp\nInspecci\u00f3n\nAuditoria\nOtro"
+  },
+  {
+   "default": "Open",
+   "fetch_from": "orden_de_servicio.status",
+   "fetch_if_empty": 1,
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Estado",
+   "options": "Draft\nSubmited\nCanceled\nOpen",
+   "read_only": 1
+  },
+  {
+   "fieldname": "orden_de_servicio",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Orden de Servicio",
+   "options": "Orden de Servicio"
+  },
+  {
+   "fetch_from": "orden_de_servicio.fecha_y_hora_finalizaci\u00f3n_os",
+   "fetch_if_empty": 1,
+   "fieldname": "fecha_de_cierre_os",
+   "fieldtype": "Data",
+   "label": "Fecha de cierre OS"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-10-16 16:47:49.262531",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Novedades",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

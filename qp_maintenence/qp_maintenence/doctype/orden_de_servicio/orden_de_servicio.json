@@ -44,7 +44,9 @@
   "consumable_items_section",
   "consumable_items",
   "section_break_34",
-  "observaciones"
+  "observaciones",
+  "datos_de_la_novedad_section",
+  "novedades"
  ],
  "fields": [
   {
@@ -321,6 +323,18 @@
    "fieldtype": "Table",
    "label": "Items",
    "options": "Opportunity Item"
+  },
+  {
+   "fieldname": "datos_de_la_novedad_section",
+   "fieldtype": "Section Break",
+   "label": "DATOS DE NOVEDAD"
+  },
+  {
+   "fieldname": "novedades",
+   "fieldtype": "Table",
+   "label": "Novedades",
+   "options": "Novedades",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -347,7 +361,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-09-09 16:46:56.658988",
+ "modified": "2025-10-16 16:49:59.184242",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

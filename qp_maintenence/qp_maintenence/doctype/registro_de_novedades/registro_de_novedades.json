@@ -1,0 +1,99 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2025-10-15 14:51:44.107463",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "datos_basicos_del_equipo_section",
+  "naming_series",
+  "hoja_de_vida_del_bien",
+  "column_break_4",
+  "item_code",
+  "item_name",
+  "datos_de_la_novedad_section",
+  "novedades",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "datos_basicos_del_equipo_section",
+   "fieldtype": "Section Break",
+   "label": "DATOS BASICOS DEL EQUIPO"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Data",
+   "label": "Naming Series"
+  },
+  {
+   "fieldname": "hoja_de_vida_del_bien",
+   "fieldtype": "Link",
+   "label": "Hoja de vida del bien",
+   "options": "Hoja de Vida del Bien"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fetch_if_empty": 1,
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "datos_de_la_novedad_section",
+   "fieldtype": "Section Break",
+   "label": "DATOS DE NOVEDAD"
+  },
+  {
+   "fieldname": "novedades",
+   "fieldtype": "Table",
+   "label": "Novedades",
+   "options": "Novedades"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Registro de Novedades",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-10-16 16:49:04.452831",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Registro de Novedades",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
