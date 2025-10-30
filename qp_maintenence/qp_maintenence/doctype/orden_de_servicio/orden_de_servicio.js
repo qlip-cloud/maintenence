@@ -10,6 +10,9 @@ frappe.ui.form.on('Orden de Servicio', {
 		}
 	},
 	refresh: function(frm) {
+
+		frm.fields_dict.tasks.grid.grid_pagination.page_length = 100;
+
 		if(!frm.is_new()){
 			frappe.db.get_list('Novedades', { filters:{'orden_de_servicio':frm.doc.name}, fields:['*']})
 					 .then(v => {
@@ -90,7 +93,8 @@ frappe.ui.form.on('Orden de Servicio', {
 						'parenttype': "Project Template",
 					},
 					fields:["*"],
-					order_by:"idx"
+					order_by:"idx",
+					limit:500
 				})
 				.then((r) => {
 
