@@ -3,7 +3,7 @@
 
 frappe.ui.form.on('Entrada de Bienes', {
 	refresh: function(frm) {
-		if (!frm.is_new()  && frm.doc.docstatus === 0) {
+		if (!frm.is_new()) {
 			frm.add_custom_button(__('Quality Inspection(s)'), function() {
 				frm.trigger('make_quality_inspection');
             }, __("Create"));
@@ -217,7 +217,7 @@ frappe.ui.form.on('Entrada de Bienes', {
 				} else {
 					dialog.show();
 				}
-				
+
 			});
 
 			
