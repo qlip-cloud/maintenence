@@ -328,7 +328,8 @@
    "fieldname": "novedades",
    "fieldtype": "Table",
    "label": "Novedades Tomadas",
-   "options": "Novedades"
+   "options": "Novedades",
+   "read_only": 1
   },
   {
    "description": "In Mins",
@@ -368,7 +369,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-11-19 10:10:59.114849",
+ "modified": "2025-11-20 10:02:43.323937",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
