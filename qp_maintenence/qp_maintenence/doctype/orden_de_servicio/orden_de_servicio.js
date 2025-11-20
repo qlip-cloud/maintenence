@@ -2,42 +2,18 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Orden de Servicio', {
+	refresh:function(frm){
+		if(frm.is_new()){
+			frm.doc.novedades = []
+			refresh_field("novedades")
+		}
+	},
 	cl_plantilla_de_mantenimiento:function(frm){
 		if(frm.doc.cl_plantilla_de_mantenimiento){
 			frm.doc.project_type = frm.doc.cl_plantilla_de_mantenimiento
 			frm.refresh_field('project_type')
 			frm.trigger('project_type');
 		}
-	},
-	refresh: function(frm) {
-
-		if(!frm.is_new()){
-			frappe.db.get_list('Novedades', { filters:{'orden_de_servicio':frm.doc.name}, fields:['*']})
-					 .then(v => {
-
-						if(v.length > 0){
-							v.forEach((rn) => {
-
-								frm.add_child('novedades', {
-									fecha_reporte:rn.fecha_reporte,
-									descripcion:rn.descripcion,
-									tipo_de_novedad:rn.tipo_de_novedad,
-									quien_reporta:rn.quien_reporta,
-									area_ejecutora:rn.area_ejecutora,
-									fuente_de_la_novedad:rn.fuente_de_la_novedad,
-									state:rn.state,
-									orden_de_servicio:rn.orden_de_servicio,
-									fecha_de_cierre_os:rn.fecha_de_cierre_os
-								})
-							})
-						}
-
-						refresh_field("novedades")
-					})
-		}
-	},
-	validate:function(frm){
-		frm.doc.novedades = null;
 	},
 	customer:function(frm){
 
@@ -137,5 +113,143 @@ frappe.ui.form.on('Orden de Servicio', {
 		me.frm.set_query('warehouse', 'consumable_items', function(doc, cdt, cdn) {
 			return get_data(doc, cdt, cdn);	
 		});
-	}
+	},
+	onload_post_render:function(frm){
+		frm.fields_dict['ver_novedades'].$wrapper.css({'margin-top': '0'});
+	},
 });
+
+cur_frm.cscript.ver_novedades = function(doc) {
+	frappe.call({
+		method: 'qp_maintenence.qp_maintenence.doctype.orden_de_servicio.orden_de_servicio.get_novedades', // Replace with your actual method path
+		args: cur_frm.doc,
+		callback: function(r) {
+			if (r.message) {
+				if (r.message.length > 0) {
+					get_novedades(r.message);
+				}
+			}
+		}
+	});
+}
+
+function get_novedades(v){
+	
+	let nv = []
+
+	if(v.length > 0){
+		v.forEach((rn) => {
+
+			nv.push({
+				fecha_reporte:rn.fecha_reporte,
+				descripcion:rn.descripcion,
+				tipo_de_novedad:rn.tipo_de_novedad,
+				quien_reporta:rn.quien_reporta,
+				area_ejecutora:rn.area_ejecutora,
+				fuente_de_la_novedad:rn.fuente_de_la_novedad,
+				state:__(rn.state),
+				orden_de_servicio:rn.orden_de_servicio,
+				fecha_de_cierre_os:rn.fecha_de_cierre_os,
+				novedad:rn.name
+			})
+		});
+
+		let dialog = new frappe.ui.Dialog({
+			title: 'Novedades Abiertas',
+			size: "extra-large",
+			fields: [
+				{
+					label: 'Novedades',
+					fieldname: 'novedades_abiertas',
+					fieldtype: 'Table',
+					cannot_add_rows: true,
+					cannot_delete_rows: true,
+					in_place_edit: false,
+					data: nv,
+					fields: [
+						{ fieldname: 'fecha_reporte', fieldtype: 'Read Only', label: 'Fecha de reporte',in_list_view: 1},
+						{ fieldname: 'descripcion', fieldtype: 'Read Only', label: 'Descripcion',in_list_view: 1},
+						{ fieldname: 'tipo_de_novedad', fieldtype: 'Read Only', label: 'Tipo de novedad',in_list_view: 1},
+						{ fieldname: 'quien_reporta', fieldtype: 'Read Only', label: 'Quien Reporta'},
+						{ fieldname: 'area_ejecutora', fieldtype: 'Read Only', label: 'Area ejecutora'},
+						{ fieldname: 'fuente_de_la_novedad', fieldtype: 'Read Only', label: 'Fuente de la novedad'},
+						{ fieldname: 'state', fieldtype: 'Read Only', label: 'Estado',in_list_view: 1},
+						{ fieldname: 'orden_de_servicio', fieldtype: 'Read Only', label: 'Orden de Servicio',in_list_view: 1},
+						{ fieldname: 'fecha_de_cierre_os', fieldtype: 'Read Only', label: 'Fecha de cierre os'},
+						{ fieldname: 'novedad', fieldtype: 'Read Only', label: 'Novedad'},
+					]
+				}
+			],
+			primary_action_label: __('Tomar Novedades'),
+			primary_action: function() {
+				let selectedRows = dialog.fields_dict.novedades_abiertas.grid.get_selected_children();
+
+				if(selectedRows.length == 0){
+					frappe.msgprint('No ha seleccionado ninguna novedad')
+				}else{
+					
+					var error = false;
+
+					selectedRows.forEach((sr) => {
+						if(cur_frm.doc.novedades.some(n => n.actividad_referencia == sr.novedad)){
+							frappe.msgprint(`Novedad ${sr.novedad} ya se encuentra tomada, por favor revise.`)
+							error = true
+						}
+					});
+
+					if(!error){
+						selectedRows.forEach((sr) => {
+
+							var r = cur_frm.add_child("novedades", {
+								fecha_reporte:sr.fecha_reporte,
+								descripcion:sr.descripcion,
+								tipo_de_novedad:sr.tipo_de_novedad,
+								quien_reporta:sr.quien_reporta,
+								area_ejecutora:sr.area_ejecutora,
+								fuente_de_la_novedad:sr.fuente_de_la_novedad,
+								state: sr.state == 'Cerrado' ? "Closed" : "Open",
+								orden_de_servicio:sr.orden_de_servicio,
+								fecha_de_cierre_os:sr.fecha_de_cierre_os,
+								por_realizar:true
+							})
+
+							r.orden_transitoria = cur_frm.doc.name,
+							r.actividad_referencia = sr.novedad
+
+						});
+
+						refresh_field("novedades")
+
+						dialog.hide();
+					}
+					
+				}
+			},
+			secondary_action_label: __('Quitar Novedades'),
+			secondary_action:function() {
+				let selectedRows = dialog.fields_dict.novedades_abiertas.grid.get_selected_children();
+
+				if(selectedRows.length == 0){
+					frappe.msgprint('No ha seleccionado ninguna novedad')
+				}else{
+					selectedRows.forEach((sr) => {
+						cur_frm.doc.novedades = cur_frm.doc.novedades.filter(n => n.actividad_referencia != sr.novedad);
+						refresh_field("novedades")
+					});
+						
+					var st = cur_frm.doc.status
+					cur_frm.set_value('status', '')
+					cur_frm.set_value('status', st)
+
+					dialog.hide();
+				}
+			}
+
+		});
+	
+		dialog.show();
+
+	}else{
+		frappe.msgprint('No se encontraron novedades abiertas')
+	}
+}

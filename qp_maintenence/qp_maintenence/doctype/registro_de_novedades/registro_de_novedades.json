@@ -13,8 +13,7 @@
   "item_code",
   "item_name",
   "datos_de_la_novedad_section",
-  "novedades",
-  "amended_from"
+  "novedades"
  ],
  "fields": [
   {
@@ -60,21 +59,12 @@
    "fieldtype": "Table",
    "label": "Novedades",
    "options": "Novedades"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Registro de Novedades",
-   "print_hide": 1,
-   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-10-16 16:49:04.452831",
+ "modified": "2025-11-13 11:14:23.102144",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Registro de Novedades",
