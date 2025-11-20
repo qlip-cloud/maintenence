@@ -14,6 +14,8 @@ class OrdendeServicio(Document):
 
 		if self.status == 'Completed' and self.docstatus == 1:
 			for tn in self.novedades:
+
+				rn = frappe.db.get_value('')
 				tn.state = 'Closed'
 				tn.orden_transitoria = self.name
 				tn.orden_de_servicio = self.name
@@ -28,7 +30,7 @@ class OrdendeServicio(Document):
 					source_nov.save()
 				else:
 					frappe.db.rollback()
-					frappe.throw(F"""La novedad {tn.actividad_referencia} ya se encuentra cerrada por otra orden, por favor revise""")
+					frappe.throw(F"""La novedad {tn.descripcion} de tipo {tn.tipo_de_novedad} del registro de novedades {tn.parent} ya se encuentra cerrada por la orden de servicio {tn.orden_de_servicio}, por favor revise""")
 				#search real novedades
 
 @frappe.whitelist()
