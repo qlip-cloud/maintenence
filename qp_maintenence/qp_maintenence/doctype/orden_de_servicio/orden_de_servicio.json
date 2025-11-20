@@ -46,6 +46,7 @@
   "section_break_34",
   "observaciones",
   "datos_de_la_novedad_section",
+  "ver_novedades",
   "novedades"
  ],
  "fields": [
@@ -109,8 +110,6 @@
   {
    "bold": 1,
    "depends_on": "eval:doc.bien !=\"Propio\"",
-   "fetch_from": "entrada_del_bien.cliente",
-   "fetch_if_empty": 1,
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_global_search": 1,
@@ -121,8 +120,6 @@
    "print_hide": 1
   },
   {
-   "fetch_from": "entrada_del_bien.tipo_de_servicio",
-   "fetch_if_empty": 1,
    "fieldname": "tipo_de_servicio",
    "fieldtype": "Select",
    "in_global_search": 1,
@@ -133,7 +130,6 @@
    "reqd": 1
   },
   {
-   "default": "Now",
    "fieldname": "fecha_y_hora_de_solicitud",
    "fieldtype": "Datetime",
    "label": "Fecha y hora de solicitud",
@@ -294,8 +290,6 @@
   },
   {
    "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
-   "fetch_from": "entrada_del_bien.cl_plantilla_proyecto",
-   "fetch_if_empty": 1,
    "fieldname": "cl_plantilla_de_mantenimiento",
    "fieldtype": "Link",
    "label": "Mantenimiento programado",
@@ -305,7 +299,7 @@
   {
    "fieldname": "replacement_items_section",
    "fieldtype": "Section Break",
-   "label": "Repuestos"
+   "label": "Respuestos"
   },
   {
    "fieldname": "replacement_items",
@@ -330,11 +324,24 @@
    "label": "DATOS DE NOVEDAD"
   },
   {
+   "depends_on": "eval: doc.producto",
    "fieldname": "novedades",
    "fieldtype": "Table",
-   "label": "Novedades",
-   "options": "Novedades",
+   "label": "Novedades Tomadas",
+   "options": "Novedades"
+  },
+  {
+   "description": "In Mins",
+   "fieldname": "lead_time",
+   "fieldtype": "Float",
+   "label": "Lead Time",
    "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.producto",
+   "fieldname": "ver_novedades",
+   "fieldtype": "Button",
+   "label": "Ver Novedades"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -361,7 +368,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-10-16 16:49:59.184242",
+ "modified": "2025-11-19 10:10:59.114849",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
