@@ -125,9 +125,7 @@ cur_frm.cscript.ver_novedades = function(doc) {
 		args: cur_frm.doc,
 		callback: function(r) {
 			if (r.message) {
-				if (r.message.length > 0) {
 					get_novedades(r.message);
-				}
 			}
 		}
 	});
