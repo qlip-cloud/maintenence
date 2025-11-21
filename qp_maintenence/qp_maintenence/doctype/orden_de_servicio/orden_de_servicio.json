@@ -204,7 +204,8 @@
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "in_global_search": 1,
-   "label": "Nombre del cliente"
+   "label": "Nombre del cliente",
+   "read_only": 1
   },
   {
    "fieldname": "fecha_y_hora_inicio_real_os",
@@ -368,7 +369,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-11-21 11:53:57.486992",
+ "modified": "2025-11-21 12:08:24.312098",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
