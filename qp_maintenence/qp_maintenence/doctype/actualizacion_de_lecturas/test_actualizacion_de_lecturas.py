@@ -4,5 +4,5 @@
 # import frappe
 import unittest
 
-class TestDatosOperativos(unittest.TestCase):
+class TestActualizaciondeLecturas(unittest.TestCase):
 	pass
