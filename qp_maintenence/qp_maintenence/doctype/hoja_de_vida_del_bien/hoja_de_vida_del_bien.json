@@ -384,11 +384,11 @@
   },
   {
    "group": "Actividad",
-   "link_doctype": "Datos Operativos",
+   "link_doctype": "Actualizacion de Lecturas",
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-09-11 13:34:23.723398",
+ "modified": "2025-11-24 14:59:37.685222",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",

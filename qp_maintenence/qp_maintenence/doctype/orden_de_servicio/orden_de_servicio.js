@@ -117,6 +117,30 @@ frappe.ui.form.on('Orden de Servicio', {
 	onload_post_render:function(frm){
 		frm.fields_dict['ver_novedades'].$wrapper.css({'margin-top': '0'});
 	},
+	before_submit: function(frm) {
+        // Your JavaScript code here
+        // For example, to show a confirmation dialog:
+		if(frm.doc.valor_de_lectura_actual){
+			frappe.confirm('El Valor de Lectura Actual ha sido completado, ¿Desea crear una Actualización de Lectura?',
+				() => {
+
+					 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
+						var mr = frappe.model.get_new_doc('Actualizacion de Lecturas');
+
+						mr.cl_hoja_de_vida_bien =  result[0].name 
+						mr.lectura_actual = frm.doc.valor_de_lectura_actual
+						mr.fecha = frm.doc.fecha_y_hora_finalización_os
+						mr.observaciones = frm.doc.name
+						frappe.set_route("Form", 'Actualizacion de Lecturas', mr.name);
+
+					});
+
+					
+				}, () => {
+					true
+			})
+		}
+	}
 });
 
 cur_frm.cscript.ver_novedades = function(doc) {
