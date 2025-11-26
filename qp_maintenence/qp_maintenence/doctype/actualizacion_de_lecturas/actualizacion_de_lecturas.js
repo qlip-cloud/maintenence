@@ -32,7 +32,7 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 		}else{
 			frappe.db.get_list('Actualizacion de Lecturas', 
 				{
-					fields: ['lectura_anterior'],
+					fields: ['lectura_actual'],
 					filters:{
 						"docstatus": 1, 
 						"codigo_de_producto":frm.doc.codigo_de_producto, 
