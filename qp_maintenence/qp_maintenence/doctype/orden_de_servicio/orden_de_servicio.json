@@ -17,6 +17,7 @@
   "tipo_de_servicio",
   "fecha_y_hora_de_solicitud",
   "fecha_y_hora_prevista_de_entrega",
+  "valor_de_lectura_actual",
   "column_break1",
   "company",
   "sales_order",
@@ -343,6 +344,11 @@
    "fieldname": "ver_novedades",
    "fieldtype": "Button",
    "label": "Ver Novedades"
+  },
+  {
+   "fieldname": "valor_de_lectura_actual",
+   "fieldtype": "Int",
+   "label": "Valor de lectura actual"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -369,7 +375,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-11-21 12:08:24.312098",
+ "modified": "2025-11-25 12:48:22.511895",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
