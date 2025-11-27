@@ -17,14 +17,14 @@ class OrdendeServicio(Document):
 
 				rn = frappe.db.get_value('')
 				tn.state = 'Closed'
-				tn.orden_transitoria = self.name
+				#tn.orden_transitoria = self.name
 				tn.orden_de_servicio = self.name
 				tn.fecha_de_cierre_os = self.fecha_y_hora_finalización_os
 				source_nov = frappe.get_doc('Novedades', tn.actividad_referencia)
 
 				if source_nov.state  == 'Open':	
 					source_nov.state = 'Closed'
-					source_nov.orden_transitoria = self.name
+					#source_nov.orden_transitoria = self.name
 					source_nov.orden_de_servicio = self.name
 					source_nov.fecha_de_cierre_os = self.fecha_y_hora_finalización_os
 					source_nov.save()
