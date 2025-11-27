@@ -235,7 +235,7 @@ function get_novedades(v){
 								por_realizar:true
 							})
 
-							r.orden_transitoria = cur_frm.doc.name,
+							//r.orden_transitoria = cur_frm.doc.name,
 							r.actividad_referencia = sr.novedad
 
 						});
