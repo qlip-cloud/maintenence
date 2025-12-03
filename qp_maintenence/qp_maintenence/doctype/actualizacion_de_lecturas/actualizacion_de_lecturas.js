@@ -75,8 +75,8 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 
 		if(frm.doc.codigo_de_producto){
 			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.codigo_de_producto}, fields:['*']}).then((result)=>{
-   				if(result.lenght > 0){
-					frm.set_value("cl_hoja_de_vida_bien", result[0].name ) 
+   				if(result.message.lenght > 0){
+					frm.set_value("cl_hoja_de_vida_bien", result.message[0].name ) 
 					refresh_field('cl_hoja_de_vida_bien') 
 				}    
 			 });
