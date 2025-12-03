@@ -55,6 +55,14 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 			})
 
 		}
+
+		if(frm.doc.codigo_de_producto){
+			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.codigo_de_producto}, fields:['*']}).then((result)=>{
+                frm.doc.cl_hoja_de_vida_bien = result[0].name   
+				refresh_field('cl_hoja_de_vida_bien')       
+			 });
+		}
+		
 	},
 	lectura_actual:function(frm){
 		if(frm.doc.lectura_actual <= 0){
@@ -65,4 +73,8 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 		if(frm.doc.tipo_de_bien == 'Equipo') frm.set_value("unidad_de_medida",'Horas')
 		if(frm.doc.tipo_de_bien == 'Vehículo') frm.set_value("unidad_de_medida",'Kms')
 	},
+	before_submit: function(frm) {
+		frm.doc.lectura_acumulada += frm.doc.lectura_actual;
+		refresh_field('lectura_acumulada');
+	}
 });
