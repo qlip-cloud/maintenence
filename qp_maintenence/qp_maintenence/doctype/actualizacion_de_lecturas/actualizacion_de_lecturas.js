@@ -26,9 +26,13 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 
 						frm.set_value("lectura_acumulada", total)
 
-						refresh_field('lectura_anterior')
-						refresh_field('lectura_acumulada')
+					}else{
+						frm.set_value("lectura_anterior", 0)
+						frm.set_value("lectura_acumulada", 0)
 					}
+
+					refresh_field('lectura_anterior')
+					refresh_field('lectura_acumulada')
 					
 				})
 			}
@@ -56,10 +60,13 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 						});
 
 						frm.set_value("lectura_acumulada", total)
-
-						refresh_field('lectura_acumulada')
-						refresh_field('lectura_actual')
+					}else{
+						frm.set_value("lectura_anterior", 0)
+						frm.set_value("lectura_acumulada", 0)
 					}
+
+					refresh_field('lectura_anterior')
+					refresh_field('lectura_acumulada')
 				})
 			}
 
