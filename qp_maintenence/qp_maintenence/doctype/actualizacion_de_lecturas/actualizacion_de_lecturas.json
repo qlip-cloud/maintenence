@@ -70,7 +70,6 @@
   },
   {
    "fetch_from": "cl_hoja_de_vida_bien.tipo_de_bien",
-   "fetch_if_empty": 1,
    "fieldname": "tipo_de_bien",
    "fieldtype": "Select",
    "label": "Tipo de bien",
@@ -129,7 +128,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-11-25 11:32:43.825862",
+ "modified": "2025-12-03 10:04:11.493579",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Actualizacion de Lecturas",

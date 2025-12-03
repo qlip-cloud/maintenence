@@ -4,7 +4,8 @@
 frappe.ui.form.on('Actualizacion de Lecturas', {
 	codigo_de_producto:function(frm){
 		if(frm.is_new()){
-			frappe.db.get_list('Actualizacion de Lecturas', 
+			if(frm.doc.codigo_de_producto){
+				frappe.db.get_list('Actualizacion de Lecturas', 
 				{
 					fields: ['lectura_actual'],
 					filters:{
@@ -13,46 +14,54 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 					},
 					order_by: 'creation desc',
 				}
-			).then(ld => {
-				
-				frm.set_value("lectura_anterior", ld[0].lectura_actual)
+				).then(ld => {
+					
+					if(ld.lenght > 0){
+						frm.set_value("lectura_anterior", ld[0].lectura_actual)
 
-				let total = 0
-				ld.forEach((value) => {
-					total += value.lectura_actual;
-				});
+						let total = 0
+						ld.forEach((value) => {
+							total += value.lectura_actual;
+						});
 
-				frm.set_value("lectura_acumulada", total)
+						frm.set_value("lectura_acumulada", total)
 
-				refresh_field('lectura_anterior')
-				refresh_field('lectura_acumulada')
-			})
-
-			
+						refresh_field('lectura_anterior')
+						refresh_field('lectura_acumulada')
+					}
+					
+				})
+			}
 		}else{
-			frappe.db.get_list('Actualizacion de Lecturas', 
-				{
-					fields: ['lectura_actual'],
-					filters:{
-						"docstatus": 1, 
-						"codigo_de_producto":frm.doc.codigo_de_producto, 
-						"name":["not in", frm.doc.name]
-					},
-					order_by: 'creation desc',
-				}
-			).then(ld => {
-				frm.set_value("lectura_anterior", ld[0].lectura_actual)
+			if(frm.doc.codigo_de_producto){
+				frappe.db.get_list('Actualizacion de Lecturas', 
+					{
+						fields: ['lectura_actual'],
+						filters:{
+							"docstatus": 1, 
+							"codigo_de_producto":frm.doc.codigo_de_producto, 
+							"name":["not in", frm.doc.name]
+						},
+						order_by: 'creation desc',
+					}
+				).then(ld => {
 
-				let total = 0
-				ld.forEach((value) => {
-					total += value.lectura_actual;
-				});
+					if(ld.lenght > 0){
+						
+						frm.set_value("lectura_anterior", ld[0].lectura_actual)
 
-				frm.set_value("lectura_acumulada", total)
+						let total = 0
+						ld.forEach((value) => {
+							total += value.lectura_actual;
+						});
 
-				refresh_field('lectura_acumulada')
-				refresh_field('lectura_actual')
-			})
+						frm.set_value("lectura_acumulada", total)
+
+						refresh_field('lectura_acumulada')
+						refresh_field('lectura_actual')
+					}
+				})
+			}
 
 		}
 
@@ -62,7 +71,7 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 				refresh_field('cl_hoja_de_vida_bien')       
 			 });
 		}
-		
+
 	},
 	lectura_actual:function(frm){
 		if(frm.doc.lectura_actual <= 0){
