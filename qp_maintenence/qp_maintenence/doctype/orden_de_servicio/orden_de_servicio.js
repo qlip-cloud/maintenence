@@ -129,7 +129,7 @@ frappe.ui.form.on('Orden de Servicio', {
 
 						mr.cl_hoja_de_vida_bien =  result[0].name 
 						mr.lectura_actual = frm.doc.valor_de_lectura_actual
-						mr.fecha = frm.doc.fecha_y_hora_finalización_os
+						mr.fecha = frm.doc.fecha_y_hora_inicio_real_os
 						mr.observaciones = frm.doc.name
 						frappe.set_route("Form", 'Actualizacion de Lecturas', mr.name);
 
@@ -140,6 +140,15 @@ frappe.ui.form.on('Orden de Servicio', {
 					true
 			})
 		}
+	},
+	producto:function(frm){
+		if(frm.doc.producto){
+			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
+                frm.doc.hoja_de_vida_del_bien = result[0].name   
+				refresh_field('hoja_de_vida_del_bien')       
+			 });
+		}
+		
 	}
 });
 
