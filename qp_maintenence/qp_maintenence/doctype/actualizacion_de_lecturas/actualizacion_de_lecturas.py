@@ -4,5 +4,5 @@
 # import frappe
 from frappe.model.document import Document
 
-class DatosOperativos(Document):
+class ActualizaciondeLecturas(Document):
 	pass

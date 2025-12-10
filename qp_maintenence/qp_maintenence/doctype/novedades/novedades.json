@@ -1,0 +1,127 @@
+{
+ "actions": [],
+ "creation": "2025-10-15 14:50:45.227672",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "fecha_reporte",
+  "descripcion",
+  "tipo_de_novedad",
+  "quien_reporta",
+  "area_ejecutora",
+  "fuente_de_la_novedad",
+  "state",
+  "orden_de_servicio",
+  "fecha_de_cierre_os",
+  "por_realizar",
+  "orden_transitoria",
+  "actividad_referencia"
+ ],
+ "fields": [
+  {
+   "fieldname": "fecha_reporte",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fecha reporte",
+   "read_only_depends_on": "eval: cur_frm.doctype == 'Orden de Servicio'"
+  },
+  {
+   "fieldname": "descripcion",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Descripcion",
+   "read_only_depends_on": "eval: cur_frm.doctype == 'Orden de Servicio'"
+  },
+  {
+   "fieldname": "tipo_de_novedad",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tipo de novedad",
+   "options": "\nEl\u00e9ctrica\nMec\u00e1nica\nHidr\u00e1ulica\nNeum\u00e1tica\nInfraestructura\nSeguridad Industrial\nTecnol\u00f3gica",
+   "read_only_depends_on": "eval: cur_frm.doctype == 'Orden de Servicio'"
+  },
+  {
+   "fieldname": "quien_reporta",
+   "fieldtype": "Data",
+   "label": "Quien reporta",
+   "read_only_depends_on": "eval: cur_frm.doctype == 'Orden de Servicio'"
+  },
+  {
+   "fieldname": "area_ejecutora",
+   "fieldtype": "Data",
+   "label": "Area ejecutora",
+   "read_only_depends_on": "eval: cur_frm.doctype == 'Orden de Servicio'"
+  },
+  {
+   "fieldname": "fuente_de_la_novedad",
+   "fieldtype": "Select",
+   "label": "Fuente de la novedad",
+   "options": "\nEmail\nTarjeta de observaci\u00f3n Sharp\nOrden de servicio\nWhatsApp\nInspecci\u00f3n\nAuditoria\nOtro",
+   "read_only_depends_on": "eval: cur_frm.doctype == 'Orden de Servicio'"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Open",
+   "fetch_if_empty": 1,
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Estado",
+   "options": "Closed\nOpen",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "orden_de_servicio",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Orden de Servicio",
+   "options": "Orden de Servicio",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "\n",
+   "fieldname": "fecha_de_cierre_os",
+   "fieldtype": "Data",
+   "label": "Fecha de cierre OS",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "por_realizar",
+   "fieldtype": "Check",
+   "label": "Por Realizar",
+   "read_only_depends_on": "eval: cur_frm.doctype != 'Orden de Servicio'"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "orden_transitoria",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Orden Transitoria",
+   "options": "Orden de Servicio"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "actividad_referencia",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Actividad Referencia",
+   "options": "Novedades"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-11-20 12:58:02.685403",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Novedades",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

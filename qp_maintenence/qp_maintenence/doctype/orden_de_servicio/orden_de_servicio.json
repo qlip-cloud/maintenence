@@ -17,16 +17,17 @@
   "tipo_de_servicio",
   "fecha_y_hora_de_solicitud",
   "fecha_y_hora_prevista_de_entrega",
+  "valor_de_lectura_actual",
   "column_break1",
   "company",
   "sales_order",
   "project",
   "cl_inspecci\u00f3n_de_calidad",
   "hoja_de_vida_del_bien",
-  "descripci\u00f3n_del_producto",
   "responsable",
-  "customer_name",
+  "descripci\u00f3n_del_producto",
   "cl_plantilla_de_mantenimiento",
+  "customer_name",
   "fecha_y_hora_inicio_real_os",
   "fecha_y_hora_finalizaci\u00f3n_os",
   "contact_info",
@@ -43,6 +44,9 @@
   "amended_from",
   "consumable_items_section",
   "consumable_items",
+  "datos_de_la_novedad_section",
+  "ver_novedades",
+  "novedades",
   "section_break_34",
   "observaciones"
  ],
@@ -107,20 +111,15 @@
   {
    "bold": 1,
    "depends_on": "eval:doc.bien !=\"Propio\"",
-   "fetch_from": "entrada_del_bien.cliente",
-   "fetch_if_empty": 1,
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_global_search": 1,
    "in_standard_filter": 1,
    "label": "Customer",
-   "mandatory_depends_on": "eval:doc.bien !=\"Propio\"",
    "options": "Customer",
    "print_hide": 1
   },
   {
-   "fetch_from": "entrada_del_bien.tipo_de_servicio",
-   "fetch_if_empty": 1,
    "fieldname": "tipo_de_servicio",
    "fieldtype": "Select",
    "in_global_search": 1,
@@ -131,7 +130,6 @@
    "reqd": 1
   },
   {
-   "default": "Now",
    "fieldname": "fecha_y_hora_de_solicitud",
    "fieldtype": "Datetime",
    "label": "Fecha y hora de solicitud",
@@ -192,6 +190,7 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "label": "Nombre del producto",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -207,7 +206,7 @@
    "fieldtype": "Data",
    "in_global_search": 1,
    "label": "Nombre del cliente",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "fecha_y_hora_inicio_real_os",
@@ -292,8 +291,6 @@
   },
   {
    "depends_on": "eval:doc.tipo_de_servicio == \"Mantenimiento Preventivo\"",
-   "fetch_from": "entrada_del_bien.cl_plantilla_proyecto",
-   "fetch_if_empty": 1,
    "fieldname": "cl_plantilla_de_mantenimiento",
    "fieldtype": "Link",
    "label": "Mantenimiento programado",
@@ -303,7 +300,7 @@
   {
    "fieldname": "replacement_items_section",
    "fieldtype": "Section Break",
-   "label": "Repuestos"
+   "label": "Respuestos"
   },
   {
    "fieldname": "replacement_items",
@@ -321,6 +318,38 @@
    "fieldtype": "Table",
    "label": "Items",
    "options": "Opportunity Item"
+  },
+  {
+   "fieldname": "datos_de_la_novedad_section",
+   "fieldtype": "Section Break",
+   "label": "DATOS DE NOVEDAD"
+  },
+  {
+   "depends_on": "eval: doc.producto",
+   "fieldname": "novedades",
+   "fieldtype": "Table",
+   "label": "Novedades Tomadas",
+   "options": "Novedades",
+   "read_only": 1
+  },
+  {
+   "description": "In Mins",
+   "fieldname": "lead_time",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Lead Time",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.producto",
+   "fieldname": "ver_novedades",
+   "fieldtype": "Button",
+   "label": "Ver Novedades"
+  },
+  {
+   "fieldname": "valor_de_lectura_actual",
+   "fieldtype": "Float",
+   "label": "Valor de lectura actual"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -347,7 +376,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-09-09 16:46:56.658988",
+ "modified": "2025-12-09 15:40:06.919089",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

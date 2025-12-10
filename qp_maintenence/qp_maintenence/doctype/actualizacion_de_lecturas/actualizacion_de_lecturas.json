@@ -15,7 +15,12 @@
   "nombre_de_producto",
   "tipo_de_bien",
   "lecturas_section",
-  "lectura",
+  "fecha",
+  "lectura_actual",
+  "observaciones",
+  "column_break_13",
+  "lectura_anterior",
+  "lectura_acumulada",
   "amended_from"
  ],
  "fields": [
@@ -64,6 +69,7 @@
    "label": "Nombre de producto"
   },
   {
+   "fetch_from": "cl_hoja_de_vida_bien.tipo_de_bien",
    "fieldname": "tipo_de_bien",
    "fieldtype": "Select",
    "label": "Tipo de bien",
@@ -75,17 +81,46 @@
    "label": "Lecturas"
   },
   {
-   "fieldname": "lectura",
-   "fieldtype": "Table",
-   "label": "Lectura",
-   "options": "Datos Operativos Mesa"
+   "fieldname": "fecha",
+   "fieldtype": "Date",
+   "label": "Fecha"
+  },
+  {
+   "default": "0",
+   "fieldname": "lectura_actual",
+   "fieldtype": "Float",
+   "label": "Lectura Actual"
+  },
+  {
+   "fieldname": "observaciones",
+   "fieldtype": "Long Text",
+   "label": "Observaciones",
+   "mandatory_depends_on": "eval: doc.lectura_actual <= 0"
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "lectura_anterior",
+   "fieldtype": "Float",
+   "label": "Lectura Anterior",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "lectura_acumulada",
+   "fieldtype": "Float",
+   "label": "Lectura Acumulada",
+   "read_only": 1
   },
   {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Datos Operativos",
+   "options": "Actualizacion de Lecturas",
    "print_hide": 1,
    "read_only": 1
   }
@@ -93,10 +128,10 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-06-05 16:37:20.966068",
+ "modified": "2025-12-09 15:38:59.984660",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
- "name": "Datos Operativos",
+ "name": "Actualizacion de Lecturas",
  "owner": "Administrator",
  "permissions": [
   {
