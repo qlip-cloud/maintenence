@@ -9,7 +9,7 @@ def handler(doctype, txt, searchfield, start, page_len, filters):
 		
 	r = frappe.db.sql("""
 		SELECT con.name
-		FROM `tabProject Template` con, `Productos Asociados PP` papp
+		FROM `tabProject Template` con, `tabProductos Asociados PP` papp
 		WHERE papp.parent = con.name
 		AND papp.parenttype = 'Project Template'
 		AND papp.item_code = '{item}'                  
