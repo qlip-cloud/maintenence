@@ -23,6 +23,8 @@
   "supplier",
   "customer_name",
   "supplier_name",
+  "is_group",
+  "parent_hoja_de_vida_del_bien",
   "column_break0",
   "posting_date",
   "item_name",
@@ -33,6 +35,8 @@
   "bien",
   "ubicacion",
   "centro_de_costos",
+  "codigo_del_producto_padre",
+  "nombre_del_producto_padre",
   "deshabilitado",
   "propietario",
   "contact_info",
@@ -50,7 +54,10 @@
   "brand",
   "eico_model",
   "section_break_1",
-  "description"
+  "description",
+  "lft",
+  "rgt",
+  "old_parent"
  ],
  "fields": [
   {
@@ -327,6 +334,7 @@
   {
    "fieldname": "descripcion_del_producto",
    "fieldtype": "Data",
+   "in_global_search": 1,
    "label": "Descripcion del Producto"
   },
   {
@@ -368,9 +376,63 @@
    "fieldname": "asset_naming_serie",
    "fieldtype": "Data",
    "label": "N\u00famero de serie del Activo"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Old Parent",
+   "options": "Hoja de Vida del Bien"
+  },
+  {
+   "depends_on": "eval: doc.is_group == 1",
+   "fieldname": "parent_hoja_de_vida_del_bien",
+   "fieldtype": "Link",
+   "label": "Hoja de Vida del Bien producto padre",
+   "options": "Hoja de Vida del Bien"
+  },
+  {
+   "depends_on": "eval: doc.is_group == 1",
+   "fetch_from": "parent_hoja_de_vida_del_bien.item_code",
+   "fieldname": "codigo_del_producto_padre",
+   "fieldtype": "Link",
+   "label": "Codigo del producto padre",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.is_group == 1",
+   "fetch_from": "codigo_del_producto_padre.item_name",
+   "fieldname": "nombre_del_producto_padre",
+   "fieldtype": "Data",
+   "label": "Nombre del producto padre",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_tree": 1,
  "links": [
   {
    "group": "Actividad",
@@ -388,10 +450,11 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-11-24 14:59:37.685222",
+ "modified": "2025-12-12 08:45:45.664852",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
+ "nsm_parent_field": "parent_hoja_de_vida_del_bien",
  "owner": "Administrator",
  "permissions": [
   {

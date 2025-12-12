@@ -53,6 +53,15 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 		frm.refresh_field('contact_person')
 
 	},
+	is_group:function(frm){
+		if(frm.doc.is_group == 1){
+			frm.set_query("parent_hoja_de_vida_del_bien", function() {
+				return {
+					filters: {"is_group": 1}
+				};
+			});
+		}
+	},
 	customer_address:function(frm){
 		if(frm.doc.customer_address){
 			frappe.db.get_value("Address", frm.doc.customer_address, "*", (r) => {
