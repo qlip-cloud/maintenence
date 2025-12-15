@@ -164,7 +164,7 @@ frappe.ui.form.on('Orden de Servicio', {
 				frm.set_query("cl_plantilla_de_mantenimiento", function() {
 					return {
 						query:"qp_maintenence.qp_maintenence.services.plan_de_mantenimiento.handler",
-						filters: {"producto": frm.doc.producto}
+						filters: {"item": frm.doc.producto}
 					};
 				});
 			}
