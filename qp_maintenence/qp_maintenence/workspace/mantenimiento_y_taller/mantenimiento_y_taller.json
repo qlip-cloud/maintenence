@@ -150,19 +150,19 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Reportes",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Reporte de Mantenimiento",
    "link_to": "Reporte de Mantenimiento",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Reportes",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
   },
   {
    "hidden": 0,
@@ -174,7 +174,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-12-30 08:45:48.306266",
+ "modified": "2025-12-30 11:44:24.829759",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Mantenimiento y Taller",
