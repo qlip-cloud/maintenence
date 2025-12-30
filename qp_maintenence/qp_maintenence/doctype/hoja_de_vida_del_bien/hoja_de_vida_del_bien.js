@@ -162,8 +162,7 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 				columns: columns,
 				data: [],
 				inlineFilters: true, // Optional: adds search filters to columnsSSSSSSS
-				editable:false,
-				layout: 'fluid'
+				editable:false
 			}
 		)
 

@@ -25,6 +25,7 @@
   "supplier_name",
   "is_group",
   "parent_hoja_de_vida_del_bien",
+  "estado_del_bien",
   "column_break0",
   "posting_date",
   "item_name",
@@ -37,7 +38,6 @@
   "centro_de_costos",
   "codigo_del_producto_padre",
   "nombre_del_producto_padre",
-  "deshabilitado",
   "propietario",
   "mantenimiento_preventivo_section",
   "mantenimientos_preventivos",
@@ -192,12 +192,6 @@
    "label": "Titular del bien",
    "options": "\nPropio\nCliente\nProveedor",
    "reqd": 1
-  },
-  {
-   "default": "0",
-   "fieldname": "deshabilitado",
-   "fieldtype": "Check",
-   "label": "Deshabilitado"
   },
   {
    "collapsible": 1,
@@ -451,6 +445,12 @@
    "fieldname": "refrescar_lista",
    "fieldtype": "Button",
    "label": "Refrescar Lista"
+  },
+  {
+   "fieldname": "estado_del_bien",
+   "fieldtype": "Select",
+   "label": "Estado del Bien",
+   "options": "\nDisponible\nEn mantenimiento\nDeshabilitado"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -472,7 +472,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-12-17 08:49:01.844857",
+ "modified": "2025-12-22 14:10:07.673921",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
