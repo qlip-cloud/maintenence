@@ -35,6 +35,9 @@
   "address_display",
   "contact_person",
   "contact_display",
+  "datos_de_la_novedad_section",
+  "ver_novedades",
+  "novedades",
   "detalle_del_servicio_realizado",
   "project_type",
   "tasks",
@@ -44,9 +47,6 @@
   "amended_from",
   "consumable_items_section",
   "consumable_items",
-  "datos_de_la_novedad_section",
-  "ver_novedades",
-  "novedades",
   "section_break_34",
   "observaciones"
  ],
@@ -250,6 +250,7 @@
    "label": "Contact"
   },
   {
+   "depends_on": "eval: doc.tipo_de_servicio != \"Mantenimiento Correctivo\"",
    "fieldname": "detalle_del_servicio_realizado",
    "fieldtype": "Section Break",
    "label": "Detalle del servicio realizado"
@@ -376,7 +377,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2025-12-09 15:40:06.919089",
+ "modified": "2025-12-30 10:40:58.982821",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
