@@ -170,6 +170,24 @@ frappe.ui.form.on('Orden de Servicio', {
 			}
 		}
 	},
+	hoja_de_vida_del_bien:function(frm){
+		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
+			frappe.db.get_value('Hoja de Vida del Bien', frm.doc.hoja_de_vida_del_bien, 'item_code')
+			.then(r => {
+				frm.set_value('producto', r.message.item_code)
+			});	
+		}
+	},
+	entrada_del_bien:function(frm){
+
+		if(!['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
+			frappe.db.get_value('Entrada de Bienes', frm.doc.entrada_del_bien, 'item_code')
+			.then(r => {
+				frm.set_value('producto', r.message.item_code)
+			});	
+		}
+		
+	}
 });
 
 cur_frm.cscript.ver_novedades = function(doc) {
