@@ -10,11 +10,23 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
                 filters: {"item_code": frm.doc.item_code}
             };
         });
+
+		frm.set_query("cl_plantilla_datos_tecnicos_de_mantenimiento", function() {
+			return {
+				query:"qp_maintenence.qp_maintenence.services.datos_tecnico.handler",
+				filters: {"item": frm.doc.item_code}
+			};
+		});
+
         frm.refresh_field('serial_no')
-		
-		
-		if(frm.doc.item_code) refresh_data()
-		
+	},
+	cl_plantilla_datos_tecnicos_de_mantenimiento:function(frm){
+		frm.set_query("cl_plantilla_datos_tecnicos_de_mantenimiento", function() {
+			return {
+				query:"qp_maintenence.qp_maintenence.services.datos_tecnico.handler",
+				filters: {"item": frm.doc.item_code}
+			};
+		});
 	},
 	customer:function(frm){
 
