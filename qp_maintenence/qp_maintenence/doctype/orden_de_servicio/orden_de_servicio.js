@@ -148,8 +148,28 @@ frappe.ui.form.on('Orden de Servicio', {
 				refresh_field('hoja_de_vida_del_bien')       
 			 });
 		}
-		
-	}
+
+		if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo'){
+			frm.set_query("cl_plantilla_de_mantenimiento", function() {
+				return {
+					query:"qp_maintenence.qp_maintenence.services.plan_de_mantenimiento.handler",
+					filters: {"item": frm.doc.producto}
+				};
+			});
+		}
+	},
+	tipo_de_servicio:function(frm){
+		if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo'){
+			if(frm.doc.producto){
+				frm.set_query("cl_plantilla_de_mantenimiento", function() {
+					return {
+						query:"qp_maintenence.qp_maintenence.services.plan_de_mantenimiento.handler",
+						filters: {"item": frm.doc.producto}
+					};
+				});
+			}
+		}
+	},
 });
 
 cur_frm.cscript.ver_novedades = function(doc) {
