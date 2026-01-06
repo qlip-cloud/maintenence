@@ -169,6 +169,14 @@ frappe.ui.form.on('Orden de Servicio', {
 				});
 			}
 		}
+
+		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
+			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo Planificado')
+				frm.set_df_property('detalle_del_servicio_realizado', 'hidden', 0)
+			else
+				frm.set_df_property('detalle_del_servicio_realizado', 'hidden', 0)
+		}
+		
 	},
 	hoja_de_vida_del_bien:function(frm){
 		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
