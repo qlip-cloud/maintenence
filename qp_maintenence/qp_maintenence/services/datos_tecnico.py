@@ -25,7 +25,7 @@ def handler(doctype, txt, searchfield, start, page_len, filters):
 
 		r = frappe.db.sql("""
 			SELECT pdtm.name
-			FROM `tabPlantilla datos tecnicos de mantenimiento` pdtm,
+			FROM `tabPlantilla datos tecnicos de mantenimiento` pdtm
 			LIMIT %(start)s, %(page_len)s
 			""", {
 			'start': start,
