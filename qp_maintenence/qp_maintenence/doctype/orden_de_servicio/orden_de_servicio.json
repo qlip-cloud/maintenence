@@ -266,8 +266,7 @@
    "fieldname": "tasks",
    "fieldtype": "Table",
    "label": "Tasks",
-   "options": "Project Template Task",
-   "reqd": 1
+   "options": "Project Template Task"
   },
   {
    "fieldname": "amended_from",
@@ -374,7 +373,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2026-01-06 11:07:21.033474",
+ "modified": "2026-01-06 11:43:04.548785",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
