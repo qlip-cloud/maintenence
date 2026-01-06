@@ -180,6 +180,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			 });
 		}
 		
+
 		if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo'){
 			frm.set_query("cl_plantilla_de_mantenimiento", function() {
 				return {
