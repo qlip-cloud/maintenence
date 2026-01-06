@@ -7,6 +7,37 @@ frappe.ui.form.on('Orden de Servicio', {
 			frm.doc.novedades = []
 			refresh_field("novedades")
 		}
+
+		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
+			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo Planificado')
+			{
+				frm.toggle_display('detalle_del_servicio_realizado', true)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('tasks', true);
+			}
+			else{
+				frm.toggle_display('detalle_del_servicio_realizado', false)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('tasks', false);
+			}
+		}else{
+			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo')
+			{
+				frm.toggle_display('detalle_del_servicio_realizado', true)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('tasks', true);
+			}
+			else{
+				frm.toggle_display('detalle_del_servicio_realizado', false)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('tasks', false);
+			}
+		}
+
 	},
 	cl_plantilla_de_mantenimiento:function(frm){
 		if(frm.doc.cl_plantilla_de_mantenimiento){
@@ -148,6 +179,7 @@ frappe.ui.form.on('Orden de Servicio', {
 				refresh_field('hoja_de_vida_del_bien')       
 			 });
 		}
+		
 
 		if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo'){
 			frm.set_query("cl_plantilla_de_mantenimiento", function() {
@@ -169,7 +201,57 @@ frappe.ui.form.on('Orden de Servicio', {
 				});
 			}
 		}
+
+		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
+			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo Planificado')
+			{
+				frm.toggle_display('detalle_del_servicio_realizado', true)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('tasks', true);
+			}
+			else{
+				frm.toggle_display('detalle_del_servicio_realizado', false)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('tasks', false);
+			}
+		}else{
+			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo')
+			{
+				frm.toggle_display('detalle_del_servicio_realizado', true)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('tasks', true);
+			}
+			else{
+				frm.toggle_display('detalle_del_servicio_realizado', false)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('tasks', false);
+			}
+		}
+		
 	},
+	
+	hoja_de_vida_del_bien:function(frm){
+		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
+			frappe.db.get_value('Hoja de Vida del Bien', frm.doc.hoja_de_vida_del_bien, 'item_code')
+			.then(r => {
+				frm.set_value('producto', r.message.item_code)
+			});	
+		}
+	},
+	entrada_del_bien:function(frm){
+
+		if(!['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
+			frappe.db.get_value('Entrada de Bienes', frm.doc.entrada_del_bien, 'item_code')
+			.then(r => {
+				frm.set_value('producto', r.message.item_code)
+			});	
+		}
+		
+	}
 });
 
 cur_frm.cscript.ver_novedades = function(doc) {

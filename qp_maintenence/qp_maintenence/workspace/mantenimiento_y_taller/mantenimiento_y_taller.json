@@ -61,7 +61,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Mantenimiento programado",
+   "label": "Planes de mantenimiento",
    "link_to": "Project Template",
    "link_type": "DocType",
    "onboard": 0,
@@ -89,6 +89,15 @@
    "is_query_report": 0,
    "label": "Actualizacion de Lecturas",
    "link_to": "Actualizacion de Lecturas",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Registro de Novedades",
+   "link_to": "Registro de Novedades",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -141,15 +150,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Todo",
-   "link_to": "ToDo",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Reportes",
    "link_type": "DocType",
    "onboard": 0,
@@ -174,7 +174,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-11-24 15:47:38.656173",
+ "modified": "2025-12-30 11:44:24.829759",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Mantenimiento y Taller",

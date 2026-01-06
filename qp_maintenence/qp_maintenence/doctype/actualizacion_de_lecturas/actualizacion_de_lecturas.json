@@ -9,6 +9,7 @@
   "naming_series",
   "codigo_de_producto",
   "responsable",
+  "ubicacion",
   "unidad_de_medida",
   "column_break_3",
   "cl_hoja_de_vida_bien",
@@ -41,8 +42,9 @@
   },
   {
    "fieldname": "responsable",
-   "fieldtype": "Data",
-   "label": "Responsable"
+   "fieldtype": "Link",
+   "label": "Responsable",
+   "options": "Equipo Tecnico"
   },
   {
    "fieldname": "unidad_de_medida",
@@ -123,12 +125,18 @@
    "options": "Actualizacion de Lecturas",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "ubicacion",
+   "fieldtype": "Link",
+   "label": "Ubicacion",
+   "options": "Location"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-09 15:38:59.984660",
+ "modified": "2025-12-29 22:10:31.544953",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Actualizacion de Lecturas",
