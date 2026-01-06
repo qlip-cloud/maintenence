@@ -19,6 +19,8 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 		});
 
         frm.refresh_field('serial_no')
+
+		if(frm.doc.item_code) refresh_data()
 	},
 	cl_plantilla_datos_tecnicos_de_mantenimiento:function(frm){
 		frm.set_query("cl_plantilla_datos_tecnicos_de_mantenimiento", function() {
