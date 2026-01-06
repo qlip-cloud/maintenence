@@ -172,9 +172,9 @@ frappe.ui.form.on('Orden de Servicio', {
 
 		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
 			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo Planificado')
-				frm.set_df_property('detalle_del_servicio_realizado', 'hidden', 1)
-			else
 				frm.set_df_property('detalle_del_servicio_realizado', 'hidden', 0)
+			else
+				frm.set_df_property('detalle_del_servicio_realizado', 'hidden', 1)
 		}
 		
 	},
