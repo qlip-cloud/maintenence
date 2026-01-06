@@ -33,8 +33,7 @@ class OrdendeServicio(Document):
 				#search real novedades
 		else:
 			for tn in self.novedades:
-
-				if frappe.db.exists("Novedades", {"actividad_referencia": tn.actividad_referencia}):				
+				if frappe.db.exists("Novedades", {"actividad_referencia": tn.actividad_referencia, "parent":["!=", self.name]}):	
 					frappe.db.rollback()
 					frappe.throw(F"""La novedad {tn.descripcion} de tipo {tn.tipo_de_novedad} del registro de novedades {tn.parent} ya se encuentra tomada por otra orden""")
 
