@@ -8,6 +8,7 @@
  "field_order": [
   "nombre",
   "datos_de_mantenimiento",
+  "productos_asociados",
   "amended_from"
  ],
  "fields": [
@@ -24,6 +25,12 @@
    "unique": 1
   },
   {
+   "fieldname": "productos_asociados",
+   "fieldtype": "Table",
+   "label": "Productos Asociados",
+   "options": "Productos Asociados DT"
+  },
+  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -36,7 +43,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-14 21:12:59.314309",
+ "modified": "2026-01-05 15:13:24.722673",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Plantilla datos tecnicos de mantenimiento",
