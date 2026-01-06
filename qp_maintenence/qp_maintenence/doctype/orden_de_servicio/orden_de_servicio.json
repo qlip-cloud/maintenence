@@ -287,11 +287,9 @@
    "label": "Observaciones"
   },
   {
-   "depends_on": "eval: in_list([\"Mantenimiento Preventivo\", \"Mantenimiento Preventivo Planificado\"], doc.tipo_de_servicio)",
    "fieldname": "cl_plantilla_de_mantenimiento",
    "fieldtype": "Link",
    "label": "Mantenimiento programado",
-   "mandatory_depends_on": "eval: in_list([\"Mantenimiento Preventivo\", \"Mantenimiento Preventivo Planificado\"], doc.tipo_de_servicio)",
    "options": "Project Template"
   },
   {
@@ -373,7 +371,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2026-01-06 11:43:04.548785",
+ "modified": "2026-01-06 12:11:20.139526",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

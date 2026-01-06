@@ -12,13 +12,30 @@ frappe.ui.form.on('Orden de Servicio', {
 			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo Planificado')
 			{
 				frm.toggle_display('detalle_del_servicio_realizado', true)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
 				frm.toggle_reqd('tasks', true);
 			}
 			else{
 				frm.toggle_display('detalle_del_servicio_realizado', false)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
 				frm.toggle_reqd('tasks', false);
 			}
-				
+		}else{
+			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo')
+			{
+				frm.toggle_display('detalle_del_servicio_realizado', true)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('tasks', true);
+			}
+			else{
+				frm.toggle_display('detalle_del_servicio_realizado', false)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('tasks', false);
+			}
 		}
 
 	},
@@ -188,10 +205,28 @@ frappe.ui.form.on('Orden de Servicio', {
 			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo Planificado')
 			{
 				frm.toggle_display('detalle_del_servicio_realizado', true)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
 				frm.toggle_reqd('tasks', true);
 			}
 			else{
 				frm.toggle_display('detalle_del_servicio_realizado', false)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('tasks', false);
+			}
+		}else{
+			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo')
+			{
+				frm.toggle_display('detalle_del_servicio_realizado', true)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
+				frm.toggle_reqd('tasks', true);
+			}
+			else{
+				frm.toggle_display('detalle_del_servicio_realizado', false)
+				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
+				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
 				frm.toggle_reqd('tasks', false);
 			}
 		}
