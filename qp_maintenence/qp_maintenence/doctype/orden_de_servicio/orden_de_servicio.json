@@ -48,6 +48,8 @@
   "consumable_items_section",
   "consumable_items",
   "section_break_34",
+  "recursos",
+  "section_break_44",
   "observaciones"
  ],
  "fields": [
@@ -345,6 +347,16 @@
    "fieldname": "valor_de_lectura_actual",
    "fieldtype": "Float",
    "label": "Valor de lectura actual"
+  },
+  {
+   "fieldname": "recursos",
+   "fieldtype": "Table",
+   "label": "Recursos",
+   "options": "Recursos"
+  },
+  {
+   "fieldname": "section_break_44",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -371,7 +383,7 @@
    "link_fieldname": "orden_de_trabajo_de_servicio"
   }
  ],
- "modified": "2026-01-06 12:11:20.139526",
+ "modified": "2026-01-07 12:44:55.805913",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
