@@ -381,9 +381,14 @@
    "group": "Actividad",
    "link_doctype": "Quality Inspection",
    "link_fieldname": "orden_de_trabajo_de_servicio"
+  },
+  {
+   "group": "Actividad",
+   "link_doctype": "Stock Entry",
+   "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-07 12:44:55.805913",
+ "modified": "2026-01-07 17:31:40.532635",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
