@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "creation": "2026-01-07 12:41:30.289662",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "persona_o_empresa",
+  "cargo",
+  "tiempo_invertido"
+ ],
+ "fields": [
+  {
+   "fieldname": "persona_o_empresa",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Persona/Empresa",
+   "options": "Equipo Tecnico"
+  },
+  {
+   "fetch_from": "persona_o_empresa.rol_desempe\u00f1ado",
+   "fieldname": "cargo",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cargo",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tiempo_invertido",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tiempo invertido"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-07 12:46:27.694080",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Recursos",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
