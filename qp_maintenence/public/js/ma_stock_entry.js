@@ -79,6 +79,41 @@ frappe.ui.form.on('Stock Entry', {
             }, __("Create"));
         }  
 	},
+    orden_de_servicio: function(frm){
+
+        if(!frm.doc.stock_entry_type) frm.doc.stock_entry_type = __("Material Issue");
+
+        frappe.db.get_list(
+				"Opportunity Item", 
+				{
+                    filters:{
+					    "parentfield":["in",["replacement_items"]],
+					    "parent":frm.doc.orden_de_servicio
+                    },
+                    fields:["*"]
+				}).then( (os) => {
+					if(Object.keys(os).length > 0){
+
+                        frm.set_value('items', [])
+
+						os.forEach(function(d) {
+                            frm.add_child('items',{
+                                item_code:d.item_code,
+                                item_name:d.item_name,
+                                qty:d.qty,
+                                warehouse:d.warehouse,
+                                item_group:d.item_group,
+                                uom:d.uom,
+                                description:d.description,
+                                conversion_factor: 1
+                            })
+                        });
+                        frm.refresh_fields()
+					}
+				}
+			);
+
+    },
     setup_quality_inspection: function(frm) {
 		if (!frm.doc.inspection_required) {
 			return;
