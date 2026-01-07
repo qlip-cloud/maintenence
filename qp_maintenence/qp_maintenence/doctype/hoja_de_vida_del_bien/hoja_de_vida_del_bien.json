@@ -404,7 +404,6 @@
    "options": "Hoja de Vida del Bien"
   },
   {
-   "depends_on": "eval: doc.is_group == 1",
    "fieldname": "parent_hoja_de_vida_del_bien",
    "fieldtype": "Link",
    "label": "Hoja de Vida del Bien producto padre",
@@ -472,7 +471,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2025-12-22 14:10:07.673921",
+ "modified": "2026-01-07 12:27:06.748387",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
