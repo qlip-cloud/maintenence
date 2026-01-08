@@ -162,6 +162,10 @@ frappe.ui.form.on('Orden de Servicio', {
 						mr.lectura_actual = frm.doc.valor_de_lectura_actual
 						mr.fecha = frm.doc.fecha_y_hora_inicio_real_os
 						mr.observaciones = frm.doc.name
+						//if (frm.get_docinfo().assignments.length > 0){
+						//	mr.responsable = cur_frm.get_docinfo().assignments[0].owner;
+						//}
+						mr.fecha = frm.doc.fecha_y_hora_finalización_os
 						frappe.set_route("Form", 'Actualizacion de Lecturas', mr.name);
 
 					});
