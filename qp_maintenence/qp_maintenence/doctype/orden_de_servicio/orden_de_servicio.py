@@ -9,6 +9,13 @@ class OrdendeServicio(Document):
 	def save(self, *args, **kwargs):
 		super().save(*args, **kwargs) # call the base save method
 		self.update_novedades(self, *args, **kwargs) # eg: trigger an API call or a Rotating File Logger that "User X has tried updating this particular record"
+		
+		if self.status == 'Completed' and self.docstatus == 1:
+			frappe.db.set_value("Hoja de Vida del Bien", self.hoja_de_vida_del_bien, "ubicacion", self.ubicacion)
+			frappe.db.set_value("Actualizacion de Lecturas", {"cl_hoja_de_vida_bien": ["in", [self.hoja_de_vida_del_bien]]}, "ubicacion", self.ubicacion)
+			
+		#actualozar HVB
+		#actializar AL
 
 	def update_novedades(self, *args, **kwargs):
 
@@ -40,7 +47,7 @@ class OrdendeServicio(Document):
 
 
 @frappe.whitelist()
-def get_novedades(**args):
+def get_novedades(**args):	
 
 	args = frappe._dict(args)
 
