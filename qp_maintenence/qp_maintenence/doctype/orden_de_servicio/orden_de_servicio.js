@@ -3,6 +3,7 @@
 
 frappe.ui.form.on('Orden de Servicio', {
 	refresh:function(frm){
+
 		if(frm.is_new()){
 			frm.doc.novedades = []
 			refresh_field("novedades")
@@ -157,19 +158,35 @@ frappe.ui.form.on('Orden de Servicio', {
 
 					 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
 						var mr = frappe.model.get_new_doc('Actualizacion de Lecturas');
-
 						mr.cl_hoja_de_vida_bien =  result[0].name 
 						mr.lectura_actual = frm.doc.valor_de_lectura_actual
 						mr.fecha = frm.doc.fecha_y_hora_inicio_real_os
 						mr.observaciones = frm.doc.name
-						frappe.set_route("Form", 'Actualizacion de Lecturas', mr.name);
+						mr.responsable = frm.doc.responsable;
+						mr.fecha = frm.doc.fecha_y_hora_finalización_os
 
-					});
+						frappe.db.insert(mr)
+							.then(doc => {
+								frappe.show_alert({
+									message: `Nueva Hoja de Vida del Bien ${doc.name} creado como borrador.`,
+									indicator: 'green'
+								});
+
+								frappe.set_route("Form", 'Actualizacion de Lecturas', doc.name);
+
+							})
+							.catch(err => {
+								frappe.show_alert({
+									message: 'Error al crear Hoja de Vida del Bien como borrador.',
+									indicator: 'red'
+								});
+							})
 
 					
-				}, () => {
-					true
-			})
+					}, () => {
+						true
+					})
+			});
 		}
 	},
 	producto:function(frm){

@@ -28,6 +28,7 @@
   "descripci\u00f3n_del_producto",
   "cl_plantilla_de_mantenimiento",
   "customer_name",
+  "ubicacion",
   "fecha_y_hora_inicio_real_os",
   "fecha_y_hora_finalizaci\u00f3n_os",
   "contact_info",
@@ -357,6 +358,12 @@
   {
    "fieldname": "section_break_44",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ubicacion",
+   "fieldtype": "Link",
+   "label": "Ubicacion",
+   "options": "Location"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -388,7 +395,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-07 17:31:40.532635",
+ "modified": "2026-01-08 14:07:12.338137",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
