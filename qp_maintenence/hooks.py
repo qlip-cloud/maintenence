@@ -15,7 +15,10 @@ app_license = "MIT"
 # include js, css files in header of desk.html
 # app_include_css = "/assets/qp_maintenence/css/qp_maintenence.css"
 # app_include_js = "/assets/qp_maintenence/js/qp_maintenence.js"
-app_include_js = ["/assets/qp_maintenence/js/ma_transaction.js"]
+app_include_js = [
+    "/assets/qp_maintenence/js/ma_transaction.js",
+    "/assets/qp_maintenence/js/form/sidebar/assign_to.js"
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/qp_maintenence/css/qp_maintenence.css"

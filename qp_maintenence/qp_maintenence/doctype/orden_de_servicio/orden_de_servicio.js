@@ -3,6 +3,7 @@
 
 frappe.ui.form.on('Orden de Servicio', {
 	refresh:function(frm){
+
 		if(frm.is_new()){
 			frm.doc.novedades = []
 			refresh_field("novedades")
