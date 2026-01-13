@@ -63,6 +63,7 @@ frappe.ui.form.AssignTo = Class.extend({
                     if(this.frm.doctype == "Orden de Servicio" && this.frm.doc.status == "Draft" && this.frm.doc.docstatus == 0){
                         frappe.db.set_value(this.frm.doctype, this.frm.doc.name, "status", "In Process")
                         this.frm.reload_doc()
+						this.frm.refresh_fields()
                     }
 
 				}
@@ -276,6 +277,7 @@ frappe.ui.form.AssignmentDialog = class {
 			if(this.frm.doctype == "Orden de Servicio" && this.frm.doc.status == "Draft" && this.frm.doc.docstatus == 0){
 				frappe.db.set_value(this.frm.doctype, this.frm.doc.name, "status", "In Process")
 				this.frm.reload_doc()
+				this.frm.refresh_fields()
 			}
 		});
 	}

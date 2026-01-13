@@ -10,5 +10,6 @@ class ActualizaciondeLecturas(Document):
 	
 		if self.docstatus == 1:
 			frappe.db.set_value("Hoja de Vida del Bien", self.cl_hoja_de_vida_bien, "ubicacion", self.ubicacion)
-			frappe.db.set_value("Orden de Servicio", {"hoja_de_vida_del_bien": ["in", [self.cl_hoja_de_vida_bien]]}, "ubicacion", self.ubicacion)
+			frappe.db.set_value("Orden de Servicio", {"hoja_de_vida_del_bien": ["in", [self.cl_hoja_de_vida_bien]], "docstatus":0}, "ubicacion", self.ubicacion)
+
 
