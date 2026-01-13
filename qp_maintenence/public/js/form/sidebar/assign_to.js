@@ -59,12 +59,11 @@ frappe.ui.form.AssignTo = Class.extend({
 				frm: me.frm,
 				callback: function (r) {
 					me.render(r.message);
-
-                    if(this.frm.doctype == "Orden de Servicio" && this.frm.doc.status == "Draft" && this.frm.doc.docstatus == 0){
-                        frappe.db.set_value(this.frm.doctype, this.frm.doc.name, "status", "In Process")
-                        this.frm.reload_doc()
-						this.frm.refresh_fields()
-                    }
+					
+					if(this.frm.doctype == "Orden de Servicio" && this.frm.doc.status == "Draft" && this.frm.doc.docstatus == 0){
+						frappe.db.set_value(this.frm.doctype, this.frm.doc.name, "status", "In Process")
+						me.frm.set_value("status", "In Process")
+					}
 
 				}
 			});
@@ -271,14 +270,14 @@ frappe.ui.form.AssignmentDialog = class {
 			name: this.frm.docname,
 			assign_to: [assignment],
 		}).then((assignments) => {
-			this.update_assignment(assignment);
-			this.render(assignments);
 
 			if(this.frm.doctype == "Orden de Servicio" && this.frm.doc.status == "Draft" && this.frm.doc.docstatus == 0){
 				frappe.db.set_value(this.frm.doctype, this.frm.doc.name, "status", "In Process")
-				this.frm.reload_doc()
-				this.frm.refresh_fields()
+				me.frm.set_value("status", "In Process")
 			}
+
+			this.update_assignment(assignment);
+			this.render(assignments);
 		});
 	}
 	remove_assignment(assignment) {
