@@ -14,7 +14,7 @@ class OrdendeServicio(Document):
 		if self.status == 'Completed' and self.docstatus == 1:
 			self.update_novedades(self, *args, **kwargs) # eg: trigger an API call or a Rotating File Logger that "User X has tried updating this particular record"
 			frappe.db.set_value("Hoja de Vida del Bien", self.hoja_de_vida_del_bien, "ubicacion", self.ubicacion)
-			frappe.db.set_value("Actualizacion de Lecturas", {"cl_hoja_de_vida_bien": ["in", [self.hoja_de_vida_del_bien]]}, "ubicacion", self.ubicacion)
+			frappe.db.set_value("Actualizacion de Lecturas", {"cl_hoja_de_vida_bien": ["in", [self.hoja_de_vida_del_bien]], "docstatus":0}, "ubicacion", self.ubicacion)
 		else:
 			for tn in self.novedades:
 				if frappe.db.exists("Novedades", {"actividad_referencia": tn.actividad_referencia, "parent":["!=", self.name]}):	
