@@ -267,7 +267,23 @@ frappe.ui.form.on('Orden de Servicio', {
 			});	
 		}
 		
-	}
+	},
+	validate: function(frm) {
+
+		let validated_rows = true;
+
+		if(frm.doc.status == "Completed"){
+			 $.each(frm.doc.tasks || [], function(i, d) {
+				if (['NO', ''].includes(d.verificada)) {
+					validated_rows = false;
+				}
+			});
+		}
+
+        if (!validated_rows) {
+           	frappe.msgprint('Existen una o más tareas del plan de mantenimiento que no han sido ejecutadas. Si esta situación es correcta, por favor registre la justificación en el campo de observaciones.');
+        }
+    }
 });
 
 cur_frm.cscript.ver_novedades = function(doc) {
