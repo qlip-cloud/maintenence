@@ -52,8 +52,8 @@
   "recursos",
   "section_break_44",
   "observaciones",
-  "section_break_47",
-  "archivos_adjuntos"
+  "os_section_break_47",
+  "os_archivos_adjuntos"
  ],
  "fields": [
   {
@@ -368,11 +368,11 @@
    "options": "Location"
   },
   {
-   "fieldname": "section_break_47",
+   "fieldname": "os_section_break_47",
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "archivos_adjuntos",
+   "fieldname": "os_archivos_adjuntos",
    "fieldtype": "Table",
    "label": "Archivos Adjuntos",
    "options": "Archivos Ordenes de Servicio"
@@ -407,7 +407,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-14 08:03:02.010424",
+ "modified": "2026-01-14 17:01:31.500358",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
