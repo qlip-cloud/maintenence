@@ -7,6 +7,10 @@ frappe.ui.form.on('Registro de Novedades', {
 			frm.doc.novedades = [];
 			refresh_field('novedades')
 		}
+
+		if(frm.doc.docstatus == 2){
+			frm.toggle_display('motivo_de_cancelacion', true);
+		}
 	},
 	item_code:function(frm){
 
