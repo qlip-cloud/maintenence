@@ -1,0 +1,43 @@
+{
+ "actions": [],
+ "creation": "2026-01-13 17:00:15.887699",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "nombre_de_evidencia",
+  "detalle",
+  "evidencia"
+ ],
+ "fields": [
+  {
+   "fieldname": "nombre_de_evidencia",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nombre"
+  },
+  {
+   "fieldname": "evidencia",
+   "fieldtype": "Attach",
+   "label": "Evidencia"
+  },
+  {
+   "fieldname": "detalle",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Detalle"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-14 08:18:16.644116",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Archivos Ordenes de Servicio",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
