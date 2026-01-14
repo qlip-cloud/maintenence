@@ -7,6 +7,10 @@ frappe.ui.form.on('Registro de Novedades', {
 			frm.doc.novedades = [];
 			refresh_field('novedades')
 		}
+
+		if(frm.doc.docstatus == 2){
+			frm.toggle_display('motivo_de_cancelacion', true);
+		}
 	},
 	item_code:function(frm){
 
@@ -17,5 +21,14 @@ frappe.ui.form.on('Registro de Novedades', {
 			 });
 		}
 		
-	}
+	},
+	before_cancel: function(frm) {
+		
+		if (!frm.doc.motivo_de_cancelacion) {
+			frm.toggle_display('motivo_de_cancelacion', true);
+			frm.toggle_reqd('motivo_de_cancelacion', true);
+			frappe.msgprint('Debe incluir un motivo de cancelación');
+			frappe.validated = false;
+		}
+    }
 });

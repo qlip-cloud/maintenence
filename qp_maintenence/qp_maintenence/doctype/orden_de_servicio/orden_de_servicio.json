@@ -28,6 +28,7 @@
   "descripci\u00f3n_del_producto",
   "cl_plantilla_de_mantenimiento",
   "customer_name",
+  "ubicacion",
   "fecha_y_hora_inicio_real_os",
   "fecha_y_hora_finalizaci\u00f3n_os",
   "contact_info",
@@ -48,7 +49,11 @@
   "consumable_items_section",
   "consumable_items",
   "section_break_34",
-  "observaciones"
+  "recursos",
+  "section_break_44",
+  "observaciones",
+  "os_section_break_47",
+  "os_archivos_adjuntos"
  ],
  "fields": [
   {
@@ -345,6 +350,32 @@
    "fieldname": "valor_de_lectura_actual",
    "fieldtype": "Float",
    "label": "Valor de lectura actual"
+  },
+  {
+   "fieldname": "recursos",
+   "fieldtype": "Table",
+   "label": "Recursos",
+   "options": "Recursos"
+  },
+  {
+   "fieldname": "section_break_44",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ubicacion",
+   "fieldtype": "Link",
+   "label": "Ubicacion",
+   "options": "Location"
+  },
+  {
+   "fieldname": "os_section_break_47",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "os_archivos_adjuntos",
+   "fieldtype": "Table",
+   "label": "Archivos Adjuntos",
+   "options": "Archivos Ordenes de Servicio"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -369,9 +400,14 @@
    "group": "Actividad",
    "link_doctype": "Quality Inspection",
    "link_fieldname": "orden_de_trabajo_de_servicio"
+  },
+  {
+   "group": "Actividad",
+   "link_doctype": "Stock Entry",
+   "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-06 12:11:20.139526",
+ "modified": "2026-01-14 17:01:31.500358",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

@@ -13,7 +13,9 @@
   "item_code",
   "item_name",
   "datos_de_la_novedad_section",
-  "novedades"
+  "novedades",
+  "section_break_9",
+  "motivo_de_cancelacion"
  ],
  "fields": [
   {
@@ -59,12 +61,23 @@
    "fieldtype": "Table",
    "label": "Novedades",
    "options": "Novedades"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "motivo_de_cancelacion",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Motivo de cancelacion"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-11-13 11:14:23.102144",
+ "modified": "2026-01-14 11:08:21.018732",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Registro de Novedades",
