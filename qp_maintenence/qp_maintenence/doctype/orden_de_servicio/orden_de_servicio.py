@@ -8,8 +8,6 @@ class OrdendeServicio(Document):
 	
 	def save(self, *args, **kwargs):
 		super().save(*args, **kwargs) # call the base save method
-		
-		print(frappe.as_json(self))
 
 		if self.status == 'Completed' and self.docstatus == 1:
 			self.update_novedades(self, *args, **kwargs) # eg: trigger an API call or a Rotating File Logger that "User X has tried updating this particular record"
@@ -48,12 +46,27 @@ def get_novedades(**args):
 
 	args = frappe._dict(args)
 
+	hvb_list = []
+
+	def search_parent(hvb):
+
+		print(hvb)
+		hvb_list.append(hvb)
+		parent_hoja_de_vida_del_bien = frappe.db.get_value('Hoja de Vida del Bien', hvb, 'parent_hoja_de_vida_del_bien')
+		print(parent_hoja_de_vida_del_bien)
+		if parent_hoja_de_vida_del_bien:
+			search_parent(parent_hoja_de_vida_del_bien)
+
+	search_parent(args.hoja_de_vida_del_bien)
+
+	search_hvb = f"""AND RN.hoja_de_vida_del_bien in {tuple(hvb_list)}""" if len(hvb_list) > 1 else f"""AND RN.hoja_de_vida_del_bien ='{hvb_list[0]}'"""
+
 	return frappe.db.sql(f"""SELECT * 
 							FROM `tabRegistro de Novedades` RN, tabNovedades N
 							WHERE N.parent = RN.name
 					  		AND N.parenttype = 'Registro de Novedades' 
 							AND N.state = 'Open'
 							AND N.docstatus = 1
-							AND RN.item_code = '{args.producto}'
 							AND N.orden_de_servicio IS NULL
+							{search_hvb}
 						""", as_dict=1)
