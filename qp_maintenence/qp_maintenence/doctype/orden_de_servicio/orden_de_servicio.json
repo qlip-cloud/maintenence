@@ -15,6 +15,7 @@
   "item_serial_no",
   "customer",
   "tipo_de_servicio",
+  "ma_causa_raiz",
   "fecha_y_hora_de_solicitud",
   "fecha_y_hora_prevista_de_entrega",
   "valor_de_lectura_actual",
@@ -376,6 +377,12 @@
    "fieldtype": "Table",
    "label": "Archivos Adjuntos",
    "options": "Archivos Ordenes de Servicio"
+  },
+  {
+   "fieldname": "ma_causa_raiz",
+   "fieldtype": "Select",
+   "label": "Causa Raiz",
+   "options": "\nOperacional\nDise\u00f1o\nHumano\nAmbiental\nDesgaste normal por uso"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -407,7 +414,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-14 17:01:31.500358",
+ "modified": "2026-01-20 15:43:43.508541",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
