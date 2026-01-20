@@ -208,6 +208,11 @@ frappe.ui.form.on('Orden de Servicio', {
 		}
 	},
 	tipo_de_servicio:function(frm){
+
+		frm.doc.cl_plantilla_de_mantenimiento = null;
+		frm.doc.project_type = null;
+		frm.doc.tasks = [];
+
 		if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo'){
 			if(frm.doc.producto){
 				frm.set_query("cl_plantilla_de_mantenimiento", function() {
@@ -249,6 +254,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			}
 		}
 		
+		frm.refresh_fields('project_type')
 	},
 	
 	hoja_de_vida_del_bien:function(frm){
