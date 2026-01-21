@@ -28,7 +28,7 @@ def get_data(**args):
 							SELECT HVB.item_code, 
 									HVB.item_name, 
 									HVB.name as hoja_de_vida_del_bien, 
-									IF(HVB.estado_del_bien, HVB.estado_del_bien, "") as estado,
+									HVB.estado_del_bien as estado,
 									HVB.ubicacion, 
 									(SELECT fecha_y_hora_finalización_os
 									FROM `tabOrden de Servicio` OS
