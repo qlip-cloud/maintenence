@@ -8,7 +8,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			frm.doc.novedades = []
 			refresh_field("novedades")
 
-			if(frm.doc.cl_plantilla_de_mantenimiento){frm.trigger('cl_plantilla_de_mantenimiento')}
+			//if(frm.doc.cl_plantilla_de_mantenimiento){frm.trigger('cl_plantilla_de_mantenimiento')}
 			
 		}
 
