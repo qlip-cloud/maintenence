@@ -1,0 +1,96 @@
+{
+ "actions": [],
+ "creation": "2025-12-22 14:25:41.298892",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "status",
+  "column_break_3",
+  "hoja_de_vida_del_bien",
+  "ubicacion",
+  "column_break_6",
+  "desde",
+  "hasta",
+  "section_break_11",
+  "lista_hoja_de_vida_del_bien"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nDisponible\nEn mantenimiento\nDeshabilitado"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hoja_de_vida_del_bien",
+   "fieldtype": "Link",
+   "label": "Hoja de vida del bien",
+   "options": "Hoja de Vida del Bien"
+  },
+  {
+   "fieldname": "ubicacion",
+   "fieldtype": "Link",
+   "label": "Ubicacion",
+   "options": "Location"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "desde",
+   "fieldtype": "Date",
+   "label": "Desde"
+  },
+  {
+   "fieldname": "hasta",
+   "fieldtype": "Date",
+   "label": "Hasta"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "lista_hoja_de_vida_del_bien",
+   "fieldtype": "HTML",
+   "label": "Lista Hoja de Vida del Bien"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-20 10:59:35.487102",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Gestion Multiple de Orden de Servicio",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
