@@ -26,7 +26,7 @@
   "cl_inspecci\u00f3n_de_calidad",
   "hoja_de_vida_del_bien",
   "responsable",
-  "descripci\u00f3n_del_producto",
+  "descripcion_del_producto",
   "cl_plantilla_de_mantenimiento",
   "customer_name",
   "ubicacion",
@@ -185,17 +185,6 @@
    "fieldtype": "Link",
    "label": "Hoja de vida del bien",
    "options": "Hoja de Vida del Bien"
-  },
-  {
-   "bold": 1,
-   "fetch_from": "producto.item_name",
-   "fetch_if_empty": 1,
-   "fieldname": "descripci\u00f3n_del_producto",
-   "fieldtype": "Data",
-   "in_global_search": 1,
-   "label": "Nombre del producto",
-   "read_only": 1,
-   "reqd": 1
   },
   {
    "fieldname": "responsable",
@@ -384,6 +373,17 @@
    "fieldtype": "Select",
    "label": "Causa Raiz",
    "options": "\nOperacional\nDise\u00f1o\nHumano\nAmbiental\nDesgaste normal por uso"
+  },
+  {
+   "bold": 1,
+   "fetch_from": "producto.item_name",
+   "fetch_if_empty": 1,
+   "fieldname": "descripcion_del_producto",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Nombre del producto",
+   "read_only": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -415,7 +415,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-21 16:34:42.988451",
+ "modified": "2026-01-21 16:51:11.270556",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
