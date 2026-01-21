@@ -7,6 +7,9 @@ frappe.ui.form.on('Orden de Servicio', {
 		if(frm.is_new()){
 			frm.doc.novedades = []
 			refresh_field("novedades")
+
+			if(frm.doc.cl_plantilla_de_mantenimiento){frm.trigger('cl_plantilla_de_mantenimiento')}
+			
 		}
 
 		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
@@ -159,6 +162,8 @@ frappe.ui.form.on('Orden de Servicio', {
 					 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
 						var mr = frappe.model.get_new_doc('Actualizacion de Lecturas');
 						mr.cl_hoja_de_vida_bien =  result[0].name 
+						mr.codigo_de_producto =  frm.doc.producto
+						mr.nombre_de_producto =  frm.doc.descripcion_del_producto
 						mr.lectura_actual = frm.doc.valor_de_lectura_actual
 						mr.fecha = frm.doc.fecha_y_hora_inicio_real_os
 						mr.observaciones = frm.doc.name
@@ -254,7 +259,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			}
 		}
 		
-		frm.refresh_fields('project_type')
+		frm.refresh_fields()
 	},
 	
 	hoja_de_vida_del_bien:function(frm){
