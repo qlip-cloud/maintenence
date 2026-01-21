@@ -36,7 +36,6 @@
   },
   {
    "fetch_from": "cl_hoja_de_vida_bien.item_code",
-   "fetch_if_empty": 1,
    "fieldname": "codigo_de_producto",
    "fieldtype": "Link",
    "label": "Codigo de producto",
@@ -141,7 +140,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-21 16:33:19.707665",
+ "modified": "2026-01-21 16:42:12.780895",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Actualizacion de Lecturas",
