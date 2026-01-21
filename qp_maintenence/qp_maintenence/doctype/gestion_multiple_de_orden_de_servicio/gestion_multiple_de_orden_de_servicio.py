@@ -64,6 +64,8 @@ def get_data(**args):
 @frappe.whitelist()
 def create_orders(datos_de_ordenes):
 
+	message_ok = [f"""Señor {frappe.session.user}, el sistema acaba de crear:"""]
+
 	if isinstance(datos_de_ordenes, string_types):
 		datos_de_ordenes = json.loads(datos_de_ordenes)
 
@@ -94,16 +96,22 @@ def create_orders(datos_de_ordenes):
 			
 			orden_de_servicio.insert()
 
+			message_ok.append(f"""Para el producto {orden_de_servicio.producto} la Orden de Servicio {orden_de_servicio.name}""")
+
 		frappe.db.commit()
-		frappe.response['message'] = "Los datos han sido almacenado correctamente"
+		frappe.response['message'] = message_ok
 		frappe.response['http_status_code']= 200
         
 	except Exception as error:
 
-		print(error)
 		frappe.response['message'] = str(error)
 		frappe.response['http_status_code'] = 500
-		return False
+		return {
+			"status":False
+		}
 	
 	else:
-		return True
+		return {
+			"status":True,
+			"message":message_ok
+		}
