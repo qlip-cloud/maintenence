@@ -349,8 +349,9 @@
   },
   {
    "fieldname": "valor_de_lectura_actual",
-   "fieldtype": "Int",
-   "label": "Valor de lectura actual"
+   "fieldtype": "Float",
+   "label": "Valor de lectura actual",
+   "precision": "0"
   },
   {
    "fieldname": "recursos",
@@ -414,7 +415,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-21 12:35:30.971605",
+ "modified": "2026-01-21 16:34:42.988451",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

@@ -92,8 +92,9 @@
   {
    "default": "0",
    "fieldname": "lectura_actual",
-   "fieldtype": "Int",
-   "label": "Lectura Actual"
+   "fieldtype": "Float",
+   "label": "Lectura Actual",
+   "precision": "0"
   },
   {
    "fieldname": "observaciones",
@@ -108,15 +109,17 @@
   {
    "default": "0",
    "fieldname": "lectura_anterior",
-   "fieldtype": "Int",
+   "fieldtype": "Float",
    "label": "Lectura Anterior",
+   "precision": "0",
    "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "lectura_acumulada",
-   "fieldtype": "Int",
+   "fieldtype": "Float",
    "label": "Lectura Acumulada",
+   "precision": "0",
    "read_only": 1
   },
   {
@@ -138,7 +141,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-21 12:34:54.753691",
+ "modified": "2026-01-21 16:33:19.707665",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Actualizacion de Lecturas",
