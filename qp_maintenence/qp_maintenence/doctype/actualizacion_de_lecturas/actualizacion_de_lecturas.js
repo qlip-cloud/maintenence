@@ -2,6 +2,11 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Actualizacion de Lecturas', {
+	refresh:function(frm){
+		if(!frm.is_new() && frm.doc.codigo_de_producto && frm.doc.docstatus == 0){
+			frm.trigger('codigo_de_producto')
+		}
+	},
 	codigo_de_producto:function(frm){
 		if(frm.is_new()){
 			if(frm.doc.codigo_de_producto){
@@ -68,6 +73,9 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 					
 					refresh_field('lectura_anterior')
 					refresh_field('lectura_acumulada')
+
+					if(frm.is_dirty()) frm.save();
+
 				})
 			}
 
