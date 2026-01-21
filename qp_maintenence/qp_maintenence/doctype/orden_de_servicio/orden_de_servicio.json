@@ -349,7 +349,7 @@
   },
   {
    "fieldname": "valor_de_lectura_actual",
-   "fieldtype": "Float",
+   "fieldtype": "Int",
    "label": "Valor de lectura actual"
   },
   {
@@ -414,7 +414,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-20 15:43:43.508541",
+ "modified": "2026-01-21 12:35:30.971605",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
