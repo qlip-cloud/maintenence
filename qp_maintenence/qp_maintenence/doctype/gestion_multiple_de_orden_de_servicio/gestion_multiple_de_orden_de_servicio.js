@@ -245,9 +245,9 @@ function modal_data(data){
 				method: 'qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.create_orders', // Replace with your actual method path
 				args: values,
 				callback: function(r) {
-					if(r.message){
+					if(r.message.status){
 						dialog.hide();
-                    	frappe.set_route('List', 'Orden de Servicio', 'List');
+						frappe.msgprint(r.message.message);
 					}else{
 						frappe.msgprint(__("No se pudieron crear las ordenes seleccionadas"));
 					}
