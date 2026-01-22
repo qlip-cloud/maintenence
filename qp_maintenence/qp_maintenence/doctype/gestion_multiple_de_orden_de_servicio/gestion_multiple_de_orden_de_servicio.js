@@ -178,7 +178,7 @@ function get_columns(is_modal){
 			hidden: is_modal
 		},
 		{
-			label:'Plan de Mantenimineto', 
+			label:'Plan de Mantenimiento', 
 			name:'Plan de Mantenimineto', 
 			id:'cl_plantilla_de_mantenimiento',
 			fieldname:'cl_plantilla_de_mantenimiento',

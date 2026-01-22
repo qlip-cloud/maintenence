@@ -44,20 +44,17 @@ def get_data(**args):
 									WHERE ODS2.hoja_de_vida_del_bien =  HVB.name 
 									AND ODS2.status != 'Completed') as nro_ordenes,
 									PT.name as cl_plantilla_de_mantenimiento
-							FROM `tabHoja de Vida del Bien` HVB,
-								 `tabProject Template` PT,
-								 `tabProductos Asociados PP` PAPP
-							WHERE HVB.item_code = PAPP.item_code
-					  		AND PAPP.parenttype = 'Project Template' 
-							AND PAPP.parent = PT.name
-							AND PT.taller_y_mantenimiento = 1
+							FROM `tabHoja de Vida del Bien` HVB
+							LEFT JOIN `tabProductos Asociados PP` PAPP ON PAPP.item_code = HVB.item_code AND PAPP.parenttype = 'Project Template'
+							LEFT JOIN `tabProject Template` PT ON PT.name = PAPP.parent AND PT.taller_y_mantenimiento = 1
+							WHERE HVB.item_code IS NOT NULL
 							{conditions}
 						""", as_dict=1)
 	
 	for r in result:
-
-		r.fecha_ultimo_mantenimiento = formatdate(r.fecha_ultimo_mantenimiento, 'yyyy-MM-dd')
-		r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.fecha_proximo_mantenimiento)
+		if r.fecha_ultimo_mantenimiento:
+			r.fecha_ultimo_mantenimiento = formatdate(r.fecha_ultimo_mantenimiento, 'yyyy-MM-dd')
+			r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.fecha_proximo_mantenimiento)
 		
 	return result
 
