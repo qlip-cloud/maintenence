@@ -139,15 +139,6 @@ function get_columns(is_modal){
 			hidden: is_modal
 		},
 		{
-			name:'Nombre del Producto', 
-			id:'item_name', 
-			fieldname:'item_name',
-			dropdown: false,
-			fieldtype:'Data',
-			editable: false,
-			hidden: is_modal
-		},
-		{
 			name:'Hoja de Vida', 
 			id:'hoja_de_vida_del_bien',
 			fieldname:'hoja_de_vida_del_bien',
@@ -179,7 +170,7 @@ function get_columns(is_modal){
 		},
 		{
 			label:'Plan de Mantenimiento', 
-			name:'Plan de Mantenimineto', 
+			name:'Plan de Mantenimiento', 
 			id:'cl_plantilla_de_mantenimiento',
 			fieldname:'cl_plantilla_de_mantenimiento',
 			dropdown: false,
