@@ -239,6 +239,12 @@ function modal_data(data){
 
 			values.datos_de_ordenes.forEach(value => {
 				console.log(value)
+
+				if(!value.tipo_de_servicio){
+					error_message.push(__(`Tipo de servicio es obligatorio`));
+					error_flag = true
+				}
+
 				if(["Mantenimiento Preventivo Planificado", "Mantenimiento Preventivo"].includes(value.tipo_de_servicio) && !value.cl_plantilla_de_mantenimiento){
 					error_message.push(__(`Plan de Mantenimiento es obligatorio en ${value.item_code}`));
 					error_flag = true
@@ -248,6 +254,7 @@ function modal_data(data){
 					error_message.push(__(`Causa raiz es obligatorio en ${value.item_code}`));
 					error_flag = true
 				}
+				
 			})
 			
 			if(!error_flag){
