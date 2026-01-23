@@ -122,7 +122,7 @@ function get_columns(is_modal){
 			fieldname:'causa_raiz',
 			dropdown: false,
 			fieldtype: 'Select',
-			options:" \Operacional\nDiseño\nHumano\nAmbiental\nDesgaste normal por uso",
+			options:" \nOperacional\nDiseño\nHumano\nAmbiental\nDesgaste normal por uso",
 			editable: is_modal,
 			in_list_view:  is_modal,
 			reqd:1
@@ -241,11 +241,11 @@ function modal_data(data){
 				console.log(value)
 
 				if(!value.tipo_de_servicio){
-					error_message.push(__(`Tipo de servicio es obligatorio`));
+					error_message.push(__(`Tipo de servicio es obligatorio en ${value.item_code}`));
 					error_flag = true
 				}
 
-				if(["Mantenimiento Preventivo Planificado", "Mantenimiento Preventivo"].includes(value.tipo_de_servicio) && !value.cl_plantilla_de_mantenimiento){
+				if(["Mantenimiento Preventivo Planificado"].includes(value.tipo_de_servicio) && !value.cl_plantilla_de_mantenimiento){
 					error_message.push(__(`Plan de Mantenimiento es obligatorio en ${value.item_code}`));
 					error_flag = true
 				}
@@ -261,6 +261,8 @@ function modal_data(data){
 				frappe.call({
 					method: 'qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.create_orders', // Replace with your actual method path
 					args: values,
+					freeze: true,
+					freeze_message: "Creando ordenes ...",
 					callback: function(r) {
 						if(r.message.status){
 							dialog.hide();
