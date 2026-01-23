@@ -65,6 +65,7 @@ function crear_orders(frm) {
 		let data_selected = []
 
 		Object.keys(indexes).forEach(i => {
+			data_table[i].cl_plantilla_de_mantenimiento = null;
 			data_selected.push(data_table[i])
 		})
 
@@ -97,7 +98,7 @@ function get_columns(is_modal){
 			fieldname:'tipo_de_servicio',
 			dropdown: false,
 			fieldtype: 'Select',
-			options:" \nGarantía\nMantenimiento Preventivo\nMantenimiento Correctivo\nDiagnostico",
+			options: ['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company")) ? " \nGarantía\nMantenimiento Preventivo\nMantenimiento Preventivo Planificado\nMantenimiento Correctivo\nMantenimineto Predictivo\nMejora (Reingenieria)\nDiagnóstico" : " \nGarantía\nMantenimiento Preventivo\nMantenimiento Correctivo\nDiagnóstico",
 			editable: is_modal,
 			in_list_view:  is_modal,
 			reqd:1
