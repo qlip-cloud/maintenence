@@ -55,6 +55,7 @@
    "label": "Desde"
   },
   {
+   "description": "Registro de fechas para vencimiento de mantenimiento preventivo",
    "fieldname": "hasta",
    "fieldtype": "Date",
    "label": "Hasta"
@@ -71,7 +72,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-20 10:59:35.487102",
+ "modified": "2026-01-23 10:09:30.945396",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Gestion Multiple de Orden de Servicio",
