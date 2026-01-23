@@ -234,8 +234,8 @@ function modal_data(data){
 		primary_action_label: __('Crear'),
 		primary_action: function(values) {
 
-			error_flag = false;
-			error_message = []
+			let error_flag = false
+			let error_message = []
 
 			values.datos_de_ordenes.forEach(value => {
 				console.log(value)
