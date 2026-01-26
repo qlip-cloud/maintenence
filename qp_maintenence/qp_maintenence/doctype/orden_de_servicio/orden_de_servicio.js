@@ -209,7 +209,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			 });
 		}
 		
-		if(['Mantenimiento Preventivo', 'Mantenimiento Preventivo Planificado'].includes(frm.doc.tipo_de_servicio) && frm.doc.cl_plantilla_de_mantenimiento){
+		if(['Mantenimiento Preventivo', 'Mantenimiento Preventivo Planificado'].includes(frm.doc.tipo_de_servicio)){
 			frm.set_query("cl_plantilla_de_mantenimiento", function() {
 				return {
 					query:"qp_maintenence.qp_maintenence.services.plan_de_mantenimiento.handler",
@@ -224,7 +224,7 @@ frappe.ui.form.on('Orden de Servicio', {
 		frm.doc.project_type = null;
 		frm.doc.tasks = [];
 
-		if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo'){
+		if(['Mantenimiento Preventivo', 'Mantenimiento Preventivo Planificado'].includes(frm.doc.tipo_de_servicio)){
 			if(frm.doc.producto){
 				frm.set_query("cl_plantilla_de_mantenimiento", function() {
 					return {
