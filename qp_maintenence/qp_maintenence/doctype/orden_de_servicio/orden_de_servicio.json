@@ -390,7 +390,8 @@
    "reqd": 1
   },
   {
-   "fetch_from": "hoja_de_vida_del_bien.titular_del_bien",
+   "depends_on": "eval: doc.hoja_de_vida_del_bien",
+   "fetch_from": "hoja_de_vida_del_bien.bien",
    "fieldname": "titular_del_bien",
    "fieldtype": "Select",
    "label": "Titular del bien HVB",
@@ -398,8 +399,8 @@
    "read_only": 1
   },
   {
-   "depends_on": "eval: doc.tipo_del_bien == \"Cliente\"",
-   "fetch_from": "hoja_de_vide_del_bien.customer",
+   "depends_on": "eval: doc.titular_del_bien == \"Cliente\"",
+   "fetch_from": "hoja_de_vida_del_bien.customer",
    "fieldname": "cliente_hvc",
    "fieldtype": "Link",
    "label": "Cliente HVB",
@@ -407,7 +408,7 @@
    "read_only": 1
   },
   {
-   "depends_on": "eval: doc.tipo_del_bien == \"Proveedor\"",
+   "depends_on": "eval: doc.titular_del_bien == \"Proveedor\"",
    "fetch_from": "hoja_de_vida_del_bien.supplier",
    "fieldname": "proveedor_hvc",
    "fieldtype": "Link",
@@ -445,7 +446,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-26 13:05:48.489460",
+ "modified": "2026-01-26 16:59:51.806254",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
