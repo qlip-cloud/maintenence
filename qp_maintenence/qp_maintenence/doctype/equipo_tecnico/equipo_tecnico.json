@@ -12,6 +12,7 @@
   "rol_desempe\u00f1ado",
   "celular",
   "cl_tipo_de_bien",
+  "deshabilitado",
   "categor\u00eda_licencia_de_conducci\u00f3n",
   "columna_1",
   "employee_name",
@@ -174,6 +175,13 @@
    "options": "Equipo Tecnico",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "deshabilitado",
+   "fieldtype": "Check",
+   "label": "Deshabilitado",
+   "options": "0"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -185,7 +193,7 @@
    "link_fieldname": "responsable"
   }
  ],
- "modified": "2026-01-05 15:57:11.835958",
+ "modified": "2026-01-26 12:07:38.103953",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Equipo Tecnico",

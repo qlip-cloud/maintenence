@@ -2,6 +2,13 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Orden de Servicio', {
+	setup:function(frm){
+		frm.set_query("responsable", function() {
+			return {
+				filters: {"deshabilitado": 0}
+			};
+		});
+	},
 	refresh:function(frm){
 
 		if(frm.is_new()){

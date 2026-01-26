@@ -2,6 +2,13 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Actualizacion de Lecturas', {
+	setup:function(frm){
+		frm.set_query("responsable", function() {
+			return {
+				filters: {"deshabilitado": 0}
+			};
+		});
+	},
 	refresh:function(frm){
 		if(!frm.is_new() && frm.doc.codigo_de_producto && frm.doc.docstatus == 0){
 			frm.trigger('codigo_de_producto')
