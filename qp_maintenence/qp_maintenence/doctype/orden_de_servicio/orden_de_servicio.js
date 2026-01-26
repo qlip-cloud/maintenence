@@ -2,6 +2,13 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Orden de Servicio', {
+	setup:function(frm){
+		frm.set_query("responsable", function() {
+			return {
+				filters: {"deshabilitado": 0}
+			};
+		});
+	},
 	refresh:function(frm){
 
 		if(frm.is_new()){
@@ -202,8 +209,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			 });
 		}
 		
-
-		if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo'){
+		if(['Mantenimiento Preventivo', 'Mantenimiento Preventivo Planificado'].includes(frm.doc.tipo_de_servicio) && frm.doc.cl_plantilla_de_mantenimiento){
 			frm.set_query("cl_plantilla_de_mantenimiento", function() {
 				return {
 					query:"qp_maintenence.qp_maintenence.services.plan_de_mantenimiento.handler",

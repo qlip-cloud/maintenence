@@ -113,7 +113,12 @@ function get_columns(is_modal){
 			options:"Equipo Tecnico",
 			editable: is_modal,
 			in_list_view:  is_modal,
-			reqd:1
+			reqd:1,
+			get_query() {
+				return {
+					filters: { deshabilitado:0}
+				}
+			}
 		},
 		{
 			label:'Causa Raiz', 
