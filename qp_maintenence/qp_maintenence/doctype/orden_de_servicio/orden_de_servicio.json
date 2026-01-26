@@ -11,6 +11,7 @@
   "naming_series",
   "entrada_del_bien",
   "status",
+  "titular_del_bien",
   "producto",
   "item_serial_no",
   "customer",
@@ -25,8 +26,10 @@
   "project",
   "cl_inspecci\u00f3n_de_calidad",
   "hoja_de_vida_del_bien",
-  "responsable",
+  "cliente_hvc",
+  "proveedor_hvc",
   "descripcion_del_producto",
+  "responsable",
   "cl_plantilla_de_mantenimiento",
   "customer_name",
   "ubicacion",
@@ -385,6 +388,32 @@
    "label": "Nombre del producto",
    "read_only": 1,
    "reqd": 1
+  },
+  {
+   "fetch_from": "hoja_de_vida_del_bien.titular_del_bien",
+   "fieldname": "titular_del_bien",
+   "fieldtype": "Select",
+   "label": "Titular del bien HVB",
+   "options": "\nPropio\nCliente\nProveedor",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.tipo_del_bien == \"Cliente\"",
+   "fetch_from": "hoja_de_vide_del_bien.customer",
+   "fieldname": "cliente_hvc",
+   "fieldtype": "Link",
+   "label": "Cliente HVB",
+   "options": "Customer",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.tipo_del_bien == \"Proveedor\"",
+   "fetch_from": "hoja_de_vida_del_bien.supplier",
+   "fieldname": "proveedor_hvc",
+   "fieldtype": "Link",
+   "label": "Proveedor HVB",
+   "options": "Supplier",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -416,7 +445,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-26 10:34:42.236576",
+ "modified": "2026-01-26 13:05:48.489460",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
