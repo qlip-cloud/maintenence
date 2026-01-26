@@ -46,3 +46,28 @@ def get_mantenimientos_preventivos(**args):
 			])	
 
 	return result_list
+
+@frappe.whitelist()
+def get_children(doctype, parent='', **filters):
+	return _get_children(doctype, parent)
+
+def _get_children(doctype, parent='', ignore_permissions=False):
+	parent_field = 'parent_' + doctype.lower().replace(' ', '_')
+	filters = [['ifnull(`{0}`,"")'.format(parent_field), '=', parent],
+		['docstatus', '<' ,'2']]
+
+	meta = frappe.get_meta(doctype)
+
+	return frappe.get_list(
+		doctype,
+		fields=[
+			'name as value',
+			'{0} as title'.format(meta.get('title_field') or 'name'),
+			'is_group as expandable',
+			'item_code as item_code',
+			'item_name as item_name'
+		],
+		filters=filters,
+		order_by='name',
+		ignore_permissions=ignore_permissions
+	)
