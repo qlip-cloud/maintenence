@@ -174,8 +174,9 @@ frappe.ui.form.on('Orden de Servicio', {
 						mr.lectura_actual = frm.doc.valor_de_lectura_actual
 						mr.fecha = frm.doc.fecha_y_hora_inicio_real_os
 						mr.observaciones = frm.doc.name
-						mr.responsable = frm.doc.responsable;
+						mr.responsable = frm.doc.responsable
 						mr.fecha = frm.doc.fecha_y_hora_finalización_os
+						mr.ubicacion = frm.doc.ubicacion
 
 						frappe.db.insert(mr)
 							.then(doc => {
