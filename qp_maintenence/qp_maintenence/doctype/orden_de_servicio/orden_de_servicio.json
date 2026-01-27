@@ -427,7 +427,7 @@
    "read_only": 1
   },
   {
-   "depends_on": "eval: doc.titular_del_bien == 'Supplier'",
+   "depends_on": "eval: doc.titular_del_bien == 'Proveedor'",
    "fetch_from": "hoja_de_vida_del_bien.supplier_name",
    "fieldname": "nombre_proveedor_hvb",
    "fieldtype": "Data",
@@ -464,7 +464,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-27 08:59:59.639758",
+ "modified": "2026-01-27 09:08:11.549382",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
