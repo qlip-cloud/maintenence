@@ -205,8 +205,7 @@ frappe.ui.form.on('Orden de Servicio', {
 	producto:function(frm){
 		if(frm.doc.producto){
 			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
-                frm.doc.hoja_de_vida_del_bien = result[0].name   
-				refresh_field('hoja_de_vida_del_bien')       
+                frm.set_value('hoja_de_vida_del_bien', result[0].name);      
 			 });
 		}
 		
