@@ -15,6 +15,7 @@
   "cl_hoja_de_vida_bien",
   "nombre_de_producto",
   "tipo_de_bien",
+  "cambio",
   "lecturas_section",
   "fecha",
   "lectura_actual",
@@ -122,6 +123,19 @@
    "read_only": 1
   },
   {
+   "fieldname": "ubicacion",
+   "fieldtype": "Link",
+   "label": "Ubicacion",
+   "options": "Location"
+  },
+  {
+   "default": "0",
+   "fieldname": "cambio",
+   "fieldtype": "Check",
+   "label": "Cambio de od\u00f3metro/hor\u00f3metro",
+   "options": "0"
+  },
+  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -129,18 +143,12 @@
    "options": "Actualizacion de Lecturas",
    "print_hide": 1,
    "read_only": 1
-  },
-  {
-   "fieldname": "ubicacion",
-   "fieldtype": "Link",
-   "label": "Ubicacion",
-   "options": "Location"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-21 16:42:12.780895",
+ "modified": "2026-01-27 10:08:10.911148",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Actualizacion de Lecturas",
