@@ -2,11 +2,21 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Orden de Servicio', {
+	setup:function(frm){
+		frm.set_query("responsable", function() {
+			return {
+				filters: {"deshabilitado": 0}
+			};
+		});
+	},
 	refresh:function(frm){
 
 		if(frm.is_new()){
 			frm.doc.novedades = []
 			refresh_field("novedades")
+
+			//if(frm.doc.cl_plantilla_de_mantenimiento){frm.trigger('cl_plantilla_de_mantenimiento')}
+			
 		}
 
 		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
@@ -159,11 +169,14 @@ frappe.ui.form.on('Orden de Servicio', {
 					 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
 						var mr = frappe.model.get_new_doc('Actualizacion de Lecturas');
 						mr.cl_hoja_de_vida_bien =  result[0].name 
+						mr.codigo_de_producto =  frm.doc.producto
+						mr.nombre_de_producto =  frm.doc.descripcion_del_producto
 						mr.lectura_actual = frm.doc.valor_de_lectura_actual
 						mr.fecha = frm.doc.fecha_y_hora_inicio_real_os
 						mr.observaciones = frm.doc.name
-						mr.responsable = frm.doc.responsable;
+						mr.responsable = frm.doc.responsable
 						mr.fecha = frm.doc.fecha_y_hora_finalización_os
+						mr.ubicacion = frm.doc.ubicacion
 
 						frappe.db.insert(mr)
 							.then(doc => {
@@ -192,13 +205,11 @@ frappe.ui.form.on('Orden de Servicio', {
 	producto:function(frm){
 		if(frm.doc.producto){
 			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
-                frm.doc.hoja_de_vida_del_bien = result[0].name   
-				refresh_field('hoja_de_vida_del_bien')       
+                frm.set_value('hoja_de_vida_del_bien', result[0].name);      
 			 });
 		}
 		
-
-		if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo'){
+		if(['Mantenimiento Preventivo', 'Mantenimiento Preventivo Planificado'].includes(frm.doc.tipo_de_servicio)){
 			frm.set_query("cl_plantilla_de_mantenimiento", function() {
 				return {
 					query:"qp_maintenence.qp_maintenence.services.plan_de_mantenimiento.handler",
@@ -213,7 +224,7 @@ frappe.ui.form.on('Orden de Servicio', {
 		frm.doc.project_type = null;
 		frm.doc.tasks = [];
 
-		if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo'){
+		if(['Mantenimiento Preventivo', 'Mantenimiento Preventivo Planificado'].includes(frm.doc.tipo_de_servicio)){
 			if(frm.doc.producto){
 				frm.set_query("cl_plantilla_de_mantenimiento", function() {
 					return {
@@ -254,7 +265,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			}
 		}
 		
-		frm.refresh_fields('project_type')
+		frm.refresh_fields()
 	},
 	
 	hoja_de_vida_del_bien:function(frm){

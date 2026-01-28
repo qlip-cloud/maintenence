@@ -65,6 +65,7 @@ function crear_orders(frm) {
 		let data_selected = []
 
 		Object.keys(indexes).forEach(i => {
+			data_table[i].cl_plantilla_de_mantenimiento = null;
 			data_selected.push(data_table[i])
 		})
 
@@ -97,7 +98,7 @@ function get_columns(is_modal){
 			fieldname:'tipo_de_servicio',
 			dropdown: false,
 			fieldtype: 'Select',
-			options:" \nGarantía\nMantenimiento Preventivo\nMantenimiento Correctivo\nDiagnostico",
+			options: ['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company")) ? " \nGarantía\nMantenimiento Preventivo\nMantenimiento Preventivo Planificado\nMantenimiento Correctivo\nMantenimineto Predictivo\nMejora (Reingenieria)\nDiagnóstico" : " \nGarantía\nMantenimiento Preventivo\nMantenimiento Correctivo\nDiagnóstico",
 			editable: is_modal,
 			in_list_view:  is_modal,
 			reqd:1
@@ -112,7 +113,12 @@ function get_columns(is_modal){
 			options:"Equipo Tecnico",
 			editable: is_modal,
 			in_list_view:  is_modal,
-			reqd:1
+			reqd:1,
+			get_query() {
+				return {
+					filters: { deshabilitado:0}
+				}
+			}
 		},
 		{
 			label:'Causa Raiz', 
@@ -121,7 +127,7 @@ function get_columns(is_modal){
 			fieldname:'causa_raiz',
 			dropdown: false,
 			fieldtype: 'Select',
-			options:" \Operacional\nDiseño\nHumano\nAmbiental\nDesgaste normal por uso",
+			options:" \nOperacional\nDiseño\nHumano\nAmbiental\nDesgaste normal por uso",
 			editable: is_modal,
 			in_list_view:  is_modal,
 			reqd:1
@@ -129,15 +135,6 @@ function get_columns(is_modal){
 	}
 
 	col.push(
-		{
-			name:'Nombre del Producto', 
-			id:'item_name', 
-			fieldname:'item_name',
-			dropdown: false,
-			fieldtype:'Data',
-			editable: false,
-			hidden: is_modal
-		},
 		{
 			name:'Nombre del Producto', 
 			id:'item_name', 
@@ -178,8 +175,8 @@ function get_columns(is_modal){
 			hidden: is_modal
 		},
 		{
-			label:'Plan de Mantenimineto', 
-			name:'Plan de Mantenimineto', 
+			label:'Plan de Mantenimiento', 
+			name:'Plan de Mantenimiento', 
 			id:'cl_plantilla_de_mantenimiento',
 			fieldname:'cl_plantilla_de_mantenimiento',
 			dropdown: false,
@@ -241,18 +238,50 @@ function modal_data(data){
 		],
 		primary_action_label: __('Crear'),
 		primary_action: function(values) {
-			frappe.call({
-				method: 'qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.create_orders', // Replace with your actual method path
-				args: values,
-				callback: function(r) {
-					if(r.message.status){
-						dialog.hide();
-						frappe.msgprint(r.message.message);
-					}else{
-						frappe.msgprint(__("No se pudieron crear las ordenes seleccionadas"));
-					}
+
+			let error_flag = false
+			let error_message = []
+
+			values.datos_de_ordenes.forEach(value => {
+				console.log(value)
+
+				if(!value.tipo_de_servicio){
+					error_message.push(__(`Tipo de servicio es obligatorio en ${value.item_code}`));
+					error_flag = true
 				}
-			});
+
+				if(["Mantenimiento Preventivo Planificado"].includes(value.tipo_de_servicio) && !value.cl_plantilla_de_mantenimiento){
+					error_message.push(__(`Plan de Mantenimiento es obligatorio en ${value.item_code}`));
+					error_flag = true
+				}
+
+				if(["Mantenimiento Correctivo"].includes(value.tipo_de_servicio) && !value.causa_raiz){
+					error_message.push(__(`Causa raiz es obligatorio en ${value.item_code}`));
+					error_flag = true
+				}
+				
+			})
+			
+			if(!error_flag){
+				frappe.call({
+					method: 'qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.create_orders', // Replace with your actual method path
+					args: values,
+					freeze: true,
+					freeze_message: "Creando ordenes ...",
+					callback: function(r) {
+						if(r.message.status){
+							dialog.hide();
+							frappe.msgprint(r.message.message);
+						}else{
+							frappe.msgprint(__("No se pudieron crear las ordenes seleccionadas"));
+						}
+					}
+				});
+			}else{
+				frappe.msgprint(error_message);
+			}
+			
+
 		},
 		secondary_action_label: __('Cancelar'),
 		secondary_action:function() {dialog.hide();}

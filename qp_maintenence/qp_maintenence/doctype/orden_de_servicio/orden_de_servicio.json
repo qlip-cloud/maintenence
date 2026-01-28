@@ -11,6 +11,8 @@
   "naming_series",
   "entrada_del_bien",
   "status",
+  "cliente_hvc",
+  "proveedor_hvc",
   "producto",
   "item_serial_no",
   "customer",
@@ -25,8 +27,11 @@
   "project",
   "cl_inspecci\u00f3n_de_calidad",
   "hoja_de_vida_del_bien",
+  "titular_del_bien",
+  "nombre_cliente_hvb",
+  "nombre_proveedor_hvb",
+  "descripcion_del_producto",
   "responsable",
-  "descripci\u00f3n_del_producto",
   "cl_plantilla_de_mantenimiento",
   "customer_name",
   "ubicacion",
@@ -187,17 +192,6 @@
    "options": "Hoja de Vida del Bien"
   },
   {
-   "bold": 1,
-   "fetch_from": "producto.item_name",
-   "fetch_if_empty": 1,
-   "fieldname": "descripci\u00f3n_del_producto",
-   "fieldtype": "Data",
-   "in_global_search": 1,
-   "label": "Nombre del producto",
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
    "fieldname": "responsable",
    "fieldtype": "Link",
    "label": "Responsable",
@@ -350,7 +344,8 @@
   {
    "fieldname": "valor_de_lectura_actual",
    "fieldtype": "Float",
-   "label": "Valor de lectura actual"
+   "label": "Valor de lectura actual",
+   "precision": "0"
   },
   {
    "fieldname": "recursos",
@@ -379,10 +374,65 @@
    "options": "Archivos Ordenes de Servicio"
   },
   {
+   "depends_on": "eval: doc.tipo_de_servicio == \"Mantenimiento Correctivo\"",
    "fieldname": "ma_causa_raiz",
    "fieldtype": "Select",
    "label": "Causa Raiz",
    "options": "\nOperacional\nDise\u00f1o\nHumano\nAmbiental\nDesgaste normal por uso"
+  },
+  {
+   "bold": 1,
+   "fetch_from": "producto.item_name",
+   "fetch_if_empty": 1,
+   "fieldname": "descripcion_del_producto",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Nombre del producto",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: doc.hoja_de_vida_del_bien",
+   "fetch_from": "hoja_de_vida_del_bien.bien",
+   "fieldname": "titular_del_bien",
+   "fieldtype": "Select",
+   "label": "Titular del bien HVB",
+   "options": "\nPropio\nCliente\nProveedor",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.titular_del_bien == \"Cliente\"",
+   "fetch_from": "hoja_de_vida_del_bien.customer",
+   "fieldname": "cliente_hvc",
+   "fieldtype": "Link",
+   "label": "Cliente HVB",
+   "options": "Customer",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.titular_del_bien == \"Proveedor\"",
+   "fetch_from": "hoja_de_vida_del_bien.supplier",
+   "fieldname": "proveedor_hvc",
+   "fieldtype": "Link",
+   "label": "Proveedor HVB",
+   "options": "Supplier",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.titular_del_bien == 'Cliente'",
+   "fetch_from": "hoja_de_vida_del_bien.customer_name",
+   "fieldname": "nombre_cliente_hvb",
+   "fieldtype": "Data",
+   "label": "Nombre Cliente HVB",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.titular_del_bien == 'Proveedor'",
+   "fetch_from": "hoja_de_vida_del_bien.supplier_name",
+   "fieldname": "nombre_proveedor_hvb",
+   "fieldtype": "Data",
+   "label": "Nombre Proveedor HVB",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -414,7 +464,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-20 15:43:43.508541",
+ "modified": "2026-01-27 09:08:11.549382",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

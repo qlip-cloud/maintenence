@@ -39,6 +39,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "fetch_from": "hoja_de_vida_del_bien.item_code",
    "fieldname": "item_code",
    "fieldtype": "Link",
    "label": "Item Code",
@@ -77,7 +78,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-14 11:08:21.018732",
+ "modified": "2026-01-21 12:40:03.819637",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Registro de Novedades",

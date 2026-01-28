@@ -21,14 +21,21 @@ def get_data(**args):
 	conditions += args.get("status") and " AND HVB.estado_del_bien = '%s' " % args.get("status") or ""
 	conditions += args.get("hoja_de_vida_del_bien") and " AND HVB.name = '%s' " % args.get("hoja_de_vida_del_bien") or ""
 	conditions += args.get("ubicacion") and " AND HVB.ubicacion = '%s' " % args.get("ubicacion") or ""
-	conditions += args.get("desde") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) >=  '%s'" % args.get("desde") or ""
-	conditions += args.get("hasta") and "AND DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) <=  '%s'" % args.get("hasta") or ""
+	
+	if args.get("desde") and args.get("hasta"):
+		conditions += args.get("desde") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) >=  '%s'" % args.get("desde") or ""
+		conditions += args.get("hasta") and "AND DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) <=  '%s'" % args.get("hasta") or ""
+	elif args.get("desde"):
+		conditions += args.get("desde") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) >=  '%s'" % args.get("desde") or ""
+	else:
+		conditions += args.get("hasta") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) <=  '%s'" % args.get("hasta") or ""
+
 
 	result = frappe.db.sql(f"""	
 							SELECT HVB.item_code, 
 									HVB.item_name, 
 									HVB.name as hoja_de_vida_del_bien, 
-									IF(HVB.estado_del_bien, HVB.estado_del_bien, "") as estado,
+									HVB.estado_del_bien as estado,
 									HVB.ubicacion, 
 									(SELECT fecha_y_hora_finalización_os
 									FROM `tabOrden de Servicio` OS
@@ -44,20 +51,17 @@ def get_data(**args):
 									WHERE ODS2.hoja_de_vida_del_bien =  HVB.name 
 									AND ODS2.status != 'Completed') as nro_ordenes,
 									PT.name as cl_plantilla_de_mantenimiento
-							FROM `tabHoja de Vida del Bien` HVB,
-								 `tabProject Template` PT,
-								 `tabProductos Asociados PP` PAPP
-							WHERE HVB.item_code = PAPP.item_code
-					  		AND PAPP.parenttype = 'Project Template' 
-							AND PAPP.parent = PT.name
-							AND PT.taller_y_mantenimiento = 1
+							FROM `tabHoja de Vida del Bien` HVB
+							LEFT JOIN `tabProductos Asociados PP` PAPP ON PAPP.item_code = HVB.item_code AND PAPP.parenttype = 'Project Template'
+							LEFT JOIN `tabProject Template` PT ON PT.name = PAPP.parent AND PT.taller_y_mantenimiento = 1
+							WHERE HVB.item_code IS NOT NULL
 							{conditions}
 						""", as_dict=1)
 	
 	for r in result:
-
-		r.fecha_ultimo_mantenimiento = formatdate(r.fecha_ultimo_mantenimiento, 'yyyy-MM-dd')
-		r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.fecha_proximo_mantenimiento)
+		if r.fecha_ultimo_mantenimiento:
+			r.fecha_ultimo_mantenimiento = formatdate(r.fecha_ultimo_mantenimiento, 'yyyy-MM-dd')
+			r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.fecha_proximo_mantenimiento)
 		
 	return result
 
