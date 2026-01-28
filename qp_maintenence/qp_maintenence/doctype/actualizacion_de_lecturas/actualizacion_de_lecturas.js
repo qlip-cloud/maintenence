@@ -68,20 +68,8 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 		let filters = {}
 		let save_flat = false;
 
-		if(frm.is_new()){
-			filters = {
-				"docstatus": 1, 
-				"codigo_de_producto":frm.doc.codigo_de_producto
-			}
-		}else{
-
+		if(!frm.is_new()){
 			save_flat = true;
-
-			filters = {
-				"docstatus": 1, 
-				"codigo_de_producto":frm.doc.codigo_de_producto,
-				"name":["not in", frm.doc.name]
-			}
 		}
 
 		if(frm.doc.codigo_de_producto){
@@ -89,7 +77,10 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 				frappe.db.get_list('Actualizacion de Lecturas', 
 				{
 					fields: ['*'],
-					filters:filters,
+					filters:filters = {
+						"docstatus": 1, 
+						"codigo_de_producto":frm.doc.codigo_de_producto
+					},
 					order_by: 'modified desc',
 				}).then(als => {
 					if(als.some(al => al.cambio)){
@@ -113,6 +104,8 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 			if(frm.doc.lectura_actual < frm.doc.lectura_anterior){
 				frappe.msgprint("Señor Usuario, por favor revise la información digitada en el campo de lectura actual, ya que está ingresando un valor inferior que alterará la lectura acumulada del equipo. Si lo anterior es correcto, favor diligenciar la columna de observaciones con la respectiva explicación.");
 			}
+
+
 		}
 	}
 });
