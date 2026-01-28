@@ -11,6 +11,7 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 	},
 	refresh:function(frm){
 		if((frm.is_dirty() || !frm.is_new()) && frm.doc.codigo_de_producto && frm.doc.docstatus == 0){
+			frm.trigger('tipo_de_bien')
 			frm.trigger('codigo_de_producto')
 			frm.trigger('lectura_actual')
 		}
