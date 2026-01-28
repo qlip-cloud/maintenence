@@ -119,6 +119,7 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 							console.log("Ok");
 						}
 					}
+				})
 			}
 		}
 	}
