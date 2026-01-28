@@ -68,8 +68,20 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 		let filters = {}
 		let save_flat = false;
 
-		if(!frm.is_new()){
+		if(frm.is_new()){
+			filters = {
+				"docstatus": 1, 
+				"codigo_de_producto":frm.doc.codigo_de_producto
+			}
+		}else{
+
 			save_flat = true;
+
+			filters = {
+				"docstatus": 1, 
+				"codigo_de_producto":frm.doc.codigo_de_producto,
+				"name":["not in", frm.doc.name]
+			}
 		}
 
 		if(frm.doc.codigo_de_producto){
@@ -77,13 +89,10 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 				frappe.db.get_list('Actualizacion de Lecturas', 
 				{
 					fields: ['*'],
-					filters:filters = {
-						"docstatus": 1, 
-						"codigo_de_producto":frm.doc.codigo_de_producto
-					},
+					filters:filters,
 					order_by: 'modified desc',
 				}).then(als => {
-					if(als.some(al => al.cambio)){
+					if(als.some(al => al.cambio) || frm.doc.cambio){
 						frm.set_value("lectura_acumulada", als[0].lectura_acumulada + frm.doc.lectura_actual)
 					}else{
 						frm.set_value("lectura_acumulada", frm.doc.lectura_actual)
@@ -104,8 +113,6 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 			if(frm.doc.lectura_actual < frm.doc.lectura_anterior){
 				frappe.msgprint("Señor Usuario, por favor revise la información digitada en el campo de lectura actual, ya que está ingresando un valor inferior que alterará la lectura acumulada del equipo. Si lo anterior es correcto, favor diligenciar la columna de observaciones con la respectiva explicación.");
 			}
-
-
 		}
 	}
 });
