@@ -290,6 +290,29 @@ frappe.ui.form.on('Orden de Servicio', {
 
 		let validated_rows = true;
 
+		if(frm.doc.producto){
+			frm.call({
+				method:"frappe.client.get_value",
+				args:{
+					doctype:"Hoja de Vida del Bien",
+					filters:{
+						item_code: frm.doc.producto, 
+						estado_del_bien:"Deshabilitado"
+					},
+					fieldname:["name"]
+				},
+				async:false,
+				callback:function(r){
+					if(r.message){
+						frappe.msgprint(`El equipo ${frm.doc.producto} asociado a la Hoja de Vida del Bien ${r.message.name} se encuentra en estado Deshabilitado, y por tanto no puede ser utilizado ni relacionado en ningún proceso del sistema`);
+						frappe.validated = false;
+						return false
+					}
+				}
+
+			})
+		}
+
 		if(frm.doc.status == "Completed"){
 			 $.each(frm.doc.tasks || [], function(i, d) {
 				if (['NO', ''].includes(d.verificada)) {
@@ -301,7 +324,8 @@ frappe.ui.form.on('Orden de Servicio', {
         if (!validated_rows) {
            	frappe.msgprint('Existen una o más tareas del plan de mantenimiento que no han sido ejecutadas. Si esta situación es correcta, por favor registre la justificación en el campo de observaciones.');
         }
-    }
+    },
+
 });
 
 cur_frm.cscript.ver_novedades = function(doc) {
