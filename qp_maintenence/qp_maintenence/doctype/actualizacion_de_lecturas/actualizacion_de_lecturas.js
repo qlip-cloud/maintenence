@@ -92,7 +92,7 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 					filters:filters,
 					order_by: 'modified desc',
 				}).then(als => {
-					if(als.some(al => al.cambio)){
+					if(als.some(al => al.cambio) || frm.doc.cambio){
 						frm.set_value("lectura_acumulada", als[0].lectura_acumulada + frm.doc.lectura_actual)
 					}else{
 						frm.set_value("lectura_acumulada", frm.doc.lectura_actual)
