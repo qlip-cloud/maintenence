@@ -108,18 +108,10 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 		if(frm.doc.tipo_de_bien == 'Equipo') frm.set_value("unidad_de_medida",'Horas')
 		if(frm.doc.tipo_de_bien == 'Vehículo') frm.set_value("unidad_de_medida",'Kms')
 	},
-	validate:function(frm){
-		if(frm.is_dirty()){
+	after_save:function(frm){
+		if(frm.doc.docstatus == 0){
 			if(frm.doc.lectura_actual < frm.doc.lectura_anterior){
-				frappe.msgprint({
-					title: __('Notification'),
-					message: __("Señor Usuario, por favor revise la información digitada en el campo de lectura actual, ya que está ingresando un valor inferior que alterará la lectura acumulada del equipo. Si lo anterior es correcto, favor diligenciar la columna de observaciones con la respectiva explicación."),
-					primary_action:{
-						action(values) {
-							console.log("Ok");
-						}
-					}
-				})
+				frappe.msgprint("Señor Usuario, por favor revise la información digitada en el campo de lectura actual, ya que está ingresando un valor inferior que alterará la lectura acumulada del equipo. Si lo anterior es correcto, favor diligenciar la columna de observaciones con la respectiva explicación.");
 			}
 		}
 	}
