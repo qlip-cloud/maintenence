@@ -111,7 +111,14 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 	validate:function(frm){
 		if(frm.is_dirty()){
 			if(frm.doc.lectura_actual < frm.doc.lectura_anterior){
-				frappe.msgprint("Señor Usuario, por favor revise la información digitada en el campo de lectura actual, ya que está ingresando un valor inferior que alterará la lectura acumulada del equipo. Si lo anterior es correcto, favor diligenciar la columna de observaciones con la respectiva explicación.");
+				frappe.msgprint({
+					title: __('Notification'),
+					message: __("Señor Usuario, por favor revise la información digitada en el campo de lectura actual, ya que está ingresando un valor inferior que alterará la lectura acumulada del equipo. Si lo anterior es correcto, favor diligenciar la columna de observaciones con la respectiva explicación."),
+					primary_action:{
+						action(values) {
+							console.log("Ok");
+						}
+					}
 			}
 		}
 	}
