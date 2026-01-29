@@ -115,5 +115,28 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 				frappe.msgprint("Señor Usuario, por favor revise la información digitada en el campo de lectura actual, ya que está ingresando un valor inferior que alterará la lectura acumulada del equipo. Si lo anterior es correcto, favor diligenciar la columna de observaciones con la respectiva explicación.");
 			}
 		}
+	},
+	validate:function(frm){
+		if(frm.doc.codigo_de_producto){
+			frm.call({
+				method:"frappe.client.get_value",
+				args:{
+					doctype:"Hoja de Vida del Bien",
+					filters:{
+						item_code: frm.doc.codigo_de_producto, 
+						estado_del_bien:"Deshabilitado"
+					},
+					fieldname:["name"]
+				},
+				async:false,
+				callback:function(r){
+					if(r.message){
+						frappe.msgprint(`El equipo ${frm.doc.codigo_de_producto} asociado a la Hoja de Vida del Bien ${r.message.name} se encuentra en estado Deshabilitado, y por tanto no puede ser utilizado ni relacionado en ningún proceso del sistema`);
+						frappe.validated = false;
+					}
+				}
+
+			})
+		}
 	}
 });
