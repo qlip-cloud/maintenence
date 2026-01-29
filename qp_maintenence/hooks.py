@@ -42,7 +42,6 @@ doctype_js = {
     "Purchase Receipt" : "public/js/ma_purchase_receipt.js",
     "Asset" : "public/js/ma_asset.js",
     "Material Request" : "public/js/ma_material_request.js",
-    "Project Template" : "public/js/ma_project_template.js"
 }
 
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}

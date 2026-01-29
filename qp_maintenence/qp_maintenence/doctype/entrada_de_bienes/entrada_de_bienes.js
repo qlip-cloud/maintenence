@@ -2,6 +2,17 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Entrada de Bienes', {
+	setup:function(frm){
+
+		frm.set_query("cl_hoja_de_vida_bien", function() {
+			return {
+				filters: {
+					"estado_del_bien":["not in",["Deshabilitado"]]
+				}
+			};
+		});
+
+	},
 	refresh: function(frm) {
 		if (!frm.is_new()) {
 			frm.add_custom_button(__('Quality Inspection(s)'), function() {
@@ -221,28 +232,5 @@ frappe.ui.form.on('Entrada de Bienes', {
 			});
 
 			
-	},
-	validate:function(frm){
-		if(frm.doc.item_code){
-			frm.call({
-				method:"frappe.client.get_value",
-				args:{
-					doctype:"Hoja de Vida del Bien",
-					filters:{
-						item_code: frm.doc.item_code, 
-						estado_del_bien:"Deshabilitado"
-					},
-					fieldname:["name"]
-				},
-				async:false,
-				callback:function(r){
-					if(r.message){
-						frappe.msgprint(`El equipo ${frm.doc.item_code} asociado a la Hoja de Vida del Bien ${r.message.name} se encuentra en estado Deshabilitado, y por tanto no puede ser utilizado ni relacionado en ningún proceso del sistema`);
-						frappe.validated = false;
-					}
-				}
-
-			})
-		}
 	}
 });

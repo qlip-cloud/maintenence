@@ -8,6 +8,15 @@ frappe.ui.form.on('Orden de Servicio', {
 				filters: {"deshabilitado": 0}
 			};
 		});
+
+		frm.set_query("hoja_de_vida_del_bien", function() {
+			return {
+				filters: {
+					"estado_del_bien":["not in",["Deshabilitado"]]
+				}
+			};
+		});
+		
 	},
 	refresh:function(frm){
 
@@ -166,7 +175,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			frappe.confirm('El Valor de Lectura Actual ha sido completado, ¿Desea crear una Actualización de Lectura?',
 				() => {
 
-					 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
+					 frappe.db.get_list('Hoja de Vida del Bien', { filters:{item_code:frm.doc.producto, estado_del_bien:["not in",["Deshabilitado"]]}, fields:['*']}).then((result)=>{
 						var mr = frappe.model.get_new_doc('Actualizacion de Lecturas');
 						mr.cl_hoja_de_vida_bien =  result[0].name 
 						mr.codigo_de_producto =  frm.doc.producto
@@ -204,7 +213,17 @@ frappe.ui.form.on('Orden de Servicio', {
 	},
 	producto:function(frm){
 		if(frm.doc.producto){
-			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
+
+			frm.set_query("hoja_de_vida_del_bien", function() {
+				return {
+					filters: {
+						"item_code": frm.doc.producto,
+						"estado_del_bien":["not in",["Deshabilitado"]]
+					}
+				};
+			});
+
+			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{item_code:frm.doc.producto, estado_del_bien:["not in",["Deshabilitado"]]}, fields:['*']}).then((result)=>{
                 frm.set_value('hoja_de_vida_del_bien', result[0].name);      
 			 });
 		}
@@ -289,29 +308,6 @@ frappe.ui.form.on('Orden de Servicio', {
 	validate: function(frm) {
 
 		let validated_rows = true;
-
-		if(frm.doc.producto){
-			frm.call({
-				method:"frappe.client.get_value",
-				args:{
-					doctype:"Hoja de Vida del Bien",
-					filters:{
-						item_code: frm.doc.producto, 
-						estado_del_bien:"Deshabilitado"
-					},
-					fieldname:["name"]
-				},
-				async:false,
-				callback:function(r){
-					if(r.message){
-						frappe.msgprint(`El equipo ${frm.doc.producto} asociado a la Hoja de Vida del Bien ${r.message.name} se encuentra en estado Deshabilitado, y por tanto no puede ser utilizado ni relacionado en ningún proceso del sistema`);
-						frappe.validated = false;
-						return false
-					}
-				}
-
-			})
-		}
 
 		if(frm.doc.status == "Completed"){
 			 $.each(frm.doc.tasks || [], function(i, d) {

@@ -2,6 +2,17 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Registro de Novedades', {
+	setup:function(frm){
+
+		frm.set_query("hoja_de_vida_del_bien", function() {
+			return {
+				filters: {
+					"estado_del_bien":["not in",["Deshabilitado"]]
+				}
+			};
+		});
+
+	},
 	refresh: function(frm) {
 		if(frm.is_new()){
 			frm.doc.novedades = [];
@@ -15,7 +26,17 @@ frappe.ui.form.on('Registro de Novedades', {
 	item_code:function(frm){
 
 		if(frm.doc.item_code){
-			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.item_code}, fields:['*']}).then((result)=>{
+
+			frm.set_query("hoja_de_vida_del_bien", function() {
+				return {
+					filters: {
+						'item_code':frm.doc.item_code,
+						"estado_del_bien":["not in",["Deshabilitado"]]
+					}
+				};
+			});
+
+			frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.item_code, "estado_del_bien":["not in",["Deshabilitado"]]}, fields:['*']}).then((result)=>{
                 frm.doc.hoja_de_vida_del_bien = result[0].name   
 				refresh_field('hoja_de_vida_del_bien')       
 			 });
@@ -30,28 +51,5 @@ frappe.ui.form.on('Registro de Novedades', {
 			frappe.msgprint('Debe incluir un motivo de cancelación');
 			frappe.validated = false;
 		}
-    },
-	validate:function(frm){
-		if(frm.doc.item_code){
-			frm.call({
-				method:"frappe.client.get_value",
-				args:{
-					doctype:"Hoja de Vida del Bien",
-					filters:{
-						item_code: frm.doc.item_code, 
-						estado_del_bien:"Deshabilitado"
-					},
-					fieldname:["name"]
-				},
-				async:false,
-				callback:function(r){
-					if(r.message){
-						frappe.msgprint(`El equipo ${frm.doc.item_code} asociado a la Hoja de Vida del Bien ${r.message.name} se encuentra en estado Deshabilitado, y por tanto no puede ser utilizado ni relacionado en ningún proceso del sistema`);
-						frappe.validated = false;
-					}
-				}
-
-			})
-		}
-	}
+    }
 });
