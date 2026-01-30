@@ -2,7 +2,35 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Orden de Servicio', {
+	setup: function(frm){
+		// Mostrar si está activa la opción para facturar desde orden de servicio
+		if (cint(frappe.boot.op_si_os) === 1) {
+			frm.custom_make_buttons = {
+				'Sales Invoice': 'Sales Invoice'
+			}
+		}
+	},
+
 	refresh:function(frm){
+		// Mostrar si está activa la opción para facturar desde orden de servicio y está validado
+		if (cint(frappe.boot.op_si_os) === 1 && frm.doc.docstatus === 1) {
+
+			frm.add_custom_button(
+				__('Sales Invoice'), function(frm){
+					frappe.call({
+						method: "qp_maintenence.qp_maintenence.doctype.orden_de_servicio.orden_de_servicio.get_sales_invoice",
+						args: {
+							"dn": cur_frm.doc.name
+						},
+						callback: function(r) {
+							var doclist = frappe.model.sync(r.message);
+							frappe.set_route("Form", doclist[0].doctype, doclist[0].name);
+						}
+					});
+				},
+				__('Create')
+			)
+		}
 
 		if(frm.is_new()){
 			frm.doc.novedades = []
