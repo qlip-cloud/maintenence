@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "creation": "2026-01-28 18:33:45.641016",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "op_si_os"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "description": "Por favor recargar el sistema al cambiar el valor del campo.",
+   "fieldname": "op_si_os",
+   "fieldtype": "Check",
+   "label": "Facturar desde Orden de Servicio"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-01-29 17:20:49.352213",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "configurar_sistema",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Sales User"
+  },
+  {
+   "read": 1,
+   "role": "Sales Manager"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
