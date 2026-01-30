@@ -42,6 +42,7 @@ doctype_js = {
     "Purchase Receipt" : "public/js/ma_purchase_receipt.js",
     "Asset" : "public/js/ma_asset.js",
     "Material Request" : "public/js/ma_material_request.js",
+    "Sales Invoice" : "public/js/sales_invoice.js"
 }
 
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
@@ -97,6 +98,8 @@ doctype_js = {
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 
+extend_bootinfo = "qp_maintenence.startup.boot.qp_maint_boot_session"
+
 # Document Events
 # ---------------
 # Hook on document methods and events
@@ -118,6 +121,9 @@ doc_events = {
 	},
 	"Asset":{
         "after_insert":["qp_maintenence.qp_maintenence.uses_cases.asset.after_insert.handle"]
+	},
+	"Sales Invoice": {
+		"validate": ["qp_maintenence.qp_maintenence.uses_cases.sales_invoice.validate.handle"]
 	}
 }
 
@@ -161,6 +167,9 @@ doc_events = {
 # override_doctype_dashboards = {
 # 	"Task": "qp_maintenence.task.get_dashboard_data"
 # }
+override_doctype_dashboards = {
+	"Sales Invoice": "qp_maintenence.sales_invoice.get_dashboard_data"
+}
 
 # exempt linked doctypes from being automatically cancelled
 #
