@@ -70,3 +70,12 @@ def get_novedades(**args):
 							AND N.orden_de_servicio IS NULL
 							{search_hvb}
 						""", as_dict=1)
+
+@frappe.whitelist()
+def get_sales_invoice(dn):
+	from qp_maintenence.qp_maintenence.services.sales_invoice_from_maint import make_sales_invoice
+
+	# TODO: validaciones para permitir facturar
+	si_doc = make_sales_invoice(dn)
+
+	return si_doc

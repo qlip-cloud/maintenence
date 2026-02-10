@@ -172,9 +172,26 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Configurar",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Configurar",
+   "link_to": "configurar_sistema",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-12-30 11:44:24.829759",
+ "modified": "2026-01-28 18:39:32.981345",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Mantenimiento y Taller",
