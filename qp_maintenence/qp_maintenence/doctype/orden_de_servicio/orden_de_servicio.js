@@ -9,14 +9,6 @@ frappe.ui.form.on('Orden de Servicio', {
 			};
 		});
 
-		frm.set_query("hoja_de_vida_del_bien", function() {
-			return {
-				filters: {
-					"estado_del_bien":["not in",["Deshabilitado"]]
-				}
-			};
-		});
-
 		// Mostrar si está activa la opción para facturar desde orden de servicio
 		if (cint(frappe.boot.op_si_os) === 1) {
 			frm.custom_make_buttons = {
@@ -202,7 +194,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			frappe.confirm('El Valor de Lectura Actual ha sido completado, ¿Desea crear una Actualización de Lectura?',
 				() => {
 
-					 frappe.db.get_list('Hoja de Vida del Bien', { filters:{item_code:frm.doc.producto, estado_del_bien:["not in",["Deshabilitado"]]}, fields:['*']}).then((result)=>{
+					 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
 						var mr = frappe.model.get_new_doc('Actualizacion de Lecturas');
 						mr.cl_hoja_de_vida_bien =  result[0].name 
 						mr.codigo_de_producto =  frm.doc.producto
@@ -240,17 +232,7 @@ frappe.ui.form.on('Orden de Servicio', {
 	},
 	producto:function(frm){
 		if(frm.doc.producto){
-
-			frm.set_query("hoja_de_vida_del_bien", function() {
-				return {
-					filters: {
-						"item_code": frm.doc.producto,
-						"estado_del_bien":["not in",["Deshabilitado"]]
-					}
-				};
-			});
-
-			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{item_code:frm.doc.producto, estado_del_bien:["not in",["Deshabilitado"]]}, fields:['*']}).then((result)=>{
+			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{'item_code':frm.doc.producto}, fields:['*']}).then((result)=>{
                 frm.set_value('hoja_de_vida_del_bien', result[0].name);      
 			 });
 		}
@@ -347,8 +329,7 @@ frappe.ui.form.on('Orden de Servicio', {
         if (!validated_rows) {
            	frappe.msgprint('Existen una o más tareas del plan de mantenimiento que no han sido ejecutadas. Si esta situación es correcta, por favor registre la justificación en el campo de observaciones.');
         }
-    },
-
+    }
 });
 
 cur_frm.cscript.ver_novedades = function(doc) {

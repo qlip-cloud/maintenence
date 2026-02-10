@@ -2,17 +2,6 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Entrada de Bienes', {
-	setup:function(frm){
-
-		frm.set_query("cl_hoja_de_vida_bien", function() {
-			return {
-				filters: {
-					"estado_del_bien":["not in",["Deshabilitado"]]
-				}
-			};
-		});
-
-	},
 	refresh: function(frm) {
 		if (!frm.is_new()) {
 			frm.add_custom_button(__('Quality Inspection(s)'), function() {
