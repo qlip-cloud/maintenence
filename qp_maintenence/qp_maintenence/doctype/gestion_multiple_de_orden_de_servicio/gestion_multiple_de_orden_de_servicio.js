@@ -27,6 +27,9 @@ frappe.ui.form.on('Gestion Multiple de Orden de Servicio', {
 	hasta:function(frm){
 		refresh_data();
 	},
+	incluir_asociados:function(frm){
+		refresh_data();
+	},
 	onload_post_render:function(frm){
 
 		// Sample columns definition
