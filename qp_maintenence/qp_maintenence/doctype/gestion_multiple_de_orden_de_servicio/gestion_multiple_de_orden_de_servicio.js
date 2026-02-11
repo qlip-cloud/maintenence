@@ -83,14 +83,13 @@ function get_columns(is_modal){
 	let col = [{
 			label:'Código del Producto', 
 			name:'Código del Producto', 
+			reqd:1,
 			id:'item_code', 
 			fieldname:'item_code',
-			dropdown: false,
 			fieldtype:'Link',
 			options:'Item',
 			editable: false,
 			in_list_view: is_modal,
-			reqd:1
 		}]
 
 	if(is_modal){
@@ -99,19 +98,18 @@ function get_columns(is_modal){
 			name:'Tipo de servicio', 
 			id:'tipo_de_servicio',
 			fieldname:'tipo_de_servicio',
-			dropdown: false,
 			fieldtype: 'Select',
 			options: ['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company")) ? " \nGarantía\nMantenimiento Preventivo\nMantenimiento Preventivo Planificado\nMantenimiento Correctivo\nMantenimineto Predictivo\nMejora (Reingenieria)\nDiagnóstico" : " \nGarantía\nMantenimiento Preventivo\nMantenimiento Correctivo\nDiagnóstico",
 			editable: is_modal,
 			in_list_view:  is_modal,
-			reqd:1
+			reqd:1,
+			sortable: true
 		},
 		{
 			label:'Responsable', 
 			name:'Responsable', 
 			id:'responsable',
 			fieldname:'responsable',
-			dropdown: false,
 			fieldtype: 'Link',
 			options:"Equipo Tecnico",
 			editable: is_modal,
@@ -121,19 +119,20 @@ function get_columns(is_modal){
 				return {
 					filters: { deshabilitado:0}
 				}
-			}
+			},
+			sortable: true
 		},
 		{
 			label:'Causa Raiz', 
 			name:'Causa Raiz', 
 			id:'causa_raiz',
 			fieldname:'causa_raiz',
-			dropdown: false,
 			fieldtype: 'Select',
 			options:" \nOperacional\nDiseño\nHumano\nAmbiental\nDesgaste normal por uso",
 			editable: is_modal,
 			in_list_view:  is_modal,
-			reqd:1
+			reqd:1,
+			sortable: true
 		})
 	}
 
@@ -142,80 +141,80 @@ function get_columns(is_modal){
 			name:'Nombre del Producto', 
 			id:'item_name', 
 			fieldname:'item_name',
-			dropdown: false,
 			fieldtype:'Data',
 			editable: false,
-			hidden: is_modal
+			hidden: is_modal,
+			sortable: true
 		},
 		{
 			name:'Hoja de Vida', 
 			id:'hoja_de_vida_del_bien',
 			fieldname:'hoja_de_vida_del_bien',
-			dropdown: false,
 			fieldtype:'Link',
 			options:'Hoja de Vida del Bien',
 			editable: false,
-			hidden: is_modal
+			hidden: is_modal,
+			sortable: true
 		},
 		{
 			name:'Estado', 
 			id:'estado',
 			fieldname:'estado',
-			dropdown: false,
 			fieldtype:'Select',
 			options: " \nDisponible\nEn mantenimiento\nDeshabilitado",
 			editable: false,
-			hidden: is_modal			
+			hidden: is_modal,
+			sortable: true			
 		},
 		{
 			name:'Ubicacion', 
 			id:'ubicacion',
 			fieldname:'ubicacion',
-			dropdown: false,
 			fieldtype:'Link',
 			options: "Location",
 			editable: false,
-			hidden: is_modal
+			hidden: is_modal,
+			sortable: true
 		},
 		{
 			label:'Plan de Mantenimiento', 
 			name:'Plan de Mantenimiento', 
 			id:'cl_plantilla_de_mantenimiento',
 			fieldname:'cl_plantilla_de_mantenimiento',
-			dropdown: false,
 			fieldtype: 'Link',
 			options:"Project Template",
 			editable: is_modal,
 			in_list_view:  is_modal,
 			reqd:1,
+			sortable: true
 		},
 		{
 			name:'Fecha Ultimo Mantenimiento Preventivo', 
 			id:'fecha_ultimo_mantenimiento',
 			fieldname:'fecha_ultimo_mantenimiento',
-			dropdown: false,
 			fieldtype:'Date',
 			editable: false,
-			hidden: is_modal
+			hidden: is_modal,
+			sortable: true
 		},
 		{
 			name:'Fecha Proximo Mantenimiento Preventivo', 
 			name:'Fecha Proximo Mantenimiento Preventivo', 
 			id:'fecha_proximo_mantenimiento',
 			fieldname:'fecha_proximo_mantenimiento',
-			dropdown: false,
 			fieldtype:'Date',
 			editable: false,
-			hidden: is_modal
+			hidden: is_modal,
+			sortable: true
 		},
 		{
 			name:'Nro. Ordenes de Servicio Abiertas', 
 			fieldname:'nro_ordenes',
 			id:'nro_ordenes',
-			dropdown: false,
 			fieldtype:'Int',
 			editable: false,
-			hidden: is_modal
+			hidden: is_modal,
+			sortable: true
 		})
 
 	// Sample columns definition
