@@ -23,6 +23,19 @@ frappe.ui.form.on('Orden de Servicio', {
 				'Sales Invoice': 'Sales Invoice'
 			}
 		}
+
+		if(!frm.doc.docstatus === 1 && frm.doc.hoja_de_vida_del_bien){
+			frappe.call({
+				method: 'qp_maintenence.qp_maintenence.doctype.orden_de_servicio.orden_de_servicio.get_novedades', // Replace with your actual method path
+				args: cur_frm.doc,
+				callback: function(r) {
+					if (r.message) {
+							$('#ver_novedades_list').remove();
+							$(`<span id="ver_novedades_list" class="ml-3 text-danger">${r.message.length} Novedades Abiertas</span>`).insertAfter(frm.fields_dict['ver_novedades'].$input[0]);
+					}
+				}
+			});
+		}
 		
 	},
 
