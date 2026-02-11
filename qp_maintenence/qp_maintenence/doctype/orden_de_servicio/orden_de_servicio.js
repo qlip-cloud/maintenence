@@ -24,7 +24,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			}
 		}
 
-		if(!frm.doc.docstatus === 1 && frm.doc.hoja_de_vida_del_bien){
+		if(!(frm.doc.docstatus === 1) && frm.doc.hoja_de_vida_del_bien){
 			frappe.call({
 				method: 'qp_maintenence.qp_maintenence.doctype.orden_de_servicio.orden_de_servicio.get_novedades', // Replace with your actual method path
 				args: cur_frm.doc,
@@ -335,7 +335,7 @@ frappe.ui.form.on('Orden de Servicio', {
 			});	
 		}
 
-		if(!frm.doc.docstatus === 1){
+		if(!(frm.doc.docstatus === 1) && frm.doc.hoja_de_vida_del_bien){
 			frappe.call({
 				method: 'qp_maintenence.qp_maintenence.doctype.orden_de_servicio.orden_de_servicio.get_novedades', // Replace with your actual method path
 				args: cur_frm.doc,
