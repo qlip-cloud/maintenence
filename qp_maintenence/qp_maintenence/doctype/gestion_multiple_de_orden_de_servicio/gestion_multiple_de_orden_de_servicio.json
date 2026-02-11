@@ -7,6 +7,7 @@
  "field_order": [
   "item_code",
   "status",
+  "incluir_asociados",
   "column_break_3",
   "hoja_de_vida_del_bien",
   "ubicacion",
@@ -19,9 +20,9 @@
  "fields": [
   {
    "fieldname": "item_code",
-   "fieldtype": "Link",
+   "fieldtype": "Table MultiSelect",
    "label": "Item Code",
-   "options": "Item"
+   "options": "ItemsTable"
   },
   {
    "fieldname": "status",
@@ -68,11 +69,18 @@
    "fieldname": "lista_hoja_de_vida_del_bien",
    "fieldtype": "HTML",
    "label": "Lista Hoja de Vida del Bien"
+  },
+  {
+   "default": "0",
+   "fieldname": "incluir_asociados",
+   "fieldtype": "Check",
+   "label": "Incluir Asociados",
+   "options": "0"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-23 10:09:30.945396",
+ "modified": "2026-02-10 08:51:08.313074",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Gestion Multiple de Orden de Servicio",
