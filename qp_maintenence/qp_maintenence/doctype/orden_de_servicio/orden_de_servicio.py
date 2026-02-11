@@ -50,10 +50,8 @@ def get_novedades(**args):
 
 	def search_parent(hvb):
 
-		print(hvb)
 		hvb_list.append(hvb)
 		parent_hoja_de_vida_del_bien = frappe.db.get_value('Hoja de Vida del Bien', hvb, 'parent_hoja_de_vida_del_bien')
-		print(parent_hoja_de_vida_del_bien)
 		if parent_hoja_de_vida_del_bien:
 			search_parent(parent_hoja_de_vida_del_bien)
 

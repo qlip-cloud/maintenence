@@ -193,7 +193,7 @@ frappe.ui.form.on('Orden de Servicio', {
 		});
 	},
 	onload_post_render:function(frm){
-		frm.fields_dict['ver_novedades'].$wrapper.css({'margin-top': '0'});
+		frm.fields_dict['ver_novedades'].$wrapper.css({'margin-top': '0'});	
 	},
 	before_submit: function(frm) {
         // Your JavaScript code here
@@ -321,6 +321,21 @@ frappe.ui.form.on('Orden de Servicio', {
 				frm.set_value('producto', r.message.item_code)
 			});	
 		}
+
+		if(!frm.doc.docstatus === 1){
+			frappe.call({
+				method: 'qp_maintenence.qp_maintenence.doctype.orden_de_servicio.orden_de_servicio.get_novedades', // Replace with your actual method path
+				args: cur_frm.doc,
+				callback: function(r) {
+					if (r.message) {
+							$('#ver_novedades_list').remove();
+							$(`<span id="ver_novedades_list" class="ml-3 text-danger">${r.message.length} Novedades Abiertas</span>`).insertAfter(frm.fields_dict['ver_novedades'].$input[0]);
+					}
+				}
+			});
+		}
+		
+
 	},
 	entrada_del_bien:function(frm){
 
