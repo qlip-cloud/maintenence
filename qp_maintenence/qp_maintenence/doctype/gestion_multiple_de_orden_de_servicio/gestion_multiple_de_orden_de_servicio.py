@@ -86,6 +86,7 @@ def get_data(**args):
 									ORDER by fecha_y_hora_finalización_os DESC
 									LIMIT 1) as fecha_ultimo_mantenimiento,
 									PAPP.periodicidad as fecha_proximo_mantenimiento,
+									PAPP.periodicidad as vig_prox_serv,
 									(SELECT COUNT(*)  
 									FROM `tabOrden de Servicio` ODS2
 									WHERE ODS2.hoja_de_vida_del_bien =  HVB.name 
@@ -102,7 +103,7 @@ def get_data(**args):
 		if r.fecha_ultimo_mantenimiento:
 			r.fecha_ultimo_mantenimiento = formatdate(r.fecha_ultimo_mantenimiento, 'yyyy-MM-dd')
 			r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.fecha_proximo_mantenimiento)
-		
+			r.vig_prox_serv = frappe.utils.date_diff(frappe.utils.getdate(r.fecha_proximo_mantenimiento), frappe.utils.getdate())
 	return result
 
 @frappe.whitelist()

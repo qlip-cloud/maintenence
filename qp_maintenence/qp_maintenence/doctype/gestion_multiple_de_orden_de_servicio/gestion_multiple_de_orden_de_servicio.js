@@ -215,6 +215,23 @@ function get_columns(is_modal){
 			editable: false,
 			hidden: is_modal,
 			sortable: true
+		},{
+			name:'Vigencia Prox. Servicio', 
+			id:'vig_prox_serv', 
+			fieldname:'vig_prox_serv',
+			fieldtype:'Data',
+			editable: false,
+			hidden: is_modal,
+			sortable: true,
+			format: (value) => {
+				if (value > 0 && value < 5) {
+                    return `<b style="color: orange;">${value}</b>`;
+                } else if (value <= 0) {
+                    return `<b style="color: red;">${value}</b>`;
+                }else{4
+                    return `<b style="color: green;">${value}</b>`;
+				}
+            }
 		})
 
 	// Sample columns definition
