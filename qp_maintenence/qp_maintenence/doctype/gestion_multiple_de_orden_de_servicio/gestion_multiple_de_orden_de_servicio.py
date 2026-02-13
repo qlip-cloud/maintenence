@@ -100,7 +100,7 @@ def get_data(**args):
 						""", as_dict=1)
 	
 	for r in result:
-		if r.fecha_ultimo_mantenimiento:
+		if r.fecha_ultimo_mantenimiento and r.fecha_proximo_mantenimiento and r.vig_prox_serv:
 			r.fecha_ultimo_mantenimiento = formatdate(r.fecha_ultimo_mantenimiento, 'yyyy-MM-dd')
 			r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.fecha_proximo_mantenimiento)
 			r.vig_prox_serv = frappe.utils.date_diff(frappe.utils.getdate(r.fecha_proximo_mantenimiento), frappe.utils.getdate())
