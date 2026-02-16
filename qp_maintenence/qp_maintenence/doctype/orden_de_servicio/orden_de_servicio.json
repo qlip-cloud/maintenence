@@ -254,7 +254,6 @@
    "label": "Detalle del servicio realizado"
   },
   {
-   "fetch_from": "entrada_del_bien.cl_plantilla_proyecto",
    "fetch_if_empty": 1,
    "fieldname": "project_type",
    "fieldtype": "Link",
@@ -466,7 +465,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-02-16 13:13:19.629055",
+ "modified": "2026-02-16 15:20:06.404815",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
