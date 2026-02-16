@@ -8,7 +8,7 @@
  "field_order": [
   "nombre",
   "inspeccion_entrada_del_bien",
-  "amended_from"
+  "productos_asociados"
  ],
  "fields": [
   {
@@ -24,19 +24,16 @@
    "options": "Inspeccion Entrada del Bien"
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Plantilla Entrada del Bien",
-   "print_hide": 1,
-   "read_only": 1
+   "fieldname": "productos_asociados",
+   "fieldtype": "Table",
+   "label": "Productos Asociados",
+   "options": "Productos Asociados PEB"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-14 21:13:11.685494",
+ "modified": "2026-02-16 09:51:45.867123",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Plantilla Entrada del Bien",

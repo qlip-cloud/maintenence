@@ -12,6 +12,15 @@ frappe.ui.form.on('Entrada de Bienes', {
 			};
 		});
 
+		if(frm.doc.item_code){
+			frm.set_query("plantilla_inspeccion_entrada_del_bien", function() {
+				return {
+					query:"qp_maintenence.qp_maintenence.services.plantilla_entrada_de_bien.handler",
+					filters: {"item": frm.doc.item_code}
+				};
+			});
+		}
+
 	},
 	refresh: function(frm) {
 		if (!frm.is_new()) {
@@ -20,6 +29,16 @@ frappe.ui.form.on('Entrada de Bienes', {
             }, __("Create"));
 			frm.page.set_inner_btn_group_as_primary(__('Create'));
 		}
+
+		if(frm.doc.item_code){
+			frm.set_query("plantilla_inspeccion_entrada_del_bien", function() {
+				return {
+					query:"qp_maintenence.qp_maintenence.services.plantilla_entrada_de_bien.handler",
+					filters: {"item": frm.doc.item_code}
+				};
+			});
+		}
+
 	},
 	cliente:function(frm, cdt, cdn){
 
@@ -65,6 +84,17 @@ frappe.ui.form.on('Entrada de Bienes', {
 		}
 
 		frm.refresh_field('contact_display')
+	},
+	item_code:function(frm){
+		if(frm.doc.item_code){
+			frm.set_query("plantilla_inspeccion_entrada_del_bien", function() {
+				return {
+					query:"qp_maintenence.qp_maintenence.services.plantilla_entrada_de_bien.handler",
+					filters: {"item": frm.doc.item_code}
+				};
+			});
+		}
+		
 	},
 	plantilla_inspeccion_entrada_del_bien:function(frm){
 		if(frm.doc.plantilla_inspeccion_entrada_del_bien){
