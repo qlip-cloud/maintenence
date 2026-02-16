@@ -279,9 +279,7 @@ frappe.ui.form.on('Orden de Servicio', {
 	},
 	tipo_de_servicio:function(frm){
 
-		frm.doc.cl_plantilla_de_mantenimiento = null;
-		frm.doc.project_type = null;
-		frm.doc.tasks = [];
+		
 
 		if(['Mantenimiento Preventivo', 'Mantenimiento Preventivo Planificado'].includes(frm.doc.tipo_de_servicio)){
 			if(frm.doc.producto){
@@ -295,6 +293,7 @@ frappe.ui.form.on('Orden de Servicio', {
 		}
 
 		if(['ITS', 'INNGTECH'].includes(frappe.defaults.get_default("Company"))){
+			
 			if(frm.doc.tipo_de_servicio == 'Mantenimiento Preventivo Planificado')
 			{
 				frm.toggle_display('detalle_del_servicio_realizado', true)
@@ -303,6 +302,11 @@ frappe.ui.form.on('Orden de Servicio', {
 				frm.toggle_reqd('tasks', true);
 			}
 			else{
+
+				frm.doc.cl_plantilla_de_mantenimiento = null;
+				frm.doc.project_type = null;
+				frm.doc.tasks = [];
+
 				frm.toggle_display('detalle_del_servicio_realizado', false)
 				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
 				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
@@ -317,6 +321,10 @@ frappe.ui.form.on('Orden de Servicio', {
 				frm.toggle_reqd('tasks', true);
 			}
 			else{
+				frm.doc.cl_plantilla_de_mantenimiento = null;
+				frm.doc.project_type = null;
+				frm.doc.tasks = [];
+
 				frm.toggle_display('detalle_del_servicio_realizado', false)
 				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
 				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)

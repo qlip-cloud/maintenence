@@ -33,7 +33,7 @@ def get_data(**args):
 	if args.get("hoja_de_vida_del_bien"):
 		all_hvc += [args.get("hoja_de_vida_del_bien")]
 
-		if args.get("incluir_asociados"):
+		if int(args.get("incluir_asociados")):
 			get_hvc_tree(args.get("hoja_de_vida_del_bien"), all_hvc)
 
 			if len(all_hvc) > 1:
