@@ -27,7 +27,15 @@ def get_mantenimientos_preventivos(**args):
 							AND OS.status = 'Completed'
 							AND fecha_y_hora_finalización_os IS NOT NULL
 							ORDER by fecha_y_hora_finalización_os DESC
-							LIMIT 1) as fecha_y_hora_finalizacion_os
+							LIMIT 1) as fecha_y_hora_finalizacion_os,
+							(SELECT name
+							FROM `tabOrden de Servicio` OS
+					  		WHERE OS.cl_plantilla_de_mantenimiento = PT.name
+					  		AND OS.producto = '{args.item_code}'
+							AND OS.status = 'Completed'
+							AND fecha_y_hora_finalización_os IS NOT NULL
+							ORDER by fecha_y_hora_finalización_os DESC
+							LIMIT 1) as last_order
 							FROM `tabProductos Asociados PP` PAPP,
 					  			 `tabProject Template` PT
 							WHERE PAPP.parent = PT.name
@@ -42,7 +50,8 @@ def get_mantenimientos_preventivos(**args):
 				r.name,
 				r.periodicidad,
 				formatdate(r.fecha_y_hora_finalizacion_os, 'yyyy-MM-dd'),
-				add_to_date(formatdate(r.fecha_y_hora_finalizacion_os, 'yyyy-MM-dd'), days=r.periodicidad)
+				add_to_date(formatdate(r.fecha_y_hora_finalizacion_os, 'yyyy-MM-dd'), days=r.periodicidad),
+				r.last_order
 			])	
 
 	return result_list
