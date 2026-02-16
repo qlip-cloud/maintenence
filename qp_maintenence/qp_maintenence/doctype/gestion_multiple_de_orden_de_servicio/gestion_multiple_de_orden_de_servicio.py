@@ -49,13 +49,14 @@ def get_data(**args):
 		if isinstance(args.get("item_code"), string_types):
 			item_code = json.loads(args.get("item_code"))
 			if len(item_code) > 0:
+				ic_list = []
 				for c in item_code:
-					args["item_code"] = [c.get("item")]
+					ic_list.append(c.get("item"))
 				
-				if len(args["item_code"]) > 1:
-					conditions += f""" AND HVB.item_code in {tuple(args.get("item_code"))} """
+				if len(ic_list) > 1:
+					conditions += f""" AND HVB.item_code in {tuple(ic_list)} """
 				else:
-					conditions += f""" AND HVB.item_code = '{args.get("item_code")[0]}' """
+					conditions += f""" AND HVB.item_code = '{ic_list[0]}' """
 
 
 	conditions += args.get("status") and " AND HVB.estado_del_bien = '%s' " % args.get("status") or ""
