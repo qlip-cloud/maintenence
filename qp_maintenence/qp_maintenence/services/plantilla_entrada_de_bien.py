@@ -8,11 +8,11 @@ from six import iteritems, string_types
 def handler(doctype, txt, searchfield, start, page_len, filters):
 		
 	r = frappe.db.sql("""
-		SELECT con.name
-		FROM `tabProject Template` con, `tabProductos Asociados PP` papp
-		WHERE papp.parent = con.name
-		AND papp.parenttype = 'Plantilla Entrada del Bien'
-		AND papp.item_code = '{item}'                  
+		SELECT peb.name
+		FROM `tabPlantilla Entrada del Bien` peb, `tabProductos Asociados PEB` papeb
+		WHERE papeb.parent = peb.name
+		AND papeb.parenttype = 'Plantilla Entrada del Bien'
+		AND papeb.item_code = '{item}'                  
 		LIMIT %(start)s, %(page_len)s
 		""".format(**{
 			'item': filters.get('item'),
@@ -24,8 +24,8 @@ def handler(doctype, txt, searchfield, start, page_len, filters):
 	if len(r) == 0:
 
 		r = frappe.db.sql("""
-			SELECT con.name
-			FROM `tabProject Template` con
+			SELECT peb.name
+			FROM `tabPlantilla Entrada del Bien` peb
 			LIMIT %(start)s, %(page_len)s
 			""", {
 			'start': start,
