@@ -129,6 +129,7 @@
    "print_hide": 1
   },
   {
+   "fetch_from": "entrada_del_bien.tipo_de_servicio",
    "fieldname": "tipo_de_servicio",
    "fieldtype": "Select",
    "in_global_search": 1,
@@ -253,7 +254,6 @@
    "label": "Detalle del servicio realizado"
   },
   {
-   "fetch_from": "entrada_del_bien.cl_plantilla_proyecto",
    "fetch_if_empty": 1,
    "fieldname": "project_type",
    "fieldtype": "Link",
@@ -287,6 +287,7 @@
    "label": "Observaciones"
   },
   {
+   "fetch_from": "entrada_del_bien.cl_plantilla_proyecto",
    "fieldname": "cl_plantilla_de_mantenimiento",
    "fieldtype": "Link",
    "label": "Mantenimiento programado",
@@ -464,7 +465,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-01-27 09:08:11.549382",
+ "modified": "2026-02-16 15:20:06.404815",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",

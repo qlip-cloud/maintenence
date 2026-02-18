@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 from frappe.utils import add_to_date, today, add_days, formatdate
 from six import string_types
@@ -17,9 +18,48 @@ def get_data(**args):
 	args = frappe._dict(args)
 	
 	conditions = ''
-	conditions += args.get("item_code") and " AND HVB.item_code = '%s' " % args.get("item_code") or ""
+	all_hvc = []
+
+	def get_hvc_tree(hvb, all_hvc):
+		if frappe.db.exists("Hoja de Vida del Bien", {"name":hvb, "is_group":1}):
+			children = frappe.get_all("Hoja de Vida del Bien", filters={"parent_hoja_de_vida_del_bien": ["in", hvb]})
+			
+			for child in children:
+				if child.parent_hoja_de_vida_del_bien:
+					get_hvc_tree(child.name, all_hvc)
+
+				all_hvc += [child.name]
+
+	if args.get("hoja_de_vida_del_bien"):
+		all_hvc += [args.get("hoja_de_vida_del_bien")]
+
+		if int(args.get("incluir_asociados")):
+			get_hvc_tree(args.get("hoja_de_vida_del_bien"), all_hvc)
+
+			if len(all_hvc) > 1:
+				conditions += f""" AND HVB.name in {tuple(all_hvc)} """
+			else:
+				conditions += f""" AND HVB.name = '{all_hvc[0]}' """
+
+	
+		else:
+			conditions += args.get("hoja_de_vida_del_bien") and " AND HVB.name = '%s' " % args.get("hoja_de_vida_del_bien") or ""
+	
+	if args.get("item_code"):
+		if isinstance(args.get("item_code"), string_types):
+			item_code = json.loads(args.get("item_code"))
+			if len(item_code) > 0:
+				ic_list = []
+				for c in item_code:
+					ic_list.append(c.get("item"))
+				
+				if len(ic_list) > 1:
+					conditions += f""" AND HVB.item_code in {tuple(ic_list)} """
+				else:
+					conditions += f""" AND HVB.item_code = '{ic_list[0]}' """
+
+
 	conditions += args.get("status") and " AND HVB.estado_del_bien = '%s' " % args.get("status") or ""
-	conditions += args.get("hoja_de_vida_del_bien") and " AND HVB.name = '%s' " % args.get("hoja_de_vida_del_bien") or ""
 	conditions += args.get("ubicacion") and " AND HVB.ubicacion = '%s' " % args.get("ubicacion") or ""
 	
 	if args.get("desde") and args.get("hasta"):
@@ -30,6 +70,7 @@ def get_data(**args):
 	else:
 		conditions += args.get("hasta") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) <=  '%s'" % args.get("hasta") or ""
 
+	print(conditions)
 
 	result = frappe.db.sql(f"""	
 							SELECT HVB.item_code, 
@@ -46,6 +87,7 @@ def get_data(**args):
 									ORDER by fecha_y_hora_finalización_os DESC
 									LIMIT 1) as fecha_ultimo_mantenimiento,
 									PAPP.periodicidad as fecha_proximo_mantenimiento,
+									PAPP.periodicidad as vig_prox_serv,
 									(SELECT COUNT(*)  
 									FROM `tabOrden de Servicio` ODS2
 									WHERE ODS2.hoja_de_vida_del_bien =  HVB.name 
@@ -62,6 +104,11 @@ def get_data(**args):
 		if r.fecha_ultimo_mantenimiento:
 			r.fecha_ultimo_mantenimiento = formatdate(r.fecha_ultimo_mantenimiento, 'yyyy-MM-dd')
 			r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.fecha_proximo_mantenimiento)
+			r.vig_prox_serv = frappe.utils.date_diff(frappe.utils.getdate(r.fecha_proximo_mantenimiento), frappe.utils.getdate())
+		else:
+			r.fecha_ultimo_mantenimiento = None
+			r.fecha_proximo_mantenimiento =	None
+			r.vig_prox_serv = None
 		
 	return result
 

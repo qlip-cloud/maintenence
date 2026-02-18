@@ -142,28 +142,35 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 		const columns = [{
 			name:'Plan de mantenimiento', 
 			dropdown: false,
-			fieldtype:'Link',
-			options:'Project Template',
-			editable: false
+			editable: false,
+			format: (value) => {
+                    return `<a href="/app/project-template/${value}">${value}</a>`;
+                }
 		}, 
 		{
 			name:'Periodicidad (días calendario)', 
 			dropdown: false,
-			fieldtype:'Int',
 			editable: false
 		}, 
 		{
 			name:'Fecha último mantenimiento preventivo', 
 			dropdown: false,
-			fieldtype:'Date',
 			editable: false
 		}, 
 		{
 			name:'Fecha próximo mantenimiento preventivo', 
 			dropdown: false,
-			fieldtype:'Date',
 			editable: false
-		}];
+		},
+		{
+			name:'Orden de Servicio', 
+			dropdown: false,
+			editable: false,
+			format: (value) => {
+                    return `<a href="/app/orden-de-servicio/${value}">${value}</a>`;
+                }
+		}
+	];
 
 		const mp_wrapper = frm.fields_dict['mantenimientos_preventivos'].wrapper
 		mp_wrapper.innerHTML = '<div id="datatable-container"></div>';
@@ -175,7 +182,7 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 			{
 				columns: columns,
 				data: [],
-				inlineFilters: true, // Optional: adds search filters to columnsSSSSSSS
+				inlineFilters: true, // Optional: adds search filters to columns
 				editable:false
 			}
 		)
