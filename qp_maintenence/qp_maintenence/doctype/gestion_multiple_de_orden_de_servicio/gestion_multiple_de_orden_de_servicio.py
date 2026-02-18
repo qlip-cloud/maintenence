@@ -70,8 +70,6 @@ def get_data(**args):
 	else:
 		conditions += args.get("hasta") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) <=  '%s'" % args.get("hasta") or ""
 
-	print(conditions)
-
 	result = frappe.db.sql(f"""	
 							SELECT HVB.item_code, 
 									HVB.item_name, 
