@@ -1,6 +1,6 @@
 frappe.ui.form.on("Material Request", {
     onload:function(frm){
-		if(frm.doc.orden_de_trabajo != null){
+		if(frm.doc.orden_de_trabajo != null && frm.is_new()){
 			frappe.db.get_list(
 				"Opportunity Item", 
 				{
