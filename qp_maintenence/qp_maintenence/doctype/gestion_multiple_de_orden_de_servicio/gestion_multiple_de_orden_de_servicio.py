@@ -4,13 +4,50 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import add_to_date, today, add_days, formatdate
+from frappe.utils import add_to_date, today, add_days, formatdate, get_url
+from frappe.utils.pdf import get_pdf
 from six import string_types
 import json
 
 
 class GestionMultipledeOrdendeServicio(Document):
 	pass
+
+@frappe.whitelist()
+def print_data(doc, selected_data):
+	print("doc --> ", doc)
+	print("selected_data --> ", selected_data)
+	
+	# Renderizar plantilla Jinja 
+	html = frappe.render_template(
+		"qp_maintenence/templates/print_format/print_format_HVB.html", 
+		{
+			"doc": json.loads(doc), 
+			"selected_data": json.loads(selected_data)
+		}) 
+	
+	# Generar PDF 
+	pdf = get_pdf(
+		html, 
+		options={ 
+			"orientation": "Landscape",
+			"margin-top": "20mm", 
+			"margin-bottom": "20mm"
+		}) 
+	
+	# Guardar archivo temporal 
+	file = frappe.get_doc(
+		{ 
+			"doctype": "File", 
+			"file_name": f"Hojas de Vida del Bien.pdf", 
+			"content": pdf, 
+			"is_private": 1 
+		}
+	) 
+	
+	file.save() 
+	
+	return file.file_url
 
 @frappe.whitelist()
 def get_data(**args):
