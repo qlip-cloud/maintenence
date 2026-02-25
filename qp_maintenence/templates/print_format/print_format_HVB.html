@@ -1,0 +1,104 @@
+<h2 style="margin-top: 20px;">Hojas de vida del bien</h2>
+
+<p>Documento: {{ doc.name }}</p>
+
+<b>Filtros:</b></br>
+
+{% if doc.item_code %}
+    <b>Productos:</b> {{ doc.item_code}}</br>
+{% endif %}
+
+{% if doc.hoja_de_vida_del_bien %}
+    <b>Hoja de vida del Bien:</b> {{ doc.hoja_de_vida_del_bien}}</br>
+{% endif %}
+
+{% if doc.status %}
+    <b>Estado:</b> {{ doc.status}}</br>
+{% endif %}
+
+{% if doc.ubicacion %}
+    <b>Ubicacion:</b> {{ doc.ubicacion}}</br>
+{% endif %}
+
+{% if doc.desde %}
+    <b>Desde:</b> {{ doc.desde}}</br>
+{% endif %}
+
+{% if doc.hasta %}
+    <b>Hasta:</b> {{ doc.hasta}}</br>
+{% endif %}
+
+</br>
+</br>
+</br>
+<table border="1" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Producto</th>
+            <th>Nombre de Producto</th>
+            <th>Hoja de Vida del Bien</th>
+            <th>Estado</th>
+            <th>Ubicacion</th>
+            <th>Ultimo Mantenimiento</th>
+            <th>Proximo Mantenimiento</th>
+            <th>Vigencia</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in selected_data %}
+        <tr text-align="center">
+            <td>{{ loop.index }}</td>
+            <td>
+                {% if row.item_code %}
+                    {{ row.item_code }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.item_name %}
+                    {{ row.item_name }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.hoja_de_vida_del_bien %}
+                    {{ row.hoja_de_vida_del_bien }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.estado %}
+                    {{ row.estado }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.ubicacion %}
+                    {{ row.ubicacion }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.fecha_ultimo_mantenimiento %}
+                    {{ row.fecha_ultimo_mantenimiento }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.fecha_proximo_mantenimiento %}
+                    {{ row.fecha_proximo_mantenimiento }}
+                {% endif %}
+            </td>
+            <td>
+            {% if row.vig_prox_serv %}
+                {% if row.vig_prox_serv > 5 %}
+                <b style="color: green;">{{ row.vig_prox_serv }}</b>
+                {% endif %}
+                {% if row.vig_prox_serv <= 0 %}
+                <b style="color: red;">{{ row.vig_prox_serv }}</b>
+                {% endif %}
+                {% if row.vig_prox_serv > 0 and row.vig_prox_serv <= 5 %}
+                <b style="color: orange;">{{ row.vig_prox_serv }}</b>
+                {% endif %}
+            {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
