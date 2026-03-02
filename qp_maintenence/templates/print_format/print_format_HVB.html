@@ -1,11 +1,13 @@
-<h2 style="margin-top: 20px;">Hojas de vida del bien</h2>
+
+
+<h2 style="margin-top: 20px;">Gestion Multiple de Orden de Servicio</h2>
 
 <p>Documento: {{ doc.name }}</p>
 
 <b>Filtros:</b></br>
 
 {% if doc.item_code %}
-    <b>Productos:</b> {{ doc.item_code}}</br>
+    <b>Productos:</b> {% for row1 in doc.item_code %} {% if loop.index > 1 %} | {% endif %} {{ row1.item}} {% endfor %}</br>
 {% endif %}
 
 {% if doc.hoja_de_vida_del_bien %}
@@ -31,21 +33,23 @@
 </br>
 </br>
 </br>
-<table border="1" cellspacing="0" cellpadding="5">
-    <thead>
+<table border="1" cellspacing="0" cellpadding="2">
+    <thead style="font-size: 0.8em;">
         <tr>
             <th>#</th>
-            <th>Producto</th>
+            <th>Código de Producto</th>
             <th>Nombre de Producto</th>
             <th>Hoja de Vida del Bien</th>
             <th>Estado</th>
-            <th>Ubicacion</th>
-            <th>Ultimo Mantenimiento</th>
-            <th>Proximo Mantenimiento</th>
-            <th>Vigencia</th>
+            <th>Ubicación</th>
+            <th>Plan de Mantenimiento</th>
+            <th>Fecha Ultimo Mantenimiento Preventivo</th>
+            <th>Fecha Proximo Mantenimiento Preventivo</th>
+            <th>Nro. Ordenes de Servicio Abiertas</th>
+            <th>Vigencia Prox. Servicio</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="font-size: 0.7em;">
         {% for row in selected_data %}
         <tr text-align="center">
             <td>{{ loop.index }}</td>
@@ -75,6 +79,11 @@
                 {% endif %}
             </td>
             <td>
+                {% if row.cl_plantilla_de_mantenimiento %}
+                    {{ row.cl_plantilla_de_mantenimiento }}
+                {% endif %}
+            </td>
+            <td>
                 {% if row.fecha_ultimo_mantenimiento %}
                     {{ row.fecha_ultimo_mantenimiento }}
                 {% endif %}
@@ -82,6 +91,11 @@
             <td>
                 {% if row.fecha_proximo_mantenimiento %}
                     {{ row.fecha_proximo_mantenimiento }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.nro_ordenes %}
+                    {{ row.nro_ordenes }}
                 {% endif %}
             </td>
             <td>

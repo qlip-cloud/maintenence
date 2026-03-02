@@ -15,8 +15,6 @@ class GestionMultipledeOrdendeServicio(Document):
 
 @frappe.whitelist()
 def print_data(doc, selected_data):
-	print("doc --> ", doc)
-	print("selected_data --> ", selected_data)
 	
 	# Renderizar plantilla Jinja 
 	html = frappe.render_template(
@@ -31,15 +29,16 @@ def print_data(doc, selected_data):
 		html, 
 		options={ 
 			"orientation": "Landscape",
-			"margin-top": "20mm", 
-			"margin-bottom": "20mm"
+			"margin-top": "10mm", 
+			"margin-bottom": "10mm",
+			'zoom': '1' 
 		}) 
 	
 	# Guardar archivo temporal 
 	file = frappe.get_doc(
 		{ 
 			"doctype": "File", 
-			"file_name": f"Hojas de Vida del Bien.pdf", 
+			"file_name": f"Gestion Multiple de Orden de Servicio.pdf", 
 			"content": pdf, 
 			"is_private": 1 
 		}
