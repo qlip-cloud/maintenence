@@ -118,7 +118,7 @@
    "allow_on_submit": 1,
    "depends_on": "eval: cur_frm.doctype == \"Orden de Servicio\"",
    "fieldname": "executed_prod",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Procedimiento Ejecutado",
    "read_only_depends_on": "eval: cur_frm.doctype != \"Orden de Servicio\""
   }
@@ -126,7 +126,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-02-12 09:30:22.125645",
+ "modified": "2026-03-02 17:42:22.360378",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Novedades",
