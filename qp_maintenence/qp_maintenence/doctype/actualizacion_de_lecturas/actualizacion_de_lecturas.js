@@ -83,6 +83,52 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 
 	},
 	lectura_actual:function(frm){
+		get_lectura_acumulada(frm);
+	},
+	cambio:function(frm){
+		get_lectura_acumulada(frm);
+	},
+	tipo_de_bien:function(frm){
+		if(frm.doc.tipo_de_bien == 'Equipo') frm.set_value("unidad_de_medida",'Horas')
+		if(frm.doc.tipo_de_bien == 'Vehículo') frm.set_value("unidad_de_medida",'Kms')
+	},
+	validate:function(frm){
+
+		
+		if((frm.doc.lectura_actual < frm.doc.lectura_anterior) && !(frm.doc.cambio)){
+			frappe.msgprint("Lectura inválida: la Lectura Actual es menor que la Lectura Anterior. Para continuar, favor corregir valor ingresado o marcar checkbox de Cambio de odómetro/horómetro");
+			frappe.validated = false;
+		}
+
+		if(frm.doc.lectura_actual > frm.doc.lectura_anterior){
+
+			if((frm.doc.unidad_de_medida == 'Horas') &&  (frm.doc.lectura_actual - frm.doc.lectura_anterior > 100)){
+				
+				return new Promise(function(resolve, reject) {
+					frappe.confirm('Variación atípica detectada. La diferencia supera el umbral (100 h / 3.000 km). ¿Confirma la lectura?',
+					() => {
+						resolve();
+					}, () => {
+						reject(frappe.validated = false);
+					})
+				})
+			}
+
+			if(frm.doc.unidad_de_medida == 'Kms'  &&  (frm.doc.lectura_actual - frm.doc.lectura_anterior > 3000)){
+				return new Promise(function(resolve, reject) {
+					frappe.confirm('Variación atípica detectada. La diferencia supera el umbral (100 h / 3.000 km). ¿Confirma la lectura?',
+					() => {
+						resolve();
+					}, () => {
+						reject(frappe.validated = false);
+					})
+				})
+			}
+		}
+	}
+});
+
+function get_lectura_acumulada(frm){
 
 		let filters = {}
 		let save_flat = false;
@@ -111,8 +157,12 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 					filters:filters,
 					order_by: 'modified desc',
 				}).then(als => {
-					if(als.some(al => al.cambio) || frm.doc.cambio){
+
+					if(frm.doc.cambio){
 						frm.set_value("lectura_acumulada", als[0].lectura_acumulada + frm.doc.lectura_actual)
+					}
+					else if(als.some(al => al.cambio)){
+						frm.set_value("lectura_acumulada", als[0].lectura_acumulada + (frm.doc.lectura_actual - frm.doc.lectura_anterior))
 					}else{
 						frm.set_value("lectura_acumulada", frm.doc.lectura_actual)
 					}	
@@ -122,16 +172,4 @@ frappe.ui.form.on('Actualizacion de Lecturas', {
 				})
 			}
 		}
-	},
-	tipo_de_bien:function(frm){
-		if(frm.doc.tipo_de_bien == 'Equipo') frm.set_value("unidad_de_medida",'Horas')
-		if(frm.doc.tipo_de_bien == 'Vehículo') frm.set_value("unidad_de_medida",'Kms')
-	},
-	after_save:function(frm){
-		if(frm.doc.docstatus == 0){
-			if(frm.doc.lectura_actual < frm.doc.lectura_anterior){
-				frappe.msgprint("Señor Usuario, por favor revise la información digitada en el campo de lectura actual, ya que está ingresando un valor inferior que alterará la lectura acumulada del equipo. Si lo anterior es correcto, favor diligenciar la columna de observaciones con la respectiva explicación.");
-			}
-		}
-	}
-});
+}
