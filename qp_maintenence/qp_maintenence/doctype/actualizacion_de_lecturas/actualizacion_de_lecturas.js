@@ -159,7 +159,7 @@ function get_lectura_acumulada(frm){
 				}).then(als => {
 
 					if(frm.doc.cambio){
-						frm.set_value("lectura_acumulada", als[0].lectura_acumulada + frm.doc.lectura_actual)
+						frm.set_value("lectura_acumulada", als[0].lectura_acumulada)
 					}
 					else if(als.some(al => al.cambio)){
 						frm.set_value("lectura_acumulada", als[0].lectura_acumulada + (frm.doc.lectura_actual - frm.doc.lectura_anterior))
