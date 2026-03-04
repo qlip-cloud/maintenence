@@ -99,8 +99,7 @@
   {
    "fieldname": "observaciones",
    "fieldtype": "Long Text",
-   "label": "Observaciones",
-   "mandatory_depends_on": "eval: doc.lectura_actual <= 0"
+   "label": "Observaciones"
   },
   {
    "fieldname": "column_break_13",
@@ -148,7 +147,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-27 10:08:10.911148",
+ "modified": "2026-03-03 17:15:12.443872",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Actualizacion de Lecturas",
