@@ -25,6 +25,7 @@ def get_mantenimientos_preventivos(**args):
 					  		WHERE OS.cl_plantilla_de_mantenimiento = PT.name
 					  		AND OS.producto = '{args.item_code}'
 							AND OS.status = 'Completed'
+							AND OS.docstatus != 2
 							AND fecha_y_hora_finalización_os IS NOT NULL
 							ORDER by fecha_y_hora_finalización_os DESC
 							LIMIT 1) as fecha_y_hora_finalizacion_os,
@@ -33,6 +34,7 @@ def get_mantenimientos_preventivos(**args):
 					  		WHERE OS.cl_plantilla_de_mantenimiento = PT.name
 					  		AND OS.producto = '{args.item_code}'
 							AND OS.status = 'Completed'
+							AND OS.docstatus != 2
 							AND fecha_y_hora_finalización_os IS NOT NULL
 							ORDER by fecha_y_hora_finalización_os DESC
 							LIMIT 1) as last_order

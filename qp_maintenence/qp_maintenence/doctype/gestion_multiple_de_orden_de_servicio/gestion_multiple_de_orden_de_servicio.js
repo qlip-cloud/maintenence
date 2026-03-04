@@ -6,8 +6,13 @@ const mp_datatable = null;
 frappe.ui.form.on('Gestion Multiple de Orden de Servicio', {
 	refresh: function(frm) {
 		frm.add_custom_button(__('Crear Ordenes'), function() {
-			crear_orders(frm);
-        })
+			create_orders(frm);
+        }, 'Gestionar Ordenes')
+
+		frm.add_custom_button(__('Imprimir Seleccionadas'), function() {
+			print_orders(frm);
+        }, 'Gestionar Ordenes')
+
 	},
 	item_code:function(frm){
 		refresh_data();
@@ -57,22 +62,57 @@ frappe.ui.form.on('Gestion Multiple de Orden de Servicio', {
 	},
 });
 
-function crear_orders(frm) {
+function create_orders(frm) {
 	
-	let indexes = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager.getCheckedRows();
+	let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
+	let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
+
+	if (indexes.length == 0) frappe.msgprint(__("Debe seleccionar al menos un registro de la lista"));
+	else {
+
+		let data_table = rowmanager.datamanager.data
+		let rows = rowmanager.datamanager.rowViewOrder.map(index => {
+			if(indexes.includes(index)){
+				data_table[index].cl_plantilla_de_mantenimiento = null;
+				return data_table[index] 
+			}
+		}).filter(Boolean);
+
+		modal_data(rows)
+
+	}
+
+}
+
+function print_orders(frm) {
+	
+	let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
+	let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
 	
 	if (indexes.length == 0) frappe.msgprint(__("Debe seleccionar al menos un registro de la lista"));
 	else {
 
-		let data_table = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager.datamanager.data
-		let data_selected = []
+		let data_table = rowmanager.datamanager.data
+		let rows = rowmanager.datamanager.rowViewOrder.map(index => {
+			if(indexes.includes(index)){
+				return data_table[index] 
+			}
+		}).filter(Boolean);
 
-		Object.keys(indexes).forEach(i => {
-			data_table[i].cl_plantilla_de_mantenimiento = null;
-			data_selected.push(data_table[i])
-		})
-
-		modal_data(data_selected)
+		frappe.call(
+			{ 
+				method: 'qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.print_data', // Replace with your actual method path
+				args: { 
+					doc: frm.doc,
+					selected_data: rows
+				}, 
+				callback(r) {
+					 if (r.message){ 
+						const w = window.open(r.message); 
+						if (!w) frappe.msgprint("Permite ventanas emergentes para ver el PDF"); 
+					} 
+				} 
+			});
 
 	}
 
