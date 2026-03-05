@@ -124,6 +124,10 @@ doc_events = {
 	},
 	"Sales Invoice": {
 		"validate": ["qp_maintenence.qp_maintenence.uses_cases.sales_invoice.validate.handle"]
+	},
+	"Orden de Servicio": {
+		"before_submit": ["qp_maintenence.qp_maintenence.uses_cases.orden_de_servicio.before_submit.handle"]
+        
 	}
 }
 
