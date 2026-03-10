@@ -98,13 +98,13 @@
             </td>
             <td>
             {% if row.vig_prox_serv %}
-                {% if row.vig_prox_serv > 5 %}
+                {% if row.vig_prox_serv > 30 %}
                 <b style="color: green;">{{ row.vig_prox_serv }}</b>
                 {% endif %}
                 {% if row.vig_prox_serv <= 0 %}
                 <b style="color: red;">{{ row.vig_prox_serv }}</b>
                 {% endif %}
-                {% if row.vig_prox_serv > 0 and row.vig_prox_serv <= 5 %}
+                {% if row.vig_prox_serv > 0 and row.vig_prox_serv <= 30 %}
                 <b style="color: orange;">{{ row.vig_prox_serv }}</b>
                 {% endif %}
             {% endif %}

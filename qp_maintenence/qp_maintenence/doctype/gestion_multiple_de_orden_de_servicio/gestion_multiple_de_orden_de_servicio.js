@@ -265,7 +265,7 @@ function get_columns(is_modal){
 			sortable: true,
 			format: (value) => {
 				if(!value) return "";
-				else if (value > 0 && value < 5) return `<b style="color: orange;">${value}</b>`;
+				else if (value > 0 && value < 30) return `<b style="color: orange;">${value}</b>`;
 				else if (value <= 0) return `<b style="color: red;">${value}</b>`;
                 else return `<b style="color: green;">${value}</b>`;
 				
