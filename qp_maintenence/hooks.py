@@ -112,7 +112,10 @@ extend_bootinfo = "qp_maintenence.startup.boot.qp_maint_boot_session"
 #	}
 # }
 doc_events = {
-
+    "Hoja de Vida del Bien": {
+		"on_update": ["qp_maintenence.qp_maintenence.uses_cases.hoja_de_vida_del_bien.after_save.handle"],
+		"after_insert": ["qp_maintenence.qp_maintenence.uses_cases.hoja_de_vida_del_bien.after_save.handle"],
+	},
     "Purchase Receipt": {
 		"validate": ["qp_maintenence.qp_maintenence.uses_cases.purchase_receipt.validate.handle"],
 	},
@@ -127,7 +130,6 @@ doc_events = {
 	},
 	"Orden de Servicio": {
 		"before_submit": ["qp_maintenence.qp_maintenence.uses_cases.orden_de_servicio.before_submit.handle"]
-        
 	}
 }
 
