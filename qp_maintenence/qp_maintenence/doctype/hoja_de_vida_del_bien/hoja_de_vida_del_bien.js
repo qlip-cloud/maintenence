@@ -190,7 +190,7 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 		if(!frm.is_new()){
 			refresh_data();
 		}
-	},
+	}
 });
 
 cur_frm.cscript.refrescar_lista = function(doc) {
