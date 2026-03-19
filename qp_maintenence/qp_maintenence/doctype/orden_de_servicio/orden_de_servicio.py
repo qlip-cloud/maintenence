@@ -55,7 +55,19 @@ def get_novedades(**args):
 		if parent_hoja_de_vida_del_bien:
 			search_parent(parent_hoja_de_vida_del_bien)
 
-	search_parent(args.hoja_de_vida_del_bien)
+	def search_children(hvb):
+
+		hvb_list.append(hvb)
+		children = frappe.db.get_list('Hoja de Vida del Bien', {'parent_hoja_de_vida_del_bien':hvb})
+		for child in children:
+			search_children(child.name)
+
+	hvb_is_group = frappe.db.get_value('Hoja de Vida del Bien', args.hoja_de_vida_del_bien, 'is_group')
+
+	if hvb_is_group:
+		search_children(args.hoja_de_vida_del_bien)
+	else:
+		search_parent(args.hoja_de_vida_del_bien)
 
 	search_hvb = f"""AND RN.hoja_de_vida_del_bien in {tuple(hvb_list)}""" if len(hvb_list) > 1 else f"""AND RN.hoja_de_vida_del_bien ='{hvb_list[0]}'"""
 
