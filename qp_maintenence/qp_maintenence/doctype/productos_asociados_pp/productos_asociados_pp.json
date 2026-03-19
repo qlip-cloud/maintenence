@@ -8,7 +8,8 @@
   "item_code",
   "item_name",
   "periodicidad",
-  "horas_kms"
+  "horas_kms",
+  "unidad_de_medida"
  ],
  "fields": [
   {
@@ -43,12 +44,19 @@
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Horas/Kms"
+  },
+  {
+   "fieldname": "unidad_de_medida",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Unidad de Medida",
+   "options": "\nHoras\nKilometros"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-26 13:15:01.302183",
+ "modified": "2026-03-19 17:00:55.102990",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Productos Asociados PP",
