@@ -91,12 +91,6 @@ def get_columns():
 
 	columns = [
 		{
-			"label": _("Name"),
-			"fieldname": "name",
-			"fieldtype": "Link",
-			"options": "Registro de Novedades"
-		},
-		{
 			"label": _("Hoja de Vida del Bien"),
 			"fieldname": "hoja_de_vida_del_bien",
 			"fieldtype": "Link",
@@ -121,6 +115,11 @@ def get_columns():
 		{
 			"label": _("Tipo de Novedad"),
 			"fieldname": "tipo_de_novedad",
+			"fieldtype": "Data"
+		},
+		{
+			"label": _("Descripcion"),
+			"fieldname": "descripcion",
 			"fieldtype": "Data"
 		},
 		{
