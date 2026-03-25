@@ -8,14 +8,71 @@ from frappe.utils import add_to_date, today, add_days, formatdate, get_url
 from frappe.utils.pdf import get_pdf
 from six import string_types
 import json
+from frappe.utils.xlsxutils import make_xlsx
 
 
 class GestionMultipledeOrdendeServicio(Document):
 	pass
 
 @frappe.whitelist()
-def print_data(doc, selected_data):
+def print_data(doc, selected_data, type):
 	
+	if type == 'PDF':
+		return generate_pdf(doc, selected_data)
+	if type == 'EXCEL':
+		return generate_excel(doc, selected_data)
+
+def generate_excel(doc, selected_data):
+	data = [
+		[
+			"Código de Producto",
+			"Nombre de Producto", 
+			"Hoja de Vida del Bien", 
+			"Estado", 
+			"Ubicación", 
+			"Plan de Mantenimiento", 
+			"Fecha Ultimo Mantenimiento Preventivo", 
+			"Fecha Proximo Mantenimiento Preventivo", 
+			"Nro. Ordenes de Servicio Abiertas", 
+			"Vigencia Prox. Servicio"
+		]
+	]	
+
+	for row in json.loads(selected_data):
+
+		data += [
+			[
+				row.get('item_code') if row.get('item_code') else "",
+				row.get('item_name') if row.get('item_name') else "",
+				row.get('hoja_de_vida_del_bien') if row.get('hoja_de_vida_del_bien') else "",
+				row.get('estado') if row.get('estado') else "",
+				row.get('ubicacion') if row.get('ubicacion') else "",
+				row.get('cl_plantilla_de_mantenimiento') if row.get('cl_plantilla_de_mantenimiento') else "",
+				row.get('fecha_ultimo_mantenimiento') if row.get('fecha_ultimo_mantenimiento') else "",
+				row.get('fecha_proximo_mantenimiento') if row.get('fecha_proximo_mantenimiento') else "",
+				row.get('nro_ordenes') if row.get('nro_ordenes') else 0,
+				row.get('vig_prox_serv') if row.get('vig_prox_serv') else 0
+			]	
+		]
+
+	print(data)
+
+	xlsx_file = make_xlsx(data, "Gestion Multiple de Orden de Servicio")
+
+	# Guardar archivo en File doctype
+	file = frappe.get_doc({
+		"doctype": "File",
+		"file_name": "Gestion Multiple de Orden de Servicio.xlsx",
+		"is_private": 0,
+		"content": xlsx_file.getvalue(),
+	})
+
+	file.insert()
+
+	return file.file_url
+
+def generate_pdf(doc, selected_data):
+
 	# Renderizar plantilla Jinja 
 	html = frappe.render_template(
 		"qp_maintenence/templates/print_format/print_format_HVB.html", 
