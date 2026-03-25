@@ -1,0 +1,32 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2026-03-24 12:57:18.842101",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2026-03-24 12:57:36.909460",
+ "modified_by": "Administrator",
+ "module": "Qp Maintenence",
+ "name": "Reporte Registro de Novedades",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Registro de Novedades",
+ "report_name": "Reporte Registro de Novedades",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Coordinador de Mantenimiento"
+  },
+  {
+   "role": "Asistente Mantenimiento"
+  }
+ ]
+}
