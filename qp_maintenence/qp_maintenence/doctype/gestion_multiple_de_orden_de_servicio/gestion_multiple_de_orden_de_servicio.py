@@ -117,11 +117,14 @@ def get_data(**args):
 									WHERE OS.cl_plantilla_de_mantenimiento = PT.name
 									AND OS.producto = HVB.item_code
 									AND OS.status = 'Completed'
+									AND OS.docstatus != 2
 									AND fecha_y_hora_finalización_os IS NOT NULL
 									ORDER by fecha_y_hora_finalización_os DESC
 									LIMIT 1) as fecha_ultimo_mantenimiento,
-									PAPP.periodicidad as fecha_proximo_mantenimiento,
-									PAPP.periodicidad as vig_prox_serv,
+									NULL as fecha_proximo_mantenimiento,
+									PAPP.periodicidad,
+									PAPP.horas_kms,	
+									NULL as vig_prox_serv,
 									(SELECT COUNT(*)  
 									FROM `tabOrden de Servicio` ODS2
 									WHERE ODS2.hoja_de_vida_del_bien =  HVB.name 
@@ -137,8 +140,13 @@ def get_data(**args):
 	for r in result:
 		if r.fecha_ultimo_mantenimiento:
 			r.fecha_ultimo_mantenimiento = formatdate(r.fecha_ultimo_mantenimiento, 'yyyy-MM-dd')
-			r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.fecha_proximo_mantenimiento)
-			r.vig_prox_serv = frappe.utils.date_diff(frappe.utils.getdate(r.fecha_proximo_mantenimiento), frappe.utils.getdate())
+
+			if r.periodicidad == 0 and r.horas_kms != 0:
+				r.fecha_proximo_mantenimiento =	None
+				r.vig_prox_serv = None
+			else:
+				r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.periodicidad)
+				r.vig_prox_serv = frappe.utils.date_diff(frappe.utils.getdate(r.fecha_proximo_mantenimiento), frappe.utils.getdate())
 		else:
 			r.fecha_ultimo_mantenimiento = None
 			r.fecha_proximo_mantenimiento =	None

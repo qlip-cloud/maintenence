@@ -153,6 +153,16 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 			editable: false
 		}, 
 		{
+			name:'Horas/Kms', 
+			dropdown: false,
+			editable: false
+		}, 
+		{
+			name:'Unidad de Medida', 
+			dropdown: false,
+			editable: false
+		}, 
+		{
 			name:'Fecha último mantenimiento preventivo', 
 			dropdown: false,
 			editable: false
@@ -190,7 +200,7 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 		if(!frm.is_new()){
 			refresh_data();
 		}
-	},
+	}
 });
 
 cur_frm.cscript.refrescar_lista = function(doc) {

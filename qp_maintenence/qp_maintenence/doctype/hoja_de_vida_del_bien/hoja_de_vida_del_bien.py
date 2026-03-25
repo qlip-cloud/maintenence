@@ -19,7 +19,7 @@ def get_mantenimientos_preventivos(**args):
 
 	args = frappe._dict(args)
 
-	result = frappe.db.sql(f"""SELECT PT.name, PAPP.periodicidad,
+	result = frappe.db.sql(f"""SELECT PT.name, PAPP.periodicidad, PAPP.horas_kms, PAPP.unidad_de_medida,
 					  		(SELECT fecha_y_hora_finalización_os
 							FROM `tabOrden de Servicio` OS
 					  		WHERE OS.cl_plantilla_de_mantenimiento = PT.name
@@ -47,13 +47,14 @@ def get_mantenimientos_preventivos(**args):
 						""", as_dict=1)
 	
 	for r in result:
-		if r.fecha_y_hora_finalizacion_os:
 			result_list.append([
 				r.name,
 				r.periodicidad,
-				formatdate(r.fecha_y_hora_finalizacion_os, 'yyyy-MM-dd'),
-				add_to_date(formatdate(r.fecha_y_hora_finalizacion_os, 'yyyy-MM-dd'), days=r.periodicidad),
-				r.last_order
+				r.horas_kms,
+				r.unidad_de_medida,
+				formatdate(r.fecha_y_hora_finalizacion_os, 'yyyy-MM-dd') if r.fecha_y_hora_finalizacion_os else '',
+				add_to_date(formatdate(r.fecha_y_hora_finalizacion_os, 'yyyy-MM-dd'), days=r.periodicidad) if r.fecha_y_hora_finalizacion_os else '',
+				r.last_order if r.fecha_y_hora_finalizacion_os else ''
 			])	
 
 	return result_list
