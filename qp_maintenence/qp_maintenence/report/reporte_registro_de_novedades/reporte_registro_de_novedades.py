@@ -72,7 +72,13 @@ def get_conditions(filters):
 		conditions.append(f""" n.state = '{filters.state}'""")
 
 	if filters.get('orden_de_servicio'):
-		conditions.append(f""" n.orden_de_servicio = '{filters.orden_de_servicio}'""")
+		orden_de_servicio = get_list(filters.get('orden_de_servicio'))
+              
+		if len(orden_de_servicio) > 1:
+			conditions.append(f""" n.orden_de_servicio in {tuple(orden_de_servicio)}""")
+		else:
+			conditions.append(f""" n.orden_de_servicio in ('{orden_de_servicio[0]}')""")
+
 
 	if filters.get('fecha_inicio'):
 		conditions.append(f""" n.fecha_reporte >= '{filters.fecha_inicio}'""")
