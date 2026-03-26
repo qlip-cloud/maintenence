@@ -9,8 +9,12 @@ frappe.ui.form.on('Gestion Multiple de Orden de Servicio', {
 			create_orders(frm);
         }, 'Gestionar Ordenes')
 
-		frm.add_custom_button(__('Imprimir Seleccionadas'), function() {
-			print_orders(frm);
+		frm.add_custom_button(__('Imprimir PDF'), function() {
+			print_orders(frm, 'PDF');
+        }, 'Gestionar Ordenes')
+
+		frm.add_custom_button(__('Imprimir Excel'), function() {
+			print_orders(frm, 'EXCEL');
         }, 'Gestionar Ordenes')
 
 	},
@@ -84,7 +88,7 @@ function create_orders(frm) {
 
 }
 
-function print_orders(frm) {
+function print_orders(frm, type) {
 	
 	let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
 	let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
@@ -104,7 +108,8 @@ function print_orders(frm) {
 				method: 'qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.print_data', // Replace with your actual method path
 				args: { 
 					doc: frm.doc,
-					selected_data: rows
+					selected_data: rows,
+					type:type
 				}, 
 				callback(r) {
 					 if (r.message){ 
