@@ -32,9 +32,13 @@ def generate_excel(doc, selected_data):
 			"Ubicación", 
 			"Plan de Mantenimiento", 
 			"Fecha Ultimo Mantenimiento Preventivo", 
-			"Fecha Proximo Mantenimiento Preventivo", 
+			"Fecha próximo mantenimiento preventivo por periodicidad", 
+			'Fecha última actualización de lectura',
+			'Valor de la última lectura actual',  
+			'Unidad de medida de lectura', 
 			"Nro. Ordenes de Servicio Abiertas", 
-			"Vigencia Prox. Servicio"
+			"Vigencia próximo servicio por periodicidad",
+			'Vigencia próximo servicio por horas/kms',
 		]
 	]	
 
@@ -50,12 +54,14 @@ def generate_excel(doc, selected_data):
 				row.get('cl_plantilla_de_mantenimiento') if row.get('cl_plantilla_de_mantenimiento') else "",
 				row.get('fecha_ultimo_mantenimiento') if row.get('fecha_ultimo_mantenimiento') else "",
 				row.get('fecha_proximo_mantenimiento') if row.get('fecha_proximo_mantenimiento') else "",
+				row.get('fecha_ultima_actualizacion_de_lectura') if row.get('fecha_ultima_actualizacion_de_lectura') else "",
+				row.get('ultima_lectura_actual') if row.get('ultima_lectura_actual') else "",
+				row.get('unidad_de_medida') if row.get('unidad_de_medida') else "",
 				row.get('nro_ordenes') if row.get('nro_ordenes') else 0,
-				row.get('vig_prox_serv') if row.get('vig_prox_serv') else 0
+				row.get('vig_prox_serv') if row.get('vig_prox_serv') else 0,
+				row.get('vig_prox_serv_horas_kms') if row.get('vig_prox_serv_horas_kms') else 0,
 			]	
 		]
-
-	print(data)
 
 	xlsx_file = make_xlsx(data, "Gestion Multiple de Orden de Servicio")
 
@@ -156,22 +162,23 @@ def get_data(**args):
 	conditions += args.get("ubicacion") and " AND HVB.ubicacion = '%s' " % args.get("ubicacion") or ""
 	
 	if args.get("desde") and args.get("hasta"):
-		conditions += args.get("desde") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) >=  '%s'" % args.get("desde") or ""
-		conditions += args.get("hasta") and "AND DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) <=  '%s'" % args.get("hasta") or ""
+		conditions += args.get("desde") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL periodicidad DAY) >=  '%s'" % args.get("desde") or ""
+		conditions += args.get("hasta") and "AND DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL periodicidad DAY) <=  '%s'" % args.get("hasta") or ""
 	elif args.get("desde"):
-		conditions += args.get("desde") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) >=  '%s'" % args.get("desde") or ""
+		conditions += args.get("desde") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL periodicidad DAY) >=  '%s'" % args.get("desde") or ""
 	else:
-		conditions += args.get("hasta") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL fecha_proximo_mantenimiento DAY) <=  '%s'" % args.get("hasta") or ""
+		conditions += args.get("hasta") and "HAVING DATE_ADD(fecha_ultimo_mantenimiento, INTERVAL periodicidad DAY) <=  '%s'" % args.get("hasta") or ""
 
 	result = frappe.db.sql(f"""	
-							SELECT HVB.item_code, 
+							SELECT  HVB.name, 
+									HVB.item_code, 
 									HVB.item_name, 
 									HVB.name as hoja_de_vida_del_bien, 
 									HVB.estado_del_bien as estado,
 									HVB.ubicacion, 
 									(SELECT fecha_y_hora_finalización_os
 									FROM `tabOrden de Servicio` OS
-									WHERE OS.cl_plantilla_de_mantenimiento = PT.name
+									WHERE OS.cl_plantilla_de_mantenimiento = PT.name 
 									AND OS.producto = HVB.item_code
 									AND OS.status = 'Completed'
 									AND OS.docstatus != 2
@@ -186,29 +193,69 @@ def get_data(**args):
 									FROM `tabOrden de Servicio` ODS2
 									WHERE ODS2.hoja_de_vida_del_bien =  HVB.name 
 									AND ODS2.status != 'Completed') as nro_ordenes,
-									PT.name as cl_plantilla_de_mantenimiento
+									PT.name as cl_plantilla_de_mantenimiento,
+									NULL as vig_prox_serv_horas_kms,
+									NULL as fecha_ultima_actualizacion_de_lectura,
+									NULL as ultima_lectura_actual,
+									NULL as unidad_de_medida
 							FROM `tabHoja de Vida del Bien` HVB
 							LEFT JOIN `tabProductos Asociados PP` PAPP ON PAPP.item_code = HVB.item_code AND PAPP.parenttype = 'Project Template'
 							LEFT JOIN `tabProject Template` PT ON PT.name = PAPP.parent AND PT.taller_y_mantenimiento = 1
 							WHERE HVB.item_code IS NOT NULL
 							{conditions}
-						""", as_dict=1)
+						""", as_dict=True)
 	
 	for r in result:
-		if r.fecha_ultimo_mantenimiento:
-			r.fecha_ultimo_mantenimiento = formatdate(r.fecha_ultimo_mantenimiento, 'yyyy-MM-dd')
 
-			if r.periodicidad == 0 and r.horas_kms != 0:
-				r.fecha_proximo_mantenimiento =	None
-				r.vig_prox_serv = None
-			else:
-				r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.periodicidad)
-				r.vig_prox_serv = frappe.utils.date_diff(frappe.utils.getdate(r.fecha_proximo_mantenimiento), frappe.utils.getdate())
-		else:
-			r.fecha_ultimo_mantenimiento = None
-			r.fecha_proximo_mantenimiento =	None
-			r.vig_prox_serv = None
+		r.fecha_ultimo_mantenimiento = None
+
+		actualizacion_de_lectura = frappe.db.sql(
+										f"""
+										SELECT fecha, 
+											   lectura_actual,
+											   unidad_de_medida
+										FROM `tabActualizacion de Lecturas` AL
+										WHERE AL.cl_hoja_de_vida_bien = '{r.name}'
+										AND AL.codigo_de_producto = '{r.item_code}'
+										AND AL.docstatus = 1
+										ORDER by fecha DESC
+										LIMIT 1
+										""", 
+										as_dict=True
+									)
 		
+		orden_de_servicio = frappe.db.sql(f"""
+									SELECT fecha_y_hora_finalización_os, valor_de_lectura_actual
+									FROM `tabOrden de Servicio` OS
+									WHERE OS.cl_plantilla_de_mantenimiento = '{r.cl_plantilla_de_mantenimiento}'
+									AND OS.producto = '{r.item_code}'
+									AND OS.status = 'Completed'
+									AND OS.docstatus != 2
+									AND fecha_y_hora_finalización_os IS NOT NULL
+									ORDER by fecha_y_hora_finalización_os DESC
+									LIMIT 1
+									""", 
+									as_dict=True
+								)
+
+		if actualizacion_de_lectura:
+			r.fecha_ultima_actualizacion_de_lectura = formatdate(actualizacion_de_lectura[0].fecha, 'yyyy-MM-dd')
+			r.ultima_lectura_actual = actualizacion_de_lectura[0].lectura_actual
+			r.unidad_de_medida = actualizacion_de_lectura[0].unidad_de_medida
+		
+		if r.periodicidad == 0 and r.horas_kms != 0:
+			if orden_de_servicio:
+				if r.ultima_lectura_actual:
+					r.vig_prox_serv_horas_kms = (orden_de_servicio[0].valor_de_lectura_actual + r.horas_kms) - r.ultima_lectura_actual
+				if orden_de_servicio[0].fecha_y_hora_finalización_os:
+					r.fecha_ultimo_mantenimiento = formatdate(orden_de_servicio[0].fecha_y_hora_finalización_os, 'yyyy-MM-dd')
+		else:
+			if orden_de_servicio:
+				if orden_de_servicio[0].fecha_y_hora_finalización_os:
+					r.fecha_ultimo_mantenimiento = formatdate(orden_de_servicio[0].fecha_y_hora_finalización_os, 'yyyy-MM-dd')
+					r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.periodicidad)
+					r.vig_prox_serv = frappe.utils.date_diff(frappe.utils.getdate(r.fecha_proximo_mantenimiento), frappe.utils.getdate())
+
 	return result
 
 @frappe.whitelist()
