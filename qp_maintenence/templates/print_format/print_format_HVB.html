@@ -32,7 +32,7 @@
 </br>
 </br>
 <table border="1" cellspacing="0" cellpadding="2">
-    <thead style="font-size: 0.8em;">
+    <thead style="font-size: 0.6em;">
         <tr>
             <th>#</th>
             <th>Código de Producto</th>
@@ -42,12 +42,16 @@
             <th>Ubicación</th>
             <th>Plan de Mantenimiento</th>
             <th>Fecha Ultimo Mantenimiento Preventivo</th>
-            <th>Fecha Proximo Mantenimiento Preventivo</th>
+            <th>Fecha próximo mantenimiento preventivo por periodicidad</th>
+            <th>Fecha última actualización de lectura</th>
+            <th>Valor de la última lectura actual</th>
+            <th>Unidad de medida de lectura</th>
             <th>Nro. Ordenes de Servicio Abiertas</th>
-            <th>Vigencia Prox. Servicio</th>
+            <th>Vigencia próximo servicio por periodicidad</th>
+            <th>Vigencia próximo servicio por horas/kms</th>
         </tr>
     </thead>
-    <tbody style="font-size: 0.7em;">
+    <tbody style="font-size: 0.5em;">
         {% for row in selected_data %}
         <tr text-align="center">
             <td>{{ loop.index }}</td>
@@ -92,12 +96,27 @@
                 {% endif %}
             </td>
             <td>
-                {% if row.nro_ordenes %}
-                    {{ row.nro_ordenes }}
+                {% if row.fecha_ultima_actualizacion_de_lectura %}
+                    {{ row.fecha_ultima_actualizacion_de_lectura }}
                 {% endif %}
             </td>
             <td>
-            {% if row.vig_prox_serv %}
+                {% if row.ultima_lectura_actual %}
+                    {{ row.ultima_lectura_actual }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.unidad_de_medida %}
+                    {{ row.unidad_de_medida }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.nro_ordenes %}
+                {{ row.nro_ordenes }}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.vig_prox_serv %}
                 {% if row.vig_prox_serv > 30 %}
                 <b style="color: green;">{{ row.vig_prox_serv }}</b>
                 {% endif %}
@@ -107,7 +126,26 @@
                 {% if row.vig_prox_serv > 0 and row.vig_prox_serv <= 30 %}
                 <b style="color: orange;">{{ row.vig_prox_serv }}</b>
                 {% endif %}
-            {% endif %}
+                {% endif %}
+            </td>
+            <td>
+                {% if row.vig_prox_serv_horas_kms %}
+                    {% if row.vig_prox_serv_horas_kms > 79 and row.unidad_de_medida == 'Horas'%}
+                    <b style="color: green;">{{ row.vig_prox_serv }}</b>
+                    {% endif %}
+                    {% if row.vig_prox_serv_horas_kms > 999 and row.unidad_de_medida == 'Kms'%}
+                    <b style="color: green;">{{ row.vig_prox_serv_horas_kms }}</b>
+                    {% endif %}
+                    {% if row.vig_prox_serv_horas_kms <= 0 %}
+                    <b style="color: red;">{{ row.vig_prox_serv_horas_kms }}</b>
+                    {% endif %}
+                    {% if row.vig_prox_serv_horas_kms > 1 and row.vig_prox_serv_horas_kms <= 79 and row.unidad_de_medida == 'Horas'%}
+                    <b style="color: orange;">{{ row.vig_prox_serv_horas_kms }}</b>
+                    {% endif %}
+                    {% if row.vig_prox_serv_horas_kms > 1 and row.vig_prox_serv_horas_kms <= 999 and row.unidad_de_medida == 'Kms'%}
+                    <b style="color: orange;">{{ row.vig_prox_serv_horas_kms }}</b>
+                    {% endif %}
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

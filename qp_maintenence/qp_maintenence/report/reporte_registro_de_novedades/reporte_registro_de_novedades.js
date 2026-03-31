@@ -44,7 +44,7 @@ frappe.query_reports["Reporte Registro de Novedades"] = {
 			"fieldname":"fuente_de_la_novedad",
 			"label": __("Fuente de la novedad"),
 			"fieldtype": "Select",
-			"options":" \nEmail\nTarjeta de observación Sharp\nOrden de servicio\nWhatsApp\nInspección\nAuditoria\nOtro"
+			"options":" \nCorreo email\nTarjeta de observación Sharp\nOrden de servicio\nWhatsApp\nInspección\nAuditoria\nOtro"
 		},
 		{
 			"fieldname":"state",

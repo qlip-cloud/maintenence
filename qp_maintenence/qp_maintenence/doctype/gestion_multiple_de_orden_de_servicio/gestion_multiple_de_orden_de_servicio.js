@@ -243,11 +243,37 @@ function get_columns(is_modal){
 			sortable: true
 		},
 		{
-			name:'Fecha Proximo Mantenimiento Preventivo', 
-			name:'Fecha Proximo Mantenimiento Preventivo', 
+			name:'Fecha próximo mantenimiento preventivo por periodicidad', 
 			id:'fecha_proximo_mantenimiento',
 			fieldname:'fecha_proximo_mantenimiento',
 			fieldtype:'Date',
+			editable: false,
+			hidden: is_modal,
+			sortable: true
+		},
+		{
+			name:'Fecha última actualización de lectura', 
+			id:'fecha_ultima_actualizacion_de_lectura',
+			fieldname:'fecha_ultima_actualizacion_de_lectura',
+			fieldtype:'Date',
+			editable: false,
+			hidden: is_modal,
+			sortable: true
+		},
+		{
+			name:'Valor de la última lectura actual', 
+			id:'ultima_lectura_actual',
+			fieldname:'ultima_lectura_actual',
+			fieldtype:'Int',
+			editable: false,
+			hidden: is_modal,
+			sortable: true
+		},
+		{
+			name:'Unidad de medida de lectura', 
+			id:'unidad_de_medida',
+			fieldname:'unidad_de_medida',
+			fieldtype:'Data',
 			editable: false,
 			hidden: is_modal,
 			sortable: true
@@ -260,22 +286,51 @@ function get_columns(is_modal){
 			editable: false,
 			hidden: is_modal,
 			sortable: true
-		},{
-			name:'Vigencia Prox. Servicio', 
+		},
+		{
+			name:'Vigencia próximo servicio por periodicidad', 
 			id:'vig_prox_serv', 
 			fieldname:'vig_prox_serv',
 			fieldtype:'Data',
 			editable: false,
 			hidden: is_modal,
 			sortable: true,
-			format: (value) => {
+			format: (value, row) => {
 				if(!value) return "";
 				else if (value > 0 && value < 30) return `<b style="color: orange;">${value}</b>`;
 				else if (value <= 0) return `<b style="color: red;">${value}</b>`;
                 else return `<b style="color: green;">${value}</b>`;
 				
             }
-		})
+		},
+		{
+			name:'Vigencia próximo servicio por horas/kms', 
+			id:'vig_prox_serv_horas_kms',
+			fieldname:'vig_prox_serv_horas_kms',
+			fieldtype:'Data',
+			editable: false,
+			hidden: is_modal,
+			sortable: true,
+			format: (value, row, column, data) => {
+
+				if(data.unidad_de_medida == 'Kms')
+				{
+					if(!value) return "";
+					else if (value > 1 && value < 999) return `<b style="color: orange;">${value}</b>`;
+					else if (value <= 0) return `<b style="color: red;">${value}</b>`;
+					else return `<b style="color: green;">${value}</b>`;
+				} else if(data.unidad_de_medida == 'Horas'){
+					if(!value) return "";
+					else if (value > 1 && value < 79) return `<b style="color: orange;">${value}</b>`;
+					else if (value <= 0) return `<b style="color: red;">${value}</b>`;
+					else return `<b style="color: green;">${value}</b>`;
+				} else{
+					return "";
+				}
+					
+					
+            }
+		},)
 
 	// Sample columns definition
 	return col
@@ -283,7 +338,9 @@ function get_columns(is_modal){
 }
 
 function modal_data(data){
-	let dialog = new frappe.ui.Dialog({
+	let dialog;
+
+	dialog = new frappe.ui.Dialog({
 		title: 'Novedades Abiertas',
 		size: "extra-large",
 		fields: [
@@ -305,7 +362,6 @@ function modal_data(data){
 			let error_message = []
 
 			values.datos_de_ordenes.forEach(value => {
-				console.log(value)
 
 				if(!value.tipo_de_servicio){
 					error_message.push(__(`Tipo de servicio es obligatorio en ${value.item_code}`));
