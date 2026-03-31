@@ -90,14 +90,12 @@ frappe.ui.form.on('Orden de Servicio', {
 				frm.toggle_display('detalle_del_servicio_realizado', true)
 				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
 				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
-				frm.toggle_reqd('valor_de_lectura_actual', true)
 				frm.toggle_reqd('tasks', true);
 			}
 			else{
 				frm.toggle_display('detalle_del_servicio_realizado', false)
 				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
 				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
-				frm.toggle_reqd('valor_de_lectura_actual', false)
 				frm.toggle_reqd('tasks', false);
 			}
 		}
@@ -324,7 +322,6 @@ frappe.ui.form.on('Orden de Servicio', {
 				frm.toggle_display('detalle_del_servicio_realizado', true)
 				frm.toggle_display('cl_plantilla_de_mantenimiento', true)
 				frm.toggle_reqd('cl_plantilla_de_mantenimiento', true)
-				frm.toggle_reqd('valor_de_lectura_actual', true)
 				frm.toggle_reqd('tasks', true);
 			}
 			else{
@@ -335,7 +332,6 @@ frappe.ui.form.on('Orden de Servicio', {
 				frm.toggle_display('detalle_del_servicio_realizado', false)
 				frm.toggle_display('cl_plantilla_de_mantenimiento', false)
 				frm.toggle_reqd('cl_plantilla_de_mantenimiento', false)
-				frm.toggle_reqd('valor_de_lectura_actual', false)
 				frm.toggle_reqd('tasks', false);
 			}
 		}

@@ -9,6 +9,9 @@ def handle(orden_de_servicio, method):
         frappe.validate = False
         frappe.throw("Fecha y Hora de Finalizacion OS es obligatoria, por favor diligenciar")
 
-    if orden_de_servicio.status not in ["Completed", "Cancelled"]:
-        frappe.validate = False
-        frappe.throw("La orden debe estar previamente en estado Completado o Cancelado para poder validarse")
+    company = frappe.defaults.get_user_default("company")
+
+    if company in ['ITS', 'INNGTECH']:
+        if orden_de_servicio.status not in ["Completed", "Cancelled"]:
+            frappe.validate = False
+            frappe.throw("La orden debe estar previamente en estado Completado o Cancelado para poder validarse")
