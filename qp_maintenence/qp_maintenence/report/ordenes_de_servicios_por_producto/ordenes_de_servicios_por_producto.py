@@ -29,8 +29,8 @@ def get_data(filters):
 				CASE WHEN t.rn = 1 THEN t.observaciones END AS observaciones,
 				CASE WHEN t.rn = 1 THEN t.responsable END AS responsable,
 				CASE WHEN t.rn = 1 THEN t.ubicacion END AS ubicacion,
-				t.descripcion_nov AS descripcion_nov,
-				t.executed_prod AS executed_prod
+				t.descripcion_nov,
+				t.executed_prod
 				FROM 
 				(
 					SELECT os.*,
@@ -39,13 +39,16 @@ def get_data(filters):
 						ROW_NUMBER() OVER (PARTITION BY os.name ORDER BY no.idx) AS rn
 					FROM `tabOrden de Servicio` os
 					LEFT JOIN `tabNovedades` no ON no.parent = os.name AND no.parenttype = 'Orden de Servicio'
+					WHERE os.name IS NOT NULL
+					{get_conditions(filters)}
 				) as t
-				WHERE t.name IS NOT NULL
-				{get_conditions(filters)}
+				
 				ORDER BY
 				t.name,
 				t.rn
     """
+
+	print(query)
 
 	return frappe.db.sql(query, as_dict=1)
 
@@ -63,57 +66,57 @@ def get_conditions(filters):
 		orden_de_servicio = get_list(filters.get('orden_de_servicio'))
               
 		if len(orden_de_servicio) > 1:
-			conditions.append(f""" t.name in {tuple(orden_de_servicio)}""")
+			conditions.append(f""" os.name in {tuple(orden_de_servicio)}""")
 		else:
-			conditions.append(f""" t.name in ('{orden_de_servicio[0]}')""")
+			conditions.append(f""" os.name in ('{orden_de_servicio[0]}')""")
 
 	if filters.get('responsable'):
 		responsable = get_list(filters.get('responsable'))
               
 		if len(responsable) > 1:
-			conditions.append(f""" t.responsable in {tuple(responsable)}""")
+			conditions.append(f""" os.responsable in {tuple(responsable)}""")
 		else:
-			conditions.append(f""" t.responsable in ('{responsable[0]}')""")
+			conditions.append(f""" os.responsable in ('{responsable[0]}')""")
 
 
 	if filters.get('ubicacion'):
 		ubicacion = get_list(filters.get('ubicacion'))
               
 		if len(ubicacion) > 1:
-			conditions.append(f""" t.ubicacion in {tuple(ubicacion)}""")
+			conditions.append(f""" os.ubicacion in {tuple(ubicacion)}""")
 		else:
-			conditions.append(f""" t.ubicacion in ('{ubicacion[0]}')""")
+			conditions.append(f""" os.ubicacion in ('{ubicacion[0]}')""")
 
 	if filters.get('producto'):
 		producto = get_list(filters.get('producto'))
               
 		if len(producto) > 1:
-			conditions.append(f""" t.producto in {tuple(producto)}""")
+			conditions.append(f""" os.producto in {tuple(producto)}""")
 		else:
-			conditions.append(f""" t.producto in ('{producto[0]}')""")
+			conditions.append(f""" os.producto in ('{producto[0]}')""")
 
 	if filters.get('cl_plantilla_de_mantenimiento'):
 		cl_plantilla_de_mantenimiento = get_list(filters.get('cl_plantilla_de_mantenimiento'))
               
 		if len(cl_plantilla_de_mantenimiento) > 1:
-			conditions.append(f""" t.cl_plantilla_de_mantenimiento in {tuple(cl_plantilla_de_mantenimiento)}""")
+			conditions.append(f""" os.cl_plantilla_de_mantenimiento in {tuple(cl_plantilla_de_mantenimiento)}""")
 		else:
-			conditions.append(f""" t.cl_plantilla_de_mantenimiento in ('{cl_plantilla_de_mantenimiento[0]}')""")
+			conditions.append(f""" os.cl_plantilla_de_mantenimiento in ('{cl_plantilla_de_mantenimiento[0]}')""")
 
 	if filters.get('status'):
-		conditions.append(f""" t.status = '{filters.status}'""")
+		conditions.append(f""" os.status = '{filters.status}'""")
 
 	if filters.get('tipo_de_servicio'):
-		conditions.append(f""" t.tipo_de_servicio = '{filters.tipo_de_servicio}'""")
+		conditions.append(f""" os.tipo_de_servicio = '{filters.tipo_de_servicio}'""")
 
 	if filters.get('fecha_y_hora_inicio_real_os'):
-		conditions.append(f""" t.fecha_y_hora_finalización_os >= '{filters.fecha_y_hora_inicio_real_os}'""")
+		conditions.append(f""" os.fecha_y_hora_finalización_os >= '{filters.fecha_y_hora_inicio_real_os}'""")
 
 	if filters.get('fecha_y_hora_finalización_os'):
-		conditions.append(f""" t.fecha_y_hora_finalización_os <= '{filters.fecha_y_hora_finalización_os}'""")
+		conditions.append(f""" os.fecha_y_hora_finalización_os <= '{filters.fecha_y_hora_finalización_os}'""")
 
-	if filters.get('descripcion_producto'):
-		conditions.append(f""" t.descripcion_del_producto LIKE '{filters.descripcion_producto}'""")
+	if filters.get('descripcion_del_producto'):
+		conditions.append(f""" os.descripcion_del_producto LIKE '%{filters.descripcion_del_producto}%'""")
 
 	return "AND {}".format(" AND ".join(conditions)) if conditions else ""
 
