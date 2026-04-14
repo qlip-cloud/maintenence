@@ -39,6 +39,8 @@
   "plantilla_inspeccion_entrada_del_bien",
   "table_29",
   "section_break_21",
+  "eb_archivos_adjuntos",
+  "section_break_35",
   "firma_cliente_column",
   "firma_cliente",
   "column_break_23",
@@ -311,6 +313,16 @@
    "fieldname": "firma_cliente_column",
    "fieldtype": "Column Break",
    "label": "Firma Cliente"
+  },
+  {
+   "fieldname": "eb_archivos_adjuntos",
+   "fieldtype": "Table",
+   "label": "Archivos adjuntos",
+   "options": "Archivos Entrada de Bienes"
+  },
+  {
+   "fieldname": "section_break_35",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -322,7 +334,7 @@
    "link_fieldname": "entrada_del_bien"
   }
  ],
- "modified": "2025-08-14 14:01:39.426009",
+ "modified": "2026-04-14 08:17:06.956347",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Entrada de Bienes",
