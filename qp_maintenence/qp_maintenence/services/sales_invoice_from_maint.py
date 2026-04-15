@@ -12,6 +12,8 @@ from erpnext.setup.doctype.item_group.item_group import get_item_group_defaults
 def make_sales_invoice(source_name, target_doc=None, ignore_permissions=False):
 
 	def postprocess(source, target):
+		if not source.get("customer") and source.get("cliente_hvc"):
+			target.customer = source.get("cliente_hvc")
 		set_missing_values(source, target)
 
 	def set_missing_values(source, target):
