@@ -79,6 +79,15 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Tipo de Actividad",
+   "link_to": "Task Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Transacciones",
    "link_type": "DocType",
    "onboard": 0,
@@ -227,7 +236,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-04-16 13:56:28.019088",
+ "modified": "2026-04-17 09:16:23.172354",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Mantenimiento y Taller",
