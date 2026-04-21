@@ -29,6 +29,7 @@ def get_data(filters):
 				CASE WHEN t.rn = 1 THEN t.observaciones END AS observaciones,
 				CASE WHEN t.rn = 1 THEN t.responsable END AS responsable,
 				CASE WHEN t.rn = 1 THEN t.ubicacion END AS ubicacion,
+				CASE WHEN t.rn = 1 THEN t.tipo_de_bien END AS tipo_de_bien,
 				t.descripcion_nov,
 				t.executed_prod
 				FROM 
@@ -106,6 +107,9 @@ def get_conditions(filters):
 	if filters.get('status'):
 		conditions.append(f""" os.status = '{filters.status}'""")
 
+	if filters.get('tipo_de_bien'):
+		conditions.append(f""" os.tipo_de_bien = '{filters.tipo_de_bien}'""")
+
 	if filters.get('tipo_de_servicio'):
 		conditions.append(f""" os.tipo_de_servicio = '{filters.tipo_de_servicio}'""")
 
@@ -169,6 +173,11 @@ def get_columns():
 		{
 			"label": _("Tipo de Servicio"),
 			"fieldname": "tipo_de_servicio",
+			"fieldtype": "Data"
+		},
+		{
+			"label": _("Tipo de Bien"),
+			"fieldname": "tipo_de_bien",
 			"fieldtype": "Data"
 		},
 		{

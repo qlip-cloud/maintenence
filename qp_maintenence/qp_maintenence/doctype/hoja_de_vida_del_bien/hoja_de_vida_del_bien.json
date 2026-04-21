@@ -113,7 +113,7 @@
    "fieldname": "tipo_de_bien",
    "fieldtype": "Select",
    "label": "Tipo de bien",
-   "options": "Equipo\nVeh\u00edculo",
+   "options": "\nEquipo\nVeh\u00edculo\nLocativo",
    "reqd": 1
   },
   {
@@ -471,7 +471,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2026-01-07 17:37:52.068346",
+ "modified": "2026-04-21 12:01:38.681725",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",
