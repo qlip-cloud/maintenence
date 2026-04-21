@@ -243,16 +243,16 @@ def get_data(**args):
 			r.ultima_lectura_actual = actualizacion_de_lectura[0].lectura_actual
 			r.unidad_de_medida = actualizacion_de_lectura[0].unidad_de_medida
 		
-		if r.periodicidad == 0 and r.horas_kms != 0:
-			if orden_de_servicio:
+		if orden_de_servicio:
+			if orden_de_servicio[0].fecha_y_hora_finalización_os:
+				r.fecha_ultimo_mantenimiento = formatdate(orden_de_servicio[0].fecha_y_hora_finalización_os, 'yyyy-MM-dd')
+
+			if r.horas_kms != 0:
 				if r.ultima_lectura_actual:
 					r.vig_prox_serv_horas_kms = (orden_de_servicio[0].valor_de_lectura_actual + r.horas_kms) - r.ultima_lectura_actual
+
+			if r.periodicidad != 0:
 				if orden_de_servicio[0].fecha_y_hora_finalización_os:
-					r.fecha_ultimo_mantenimiento = formatdate(orden_de_servicio[0].fecha_y_hora_finalización_os, 'yyyy-MM-dd')
-		else:
-			if orden_de_servicio:
-				if orden_de_servicio[0].fecha_y_hora_finalización_os:
-					r.fecha_ultimo_mantenimiento = formatdate(orden_de_servicio[0].fecha_y_hora_finalización_os, 'yyyy-MM-dd')
 					r.fecha_proximo_mantenimiento =	add_to_date(r.fecha_ultimo_mantenimiento, days= r.periodicidad)
 					r.vig_prox_serv = frappe.utils.date_diff(frappe.utils.getdate(r.fecha_proximo_mantenimiento), frappe.utils.getdate())
 
