@@ -74,30 +74,6 @@
    "property_type": "Text",
    "row_name": null,
    "value": "HV-.YYYY.-"
-  },
-  {
-   "_assign": null,
-   "_comments": null,
-   "_liked_by": null,
-   "_user_tags": null,
-   "creation": "2025-05-06 09:43:38.133124",
-   "default_value": null,
-   "doc_type": "Hoja de Vida del Bien",
-   "docstatus": 0,
-   "doctype_or_field": "DocField",
-   "field_name": "tipo_de_bien",
-   "idx": 0,
-   "modified": "2025-05-06 09:43:38.133124",
-   "modified_by": "milena.rivillas@mentum.com.co",
-   "name": "Hoja de Vida del Bien-tipo_de_bien-options",
-   "owner": "milena.rivillas@mentum.com.co",
-   "parent": null,
-   "parentfield": null,
-   "parenttype": null,
-   "property": "options",
-   "property_type": "Text",
-   "row_name": null,
-   "value": "\nEquipo\nVeh\u00edculo"
   }
  ],
  "sync_on_migrate": 1
