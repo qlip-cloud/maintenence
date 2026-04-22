@@ -62,6 +62,12 @@ frappe.query_reports["Ordenes de Servicios por Producto"] = {
 			}
 		},
 		{
+			"label": __("Tipo de Bien"),
+			"fieldname": "tipo_de_bien",
+			"fieldtype": "Select",
+			"options":" \nEquipo\nVehículo\nLocativo"
+		},
+		{
 			"label": __("Fecha Inicio"),
 			"fieldname": "fecha_y_hora_inicio_real_os",
 			"fieldtype": "Datetime",
