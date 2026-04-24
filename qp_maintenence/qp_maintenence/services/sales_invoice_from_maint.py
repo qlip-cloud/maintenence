@@ -17,8 +17,6 @@ def make_sales_invoice(source_name, target_doc=None, ignore_permissions=False):
 
 		target.tax_id  = frappe.db.get_value("Customer", target.customer, 'tax_id')
 
-		print(target)
-
 		set_missing_values(source, target)
 
 	def set_missing_values(source, target):
