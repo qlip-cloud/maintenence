@@ -79,6 +79,15 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Tipo de Actividad",
+   "link_to": "Task Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Transacciones",
    "link_type": "DocType",
    "onboard": 0,
@@ -175,6 +184,42 @@
   },
   {
    "hidden": 0,
+   "is_query_report": 1,
+   "label": "Reporte Registro de Novedades",
+   "link_to": "Reporte Registro de Novedades",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Reporte Actualizacion de Lectura",
+   "link_to": "Reporte Actualizacion de Lectura",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Reporte Ordenes de Servicios por Producto",
+   "link_to": "Ordenes de Servicios por Producto",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Gesti\u00f3n m\u00faltiple de orden de servicio",
+   "link_to": "Gestion Multiple de Orden de Servicio",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
    "is_query_report": 0,
    "label": "Configurar",
    "link_type": "DocType",
@@ -191,7 +236,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-01-28 18:39:32.981345",
+ "modified": "2026-04-17 09:16:23.172354",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Mantenimiento y Taller",

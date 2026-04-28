@@ -14,6 +14,7 @@
   "cliente_hvc",
   "proveedor_hvc",
   "producto",
+  "tipo_de_bien",
   "item_serial_no",
   "customer",
   "tipo_de_servicio",
@@ -434,6 +435,13 @@
    "fieldtype": "Data",
    "label": "Nombre Proveedor HVB",
    "read_only": 1
+  },
+  {
+   "fetch_from": "hoja_de_vida_del_bien.tipo_de_bien",
+   "fieldname": "tipo_de_bien",
+   "fieldtype": "Select",
+   "label": "Tipo de bien",
+   "options": "Equipo\nVeh\u00edculo\nLocativo"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -465,7 +473,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-03-04 18:13:07.007668",
+ "modified": "2026-04-21 12:02:31.836522",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
