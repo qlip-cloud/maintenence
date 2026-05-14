@@ -372,21 +372,20 @@ frappe.ui.form.on('Orden de Servicio', {
 		}
 		
 	},
-	validate: function(frm) {
+	after_save: function(frm) {
 
-		let validated_rows = true;
+		if (frm.doc.status === "Completed") {
+        	let invalid = frm.doc.tasks.some(t => ['NO', ''].includes(t.verificada));
 
-		if(frm.doc.status == "Completed"){
-			 $.each(frm.doc.tasks || [], function(i, d) {
-				if (['NO', ''].includes(d.verificada)) {
-					validated_rows = false;
-				}
-			});
+			if (invalid) {
+				frappe.msgprint({
+					title: "Validación requerida",
+					message: "Existen una o más tareas del plan de mantenimiento que no han sido ejecutadas. Si esta situación es correcta, por favor registre la justificación en el campo correspondiente.",
+					indicator: "red",
+					alert:false
+				});
+			}
 		}
-
-        if (!validated_rows) {
-           	frappe.msgprint('Existen una o más tareas del plan de mantenimiento que no han sido ejecutadas. Si esta situación es correcta, por favor registre la justificación en el campo de observaciones.');
-        }
     },
 
 });
