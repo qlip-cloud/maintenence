@@ -134,6 +134,11 @@ def get_columns():
 			"fieldtype": "Data",
 		},
 		{
+			"label": _("Nombre Quien Reporta"),
+			"fieldname": "nombre_quien_reporta",
+			"fieldtype": "Data",
+		},
+		{
 			"label": _("Area Ejecutora"),
 			"fieldname": "area_ejecutora",
 			"fieldtype": "Data",
