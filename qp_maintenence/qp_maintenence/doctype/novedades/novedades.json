@@ -126,14 +126,13 @@
    "fieldname": "nombre_quien_reporta",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Nombre Quien Reporta",
-   "read_only": 1
+   "label": "Nombre Quien Reporta"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-05-15 16:56:39.701660",
+ "modified": "2026-05-15 17:04:01.418423",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Novedades",
