@@ -131,12 +131,14 @@ def get_columns():
 		{
 			"label": _("Quien Reporta"),
 			"fieldname": "quien_reporta",
-			"fieldtype": "Data",
+			"fieldtype": "Link",
+			"options": "Employee"
 		},
 		{
 			"label": _("Nombre Quien Reporta"),
 			"fieldname": "nombre_quien_reporta",
 			"fieldtype": "Data",
+			"fetch_from":"quien_reporta.employee_name"
 		},
 		{
 			"label": _("Area Ejecutora"),
