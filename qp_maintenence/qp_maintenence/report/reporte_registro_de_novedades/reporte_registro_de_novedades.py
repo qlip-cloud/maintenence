@@ -19,6 +19,7 @@ def get_data(filters):
 	query = f"""SELECT *
             FROM `tabRegistro de Novedades` as rn,
 			tabNovedades as n
+			LEFT JOIN tabEmployee en ON en.name = n.quien_reporta
 			WHERE n.parent = rn.name
 			{get_conditions(filters)}
     """	
@@ -136,9 +137,8 @@ def get_columns():
 		},
 		{
 			"label": _("Nombre Quien Reporta"),
-			"fieldname": "nombre_quien_reporta",
-			"fieldtype": "Data",
-			"fetch_from":"quien_reporta.employee_name"
+			"fieldname": "employee_name",
+			"fieldtype": "Data"
 		},
 		{
 			"label": _("Area Ejecutora"),
