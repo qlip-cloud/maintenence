@@ -150,16 +150,19 @@ def get_columns():
 			"label": _("Lectura Actual"),
 			"fieldname": "lectura_actual",
 			"fieldtype": "Float",
+			"precision":0
 		},
 		{
 			"label": _("Lectura Anterior"),
 			"fieldname": "lectura_anterior",
 			"fieldtype": "Float",
+			"precision":0
 		},
 		{
 			"label": _("Lectura Acumulada"),
 			"fieldname": "lectura_acumulada",
 			"fieldtype": "Float",
+			"precision":0
 		},
 		
 	]
