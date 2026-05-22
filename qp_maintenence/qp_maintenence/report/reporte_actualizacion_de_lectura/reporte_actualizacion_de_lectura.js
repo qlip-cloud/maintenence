@@ -64,5 +64,14 @@ frappe.query_reports["Reporte Actualizacion de Lectura"] = {
 			"label": __("Cambio de odómetro/horómetro"),
 			"fieldtype": "Check"
 		},
-	]
+	],
+	formatter(value, row, column, data, default_formatter) {
+
+		if (['lectura_anterior','lectura_acumulada','lectura_actual'].includes(column.fieldname)) {
+			if (value == null) return "";
+			return parseInt(value, 10).toString();
+		}
+
+		return default_formatter(value, row, column, data);
+	}
 };
