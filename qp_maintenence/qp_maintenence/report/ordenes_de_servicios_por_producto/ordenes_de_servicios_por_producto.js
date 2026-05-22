@@ -3,6 +3,96 @@
 /* eslint-disable */
 
 frappe.query_reports["Ordenes de Servicios por Producto"] = {
+	formatter: function(value, row, column, data, default_formatter) {
+        if (column.fieldname === "seleccionar") {
+            return `<input type="checkbox" class="row-select" data-name="${data.name}">`;
+        }
+        return default_formatter(value, row, column, data);
+    },
+	onload: function(report) {
+
+        frappe.query_report.selected_rows = [];
+
+        $(document).on("change", ".row-select", function() {
+            let name = $(this).data("name");
+
+            if (this.checked) {
+                frappe.query_report.selected_rows.push(name);
+            } else {
+                frappe.query_report.selected_rows =
+                    frappe.query_report.selected_rows.filter(x => x !== name);
+            }
+        });
+	
+		// Guardamos referencia al original
+		//Exportar EXCEL
+        const original_get_filter_values = frappe.query_report.get_filter_values;
+
+       	frappe.query_report.get_filter_values = function(for_export) {
+
+			let filters = original_get_filter_values.call(this, for_export);
+
+			// SIEMPRE enviar seleccionados
+			filters.seleccionados = frappe.query_report.selected_rows.join(",");
+
+			if (for_export) {
+				filters.report_action = "Export";
+			}
+
+			return filters;
+		};
+
+		// Guardamos referencia al original
+		//Exportar CSV
+		const original_get_data_for_csv = frappe.query_report.get_data_for_csv;
+
+		frappe.query_report.get_data_for_csv = function(include_indentation) {
+
+			console.log("get_data_for_csv")
+			
+			let data = original_get_data_for_csv.call(this, include_indentation);
+
+			const seleccionados = frappe.query_report.selected_rows;
+
+			if (seleccionados && seleccionados.length > 0) {
+				data = data.filter(row => seleccionados.includes(row[1]));
+			}
+
+			return data;
+		};
+
+		// Guardamos referencia al original
+		// Imprimir PDF
+		const original_pdf_report = frappe.query_report.__proto__.pdf_report;
+
+		frappe.query_report.__proto__.pdf_report = function(print_settings) {
+
+			if (this.report_name === "Ordenes de Servicios por Producto") {
+
+				const seleccionados = frappe.query_report.selected_rows;
+
+				if (seleccionados.length > 0) {
+
+					// Guardar data original
+					const original_data = this.data;
+
+					// Filtrar data visible
+					this.data = original_data.filter(row => seleccionados.includes(row.name));
+
+					// Ejecutar PDF
+					original_pdf_report.call(this, print_settings);
+
+					// Restaurar data original
+					this.data = original_data;
+
+					return;
+				}
+			}
+
+			return original_pdf_report.call(this, print_settings);
+		};
+
+    },
 	"filters": [
 		{
 			"fieldname":"orden_de_servicio",
@@ -76,9 +166,12 @@ frappe.query_reports["Ordenes de Servicios por Producto"] = {
 			"label": __("Fecha Fin"),
 			"fieldname": "fecha_y_hora_finalización_os",
 			"fieldtype": "Datetime",
-		}
-	],
-	formatter: function(value, row, column, data, default_formatter) {
-		return default_formatter(__(value), row, column, data);
-	}
+		},
+		{
+            "fieldname": "seleccionados",
+            "label": "Seleccionados",
+            "fieldtype": "Data",
+            "hidden": 1
+        }
+	]
 };
