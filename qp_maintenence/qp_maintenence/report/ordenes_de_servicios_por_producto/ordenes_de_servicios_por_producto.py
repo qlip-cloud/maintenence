@@ -5,9 +5,6 @@ import frappe
 from frappe import _
 
 def execute(filters=None):
-
-	print("FILTROS")
-	print(filters)
 	
 	columns, data, seleccionados = [], [], []
 
