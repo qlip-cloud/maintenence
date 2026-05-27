@@ -5,19 +5,28 @@ import frappe
 from frappe import _
 
 def execute(filters=None):
+	
+	columns, data, seleccionados = [], [], []
 
-	columns, data = [], []
+	if filters and filters.get("seleccionados"):
+		seleccionados = filters.get("seleccionados").split(",")
 
 	columns = get_columns()
 	data = get_data(filters)
+
+	is_export = filters.get("report_action") == "Export"
+
+	if is_export and seleccionados:
+		data = [d for d in data if d.get("name") in seleccionados]
 
 	return columns, data
 
 def get_data(filters):
 
 	validate_filters(filters)
-
+	
 	query = f"""SELECT 
+				0 as seleccionar,
 				CASE WHEN t.rn = 1 THEN t.name END AS name,
 				CASE WHEN t.rn = 1 THEN t.status END AS status,
 				CASE WHEN t.rn = 1 THEN t.producto END AS producto,
@@ -49,8 +58,6 @@ def get_data(filters):
 				t.rn
     """
 
-	print(query)
-
 	return frappe.db.sql(query, as_dict=1)
 
 
@@ -63,6 +70,7 @@ def validate_filters(filters):
 def get_conditions(filters):
 	conditions = []
 
+	
 	if filters.get('orden_de_servicio'):
 		orden_de_servicio = get_list(filters.get('orden_de_servicio'))
               
@@ -132,6 +140,12 @@ def get_list(field_list):
 def get_columns():
 
 	columns = [
+		{
+			"label": "",
+			"fieldname": "seleccionar",
+			"fieldtype": "Check",
+			"width": 80
+		},
 		{
 			"label": _("Name"),
 			"fieldname": "name",
@@ -212,3 +226,34 @@ def get_columns():
 
 
 	return columns
+
+@frappe.whitelist()
+def export_query_override():
+    args = frappe._dict(frappe.local.form_dict)
+    filters = frappe.parse_json(args.filters or "{}")
+
+    # Solo aplicar a tu reporte
+    if args.report_name != "Ordenes de Servicios por Producto":
+        return generate_report_result(
+            args.report_name,
+            filters=filters,
+            user=frappe.session.user
+        )
+
+    result = generate_report_result(
+        args.report_name,
+        filters=filters,
+        user=frappe.session.user
+    )
+
+    data = result.get("result")
+
+    seleccionados = filters.get("seleccionados")
+    is_export = filters.get("report_action") == "Export"
+
+    if is_export and seleccionados:
+        seleccionados = [x.strip() for x in seleccionados.split(",") if x.strip()]
+        data = [d for d in data if d.get("name") in seleccionados]
+
+    result["result"] = data
+    return result
