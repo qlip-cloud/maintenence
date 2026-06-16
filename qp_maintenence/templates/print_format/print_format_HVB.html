@@ -1,154 +1,102 @@
+{% if letterhead %}
+    {{ frappe.get_doc("Letter Head", letterhead).content }}
+{% endif %}
 
+<h2 style="margin-top: 20px;">Gestión Múltiple de Orden de Servicio</h2>
 
-<h2 style="margin-top: 20px;">Gestion Multiple de Orden de Servicio</h2>
-
-<b>Filtros:</b></br>
+<b>Filtros:</b><br>
 
 {% if doc.item_code %}
-    <b>Productos:</b> {% for row1 in doc.item_code %} {% if loop.index > 1 %} | {% endif %} {{ row1.item}} {% endfor %}</br>
+    <b>Productos:</b> 
+    {% for row1 in doc.item_code %}
+        {% if loop.index > 1 %} | {% endif %}
+        {{ row1.item }}
+    {% endfor %}
+    <br>
 {% endif %}
 
 {% if doc.hoja_de_vida_del_bien %}
-    <b>Hoja de vida del Bien:</b> {{ doc.hoja_de_vida_del_bien}}</br>
+    <b>Hoja de vida del Bien:</b> {{ doc.hoja_de_vida_del_bien }}<br>
 {% endif %}
 
 {% if doc.status %}
-    <b>Estado:</b> {{ doc.status}}</br>
+    <b>Estado:</b> {{ doc.status }}<br>
 {% endif %}
 
 {% if doc.ubicacion %}
-    <b>Ubicacion:</b> {{ doc.ubicacion}}</br>
+    <b>Ubicación:</b> {{ doc.ubicacion }}<br>
 {% endif %}
 
 {% if doc.desde %}
-    <b>Desde:</b> {{ doc.desde}}</br>
+    <b>Desde:</b> {{ doc.desde }}<br>
 {% endif %}
 
 {% if doc.hasta %}
-    <b>Hasta:</b> {{ doc.hasta}}</br>
+    <b>Hasta:</b> {{ doc.hasta }}<br>
 {% endif %}
 
-</br>
-</br>
-</br>
+<br><br><br>
+
 <table border="1" cellspacing="0" cellpadding="2">
     <thead style="font-size: 0.6em;">
         <tr>
             <th>#</th>
-            <th>Código de Producto</th>
-            <th>Nombre de Producto</th>
-            <th>Hoja de Vida del Bien</th>
-            <th>Estado</th>
-            <th>Ubicación</th>
-            <th>Plan de Mantenimiento</th>
-            <th>Fecha Ultimo Mantenimiento Preventivo</th>
-            <th>Fecha próximo mantenimiento preventivo por periodicidad</th>
-            <th>Fecha última actualización de lectura</th>
-            <th>Valor de la última lectura actual</th>
-            <th>Unidad de medida de lectura</th>
-            <th>Nro. Ordenes de Servicio Abiertas</th>
-            <th>Vigencia próximo servicio por periodicidad</th>
-            <th>Vigencia próximo servicio por horas/kms</th>
+
+            {% for col in columns %}
+                {% if col.fieldname %}
+                    <th>{{ col.label if col.label else col.fieldname }}</th>
+                {% endif %}
+            {% endfor %}
         </tr>
     </thead>
+
     <tbody style="font-size: 0.5em;">
         {% for row in selected_data %}
-        <tr text-align="center">
+        <tr>
             <td>{{ loop.index }}</td>
-            <td>
-                {% if row.item_code %}
-                    {{ row.item_code }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.item_name %}
-                    {{ row.item_name }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.hoja_de_vida_del_bien %}
-                    {{ row.hoja_de_vida_del_bien }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.estado %}
-                    {{ row.estado }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.ubicacion %}
-                    {{ row.ubicacion }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.cl_plantilla_de_mantenimiento %}
-                    {{ row.cl_plantilla_de_mantenimiento }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.fecha_ultimo_mantenimiento %}
-                    {{ row.fecha_ultimo_mantenimiento }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.fecha_proximo_mantenimiento %}
-                    {{ row.fecha_proximo_mantenimiento }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.fecha_ultima_actualizacion_de_lectura %}
-                    {{ row.fecha_ultima_actualizacion_de_lectura }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.ultima_lectura_actual %}
-                    {{ row.ultima_lectura_actual }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.unidad_de_medida %}
-                    {{ row.unidad_de_medida }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.nro_ordenes %}
-                {{ row.nro_ordenes }}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.vig_prox_serv %}
-                {% if row.vig_prox_serv > 30 %}
-                <b style="color: green;">{{ row.vig_prox_serv }}</b>
-                {% endif %}
-                {% if row.vig_prox_serv <= 0 %}
-                <b style="color: red;">{{ row.vig_prox_serv }}</b>
-                {% endif %}
-                {% if row.vig_prox_serv > 0 and row.vig_prox_serv <= 30 %}
-                <b style="color: orange;">{{ row.vig_prox_serv }}</b>
-                {% endif %}
-                {% endif %}
-            </td>
-            <td>
-                {% if row.vig_prox_serv_horas_kms %}
-                    {% if row.vig_prox_serv_horas_kms > 79 and row.unidad_de_medida == 'Horas'%}
-                    <b style="color: green;">{{ row.vig_prox_serv }}</b>
-                    {% endif %}
-                    {% if row.vig_prox_serv_horas_kms > 999 and row.unidad_de_medida == 'Kms'%}
-                    <b style="color: green;">{{ row.vig_prox_serv_horas_kms }}</b>
-                    {% endif %}
-                    {% if row.vig_prox_serv_horas_kms <= 0 %}
-                    <b style="color: red;">{{ row.vig_prox_serv_horas_kms }}</b>
-                    {% endif %}
-                    {% if row.vig_prox_serv_horas_kms > 1 and row.vig_prox_serv_horas_kms <= 79 and row.unidad_de_medida == 'Horas'%}
-                    <b style="color: orange;">{{ row.vig_prox_serv_horas_kms }}</b>
-                    {% endif %}
-                    {% if row.vig_prox_serv_horas_kms > 1 and row.vig_prox_serv_horas_kms <= 999 and row.unidad_de_medida == 'Kms'%}
-                    <b style="color: orange;">{{ row.vig_prox_serv_horas_kms }}</b>
+
+            {% for col in columns %}
+                {% if col.fieldname %}
+                    {% set value = row.get(col.fieldname) %}
+
+                    {# --- REGLAS ESPECIALES --- #}
+
+                    {% if col.fieldname == "vig_prox_serv" and value %}
+                        {% if value > 30 %}
+                            <td><b style="color: green;">{{ value }}</b></td>
+                        {% elif value <= 0 %}
+                            <td><b style="color: red;">{{ value }}</b></td>
+                        {% else %}
+                            <td><b style="color: orange;">{{ value }}</b></td>
+                        {% endif %}
+
+                    {% elif col.fieldname == "vig_prox_serv_horas_kms" and value %}
+                        {% if row.unidad_de_medida == "Horas" %}
+                            {% if value > 79 %}
+                                <td><b style="color: green;">{{ value }}</b></td>
+                            {% elif value <= 0 %}
+                                <td><b style="color: red;">{{ value }}</b></td>
+                            {% else %}
+                                <td><b style="color: orange;">{{ value }}</b></td>
+                            {% endif %}
+                        {% elif row.unidad_de_medida == "Kms" %}
+                            {% if value > 999 %}
+                                <td><b style="color: green;">{{ value }}</b></td>
+                            {% elif value <= 0 %}
+                                <td><b style="color: red;">{{ value }}</b></td>
+                            {% else %}
+                                <td><b style="color: orange;">{{ value }}</b></td>
+                            {% endif %}
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+
+                    {% else %}
+                        <td>{{ value if value else "" }}</td>
                     {% endif %}
                 {% endif %}
-            </td>
+            {% endfor %}
         </tr>
         {% endfor %}
     </tbody>
 </table>
-

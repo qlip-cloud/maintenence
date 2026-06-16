@@ -66,6 +66,87 @@ frappe.ui.form.on('Gestion Multiple de Orden de Servicio', {
 	},
 });
 
+function print_orders(frm, type) {
+
+    // 1. Obtener filas seleccionadas
+    let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
+    let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
+
+    if (indexes.length == 0) {
+        frappe.msgprint(__("Debe seleccionar al menos un registro de la lista"));
+        return;
+    }
+
+    let data_table = rowmanager.datamanager.data;
+    let rows = rowmanager.datamanager.rowViewOrder
+        .map(index => indexes.includes(index) ? data_table[index] : null)
+        .filter(Boolean);
+
+    // 2. Obtener columnas visibles (limpias)
+    let dt = frm.lista_hoja_de_vida_del_bien_data_table;
+
+    let visible_columns = dt.datamanager.columns
+        .filter(col => col.fieldname && !col.hidden)
+        .sort((a, b) => a.colIndex - b.colIndex)
+        .map(col => ({
+            fieldname: col.fieldname,
+            label: col.label || col.fieldname
+        }));
+
+    // 3. Limpiar filas según columnas visibles
+    let cleaned_rows = rows.map(row => {
+        let cleaned = {};
+        visible_columns.forEach(col => {
+            cleaned[col.fieldname] = row[col.fieldname];
+        });
+        return cleaned;
+    });
+
+    // 4. AHORA sí mostramos el popup
+    let d = new frappe.ui.Dialog({
+        title: "Ajustes de impresión",
+        fields: [
+            {
+                fieldname: "con_membrete",
+                label: "Con membrete",
+                fieldtype: "Check",
+                default: 1
+            },
+            {
+                fieldname: "membrete",
+                label: "Membrete",
+                fieldtype: "Link",
+                options: "Letter Head",
+                depends_on: "eval:doc.con_membrete"
+            }
+        ],
+        primary_action_label: "Imprimir",
+        primary_action(values) {
+
+            frappe.call({
+                method: "qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.print_data",
+                args: {
+                    doc: frm.doc,
+                    selected_data: cleaned_rows,
+                    columns: visible_columns,
+                    type: type,
+                    con_membrete: values.con_membrete,
+                    letterhead: values.membrete
+                },
+                callback(r) {
+                    if (r.message) window.open(r.message);
+                }
+            });
+
+            d.hide();
+        }
+    });
+
+    d.show();
+}
+
+
+
 function create_orders(frm) {
 	
 	let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
@@ -88,40 +169,60 @@ function create_orders(frm) {
 
 }
 
-function print_orders(frm, type) {
+// function print_orders(frm, type) {
 	
-	let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
-	let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
+// 	let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
+// 	let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
 	
-	if (indexes.length == 0) frappe.msgprint(__("Debe seleccionar al menos un registro de la lista"));
-	else {
+// 	if (indexes.length == 0) frappe.msgprint(__("Debe seleccionar al menos un registro de la lista"));
+// 	else {
 
-		let data_table = rowmanager.datamanager.data
-		let rows = rowmanager.datamanager.rowViewOrder.map(index => {
-			if(indexes.includes(index)){
-				return data_table[index] 
-			}
-		}).filter(Boolean);
+// 		let data_table = rowmanager.datamanager.data
+// 		let rows = rowmanager.datamanager.rowViewOrder.map(index => {
+// 			if(indexes.includes(index)){
+// 				return data_table[index] 
+// 			}
+// 		}).filter(Boolean);
 
-		frappe.call(
-			{ 
-				method: 'qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.print_data', // Replace with your actual method path
-				args: { 
-					doc: frm.doc,
-					selected_data: rows,
-					type:type
-				}, 
-				callback(r) {
-					 if (r.message){ 
-						const w = window.open(r.message); 
-						if (!w) frappe.msgprint("Permite ventanas emergentes para ver el PDF"); 
-					} 
-				} 
-			});
+// 		let dt = frm.lista_hoja_de_vida_del_bien_data_table;
 
-	}
+// 		let visible_columns = dt.datamanager.columns
+// 			.filter(col => col.fieldname && !col.hidden)
+// 			.sort((a, b) => a.colIndex - b.colIndex)
+// 			.map(col => ({
+// 				fieldname: col.fieldname,
+// 				label: col.label
+// 			}));
 
-}
+// 		let cleaned_rows = rows.map(row => {
+// 			let cleaned = {};
+// 			visible_columns.forEach(col => {
+// 				cleaned[col.fieldname] = row[col.fieldname];
+// 			});
+// 			return cleaned;
+// 		});
+
+
+// 		frappe.call(
+// 			{ 
+// 				method: 'qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.print_data', // Replace with your actual method path
+// 				args: { 
+// 					doc: frm.doc,
+// 					selected_data: rows,
+// 					columns: visible_columns,
+// 					type:type
+// 				}, 
+// 				callback(r) {
+// 					 if (r.message){ 
+// 						const w = window.open(r.message); 
+// 						if (!w) frappe.msgprint("Permite ventanas emergentes para ver el PDF"); 
+// 					} 
+// 				} 
+// 			});
+
+// 	}
+
+// }
 
 function get_columns(is_modal){
 
@@ -183,6 +284,7 @@ function get_columns(is_modal){
 
 	col.push(
 		{
+			label:'Nombre del Producto',
 			name:'Nombre del Producto', 
 			id:'item_name', 
 			fieldname:'item_name',
@@ -192,6 +294,7 @@ function get_columns(is_modal){
 			sortable: true
 		},
 		{
+			label:'Hoja de Vida', 
 			name:'Hoja de Vida', 
 			id:'hoja_de_vida_del_bien',
 			fieldname:'hoja_de_vida_del_bien',
@@ -202,6 +305,7 @@ function get_columns(is_modal){
 			sortable: true
 		},
 		{
+			label:'Estado', 
 			name:'Estado', 
 			id:'estado',
 			fieldname:'estado',
@@ -212,6 +316,7 @@ function get_columns(is_modal){
 			sortable: true			
 		},
 		{
+			label:'Ubicacion',
 			name:'Ubicacion', 
 			id:'ubicacion',
 			fieldname:'ubicacion',
@@ -235,6 +340,7 @@ function get_columns(is_modal){
 		},
 		{
 			name:'Fecha Ultimo Mantenimiento Preventivo', 
+			label:'Fecha Ultimo Mantenimiento Preventivo', 
 			id:'fecha_ultimo_mantenimiento',
 			fieldname:'fecha_ultimo_mantenimiento',
 			fieldtype:'Date',
@@ -244,6 +350,7 @@ function get_columns(is_modal){
 		},
 		{
 			name:'Fecha próximo mantenimiento preventivo por periodicidad', 
+			label:'Fecha próximo mantenimiento preventivo por periodicidad', 
 			id:'fecha_proximo_mantenimiento',
 			fieldname:'fecha_proximo_mantenimiento',
 			fieldtype:'Date',
@@ -253,6 +360,7 @@ function get_columns(is_modal){
 		},
 		{
 			name:'Fecha última actualización de lectura', 
+			label:'Fecha última actualización de lectura', 
 			id:'fecha_ultima_actualizacion_de_lectura',
 			fieldname:'fecha_ultima_actualizacion_de_lectura',
 			fieldtype:'Date',
@@ -262,6 +370,7 @@ function get_columns(is_modal){
 		},
 		{
 			name:'Valor de la última lectura actual', 
+			label:'Valor de la última lectura actual', 
 			id:'ultima_lectura_actual',
 			fieldname:'ultima_lectura_actual',
 			fieldtype:'Int',
@@ -271,6 +380,7 @@ function get_columns(is_modal){
 		},
 		{
 			name:'Unidad de medida de lectura', 
+			label:'Unidad de medida de lectura', 
 			id:'unidad_de_medida',
 			fieldname:'unidad_de_medida',
 			fieldtype:'Data',
@@ -280,6 +390,7 @@ function get_columns(is_modal){
 		},
 		{
 			name:'Nro. Ordenes de Servicio Abiertas', 
+			label:'Nro. Ordenes de Servicio Abiertas', 
 			fieldname:'nro_ordenes',
 			id:'nro_ordenes',
 			fieldtype:'Int',
@@ -289,6 +400,7 @@ function get_columns(is_modal){
 		},
 		{
 			name:'Vigencia próximo servicio por periodicidad', 
+			label:'Vigencia próximo servicio por periodicidad', 
 			id:'vig_prox_serv', 
 			fieldname:'vig_prox_serv',
 			fieldtype:'Data',
@@ -305,6 +417,7 @@ function get_columns(is_modal){
 		},
 		{
 			name:'Vigencia próximo servicio por horas/kms', 
+			label:'Vigencia próximo servicio por horas/kms', 
 			id:'vig_prox_serv_horas_kms',
 			fieldname:'vig_prox_serv_horas_kms',
 			fieldtype:'Data',
