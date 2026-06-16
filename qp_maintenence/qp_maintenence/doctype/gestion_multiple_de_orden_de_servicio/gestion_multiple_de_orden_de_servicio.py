@@ -15,7 +15,7 @@ class GestionMultipledeOrdendeServicio(Document):
 	pass
 
 @frappe.whitelist()
-def print_data(doc, selected_data, columns, type):
+def print_data(doc, selected_data, columns, type, letterhead=None, con_membrete=False):
 
 	if isinstance(selected_data, str):
 		selected_data = json.loads(selected_data)
@@ -27,7 +27,7 @@ def print_data(doc, selected_data, columns, type):
 		doc = json.loads(doc)
 	
 	if type == 'PDF':
-		return generate_pdf(doc, selected_data, columns)
+		return generate_pdf(doc, selected_data, columns, letterhead, con_membrete)
 	if type == 'EXCEL':
 		return generate_excel(doc, selected_data, columns)
 
