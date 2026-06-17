@@ -68,21 +68,19 @@ frappe.ui.form.on('Gestion Multiple de Orden de Servicio', {
 
 function print_orders(frm, type) {
 
-    // 1. Obtener filas seleccionadas
-    let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
-    let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
-
-    if (indexes.length == 0) {
-        frappe.msgprint(__("Debe seleccionar al menos un registro de la lista"));
-        return;
+    // Si es Excel → NO mostrar popup
+    if (type === "EXCEL") {
+        return print_excel(frm);
     }
 
-    let data_table = rowmanager.datamanager.data;
-    let rows = rowmanager.datamanager.rowViewOrder
-        .map(index => indexes.includes(index) ? data_table[index] : null)
-        .filter(Boolean);
+    // Si es PDF → mostrar popup
+    if (type === "PDF") {
+        return print_pdf_with_popup(frm);
+    }
+}
 
-    // 2. Obtener columnas visibles (limpias)
+function print_excel(frm) {
+
     let dt = frm.lista_hoja_de_vida_del_bien_data_table;
 
     let visible_columns = dt.datamanager.columns
@@ -93,7 +91,19 @@ function print_orders(frm, type) {
             label: col.label || col.fieldname
         }));
 
-    // 3. Limpiar filas según columnas visibles
+    let rowmanager = dt.rowmanager;
+    let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
+
+    if (indexes.length === 0) {
+        frappe.msgprint("Debe seleccionar al menos un registro");
+        return;
+    }
+
+    let data_table = rowmanager.datamanager.data;
+    let rows = rowmanager.datamanager.rowViewOrder
+        .map(index => indexes.includes(index) ? data_table[index] : null)
+        .filter(Boolean);
+
     let cleaned_rows = rows.map(row => {
         let cleaned = {};
         visible_columns.forEach(col => {
@@ -102,7 +112,75 @@ function print_orders(frm, type) {
         return cleaned;
     });
 
-    // 4. AHORA sí mostramos el popup
+    frappe.call({
+        method: "qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.print_data",
+        args: {
+            doc: frm.doc,
+            selected_data: cleaned_rows,
+            columns: visible_columns,
+            type: "EXCEL"
+        },
+        callback(r) {
+            if (r.message) window.open(r.message);
+        }
+    });
+}
+
+function create_orders(frm) {
+	
+	let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
+	let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
+
+	if (indexes.length == 0) frappe.msgprint(__("Debe seleccionar al menos un registro de la lista"));
+	else {
+
+		let data_table = rowmanager.datamanager.data
+		let rows = rowmanager.datamanager.rowViewOrder.map(index => {
+			if(indexes.includes(index)){
+				data_table[index].cl_plantilla_de_mantenimiento = null;
+				return data_table[index] 
+			}
+		}).filter(Boolean);
+
+		modal_data(rows)
+
+	}
+
+}
+
+function print_pdf_with_popup(frm) {
+
+    let dt = frm.lista_hoja_de_vida_del_bien_data_table;
+
+    let visible_columns = dt.datamanager.columns
+        .filter(col => col.fieldname && !col.hidden)
+        .sort((a, b) => a.colIndex - b.colIndex)
+        .map(col => ({
+            fieldname: col.fieldname,
+            label: col.label || col.fieldname
+        }));
+
+    let rowmanager = dt.rowmanager;
+    let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
+
+    if (indexes.length === 0) {
+        frappe.msgprint("Debe seleccionar al menos un registro");
+        return;
+    }
+
+    let data_table = rowmanager.datamanager.data;
+    let rows = rowmanager.datamanager.rowViewOrder
+        .map(index => indexes.includes(index) ? data_table[index] : null)
+        .filter(Boolean);
+
+    let cleaned_rows = rows.map(row => {
+        let cleaned = {};
+        visible_columns.forEach(col => {
+            cleaned[col.fieldname] = row[col.fieldname];
+        });
+        return cleaned;
+    });
+
     let d = new frappe.ui.Dialog({
         title: "Ajustes de impresión",
         fields: [
@@ -129,7 +207,7 @@ function print_orders(frm, type) {
                     doc: frm.doc,
                     selected_data: cleaned_rows,
                     columns: visible_columns,
-                    type: type,
+                    type: "PDF",
                     con_membrete: values.con_membrete,
                     letterhead: values.membrete
                 },
@@ -146,83 +224,6 @@ function print_orders(frm, type) {
 }
 
 
-
-function create_orders(frm) {
-	
-	let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
-	let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
-
-	if (indexes.length == 0) frappe.msgprint(__("Debe seleccionar al menos un registro de la lista"));
-	else {
-
-		let data_table = rowmanager.datamanager.data
-		let rows = rowmanager.datamanager.rowViewOrder.map(index => {
-			if(indexes.includes(index)){
-				data_table[index].cl_plantilla_de_mantenimiento = null;
-				return data_table[index] 
-			}
-		}).filter(Boolean);
-
-		modal_data(rows)
-
-	}
-
-}
-
-// function print_orders(frm, type) {
-	
-// 	let rowmanager = frm.lista_hoja_de_vida_del_bien_data_table.rowmanager;
-// 	let indexes = rowmanager.getCheckedRows().map(crow => parseInt(crow));
-	
-// 	if (indexes.length == 0) frappe.msgprint(__("Debe seleccionar al menos un registro de la lista"));
-// 	else {
-
-// 		let data_table = rowmanager.datamanager.data
-// 		let rows = rowmanager.datamanager.rowViewOrder.map(index => {
-// 			if(indexes.includes(index)){
-// 				return data_table[index] 
-// 			}
-// 		}).filter(Boolean);
-
-// 		let dt = frm.lista_hoja_de_vida_del_bien_data_table;
-
-// 		let visible_columns = dt.datamanager.columns
-// 			.filter(col => col.fieldname && !col.hidden)
-// 			.sort((a, b) => a.colIndex - b.colIndex)
-// 			.map(col => ({
-// 				fieldname: col.fieldname,
-// 				label: col.label
-// 			}));
-
-// 		let cleaned_rows = rows.map(row => {
-// 			let cleaned = {};
-// 			visible_columns.forEach(col => {
-// 				cleaned[col.fieldname] = row[col.fieldname];
-// 			});
-// 			return cleaned;
-// 		});
-
-
-// 		frappe.call(
-// 			{ 
-// 				method: 'qp_maintenence.qp_maintenence.doctype.gestion_multiple_de_orden_de_servicio.gestion_multiple_de_orden_de_servicio.print_data', // Replace with your actual method path
-// 				args: { 
-// 					doc: frm.doc,
-// 					selected_data: rows,
-// 					columns: visible_columns,
-// 					type:type
-// 				}, 
-// 				callback(r) {
-// 					 if (r.message){ 
-// 						const w = window.open(r.message); 
-// 						if (!w) frappe.msgprint("Permite ventanas emergentes para ver el PDF"); 
-// 					} 
-// 				} 
-// 			});
-
-// 	}
-
-// }
 
 function get_columns(is_modal){
 
