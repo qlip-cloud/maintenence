@@ -265,9 +265,12 @@ frappe.ui.form.on('Orden de Servicio', {
 				};
 			});
 
-			 frappe.db.get_list('Hoja de Vida del Bien', { filters:{item_code:frm.doc.producto, estado_del_bien:["not in",["Deshabilitado"]]}, fields:['*']}).then((result)=>{
-                frm.set_value('hoja_de_vida_del_bien', result[0].name);      
-			 });
+			//  frappe.db.get_list('Hoja de Vida del Bien', { filters:{item_code:frm.doc.producto, estado_del_bien:["not in",["Deshabilitado"]]}, fields:['*']}).then((result)=>{
+            //     if (result && result.length > 0) {
+			// 		frm.set_value("hoja_de_vida_del_bien", result[0].name);
+			// 		frm.refresh_field("hoja_de_vida_del_bien");
+			// 	}
+			//  });
 		}
 		
 		if(['Mantenimiento Preventivo', 'Mantenimiento Preventivo Planificado'].includes(frm.doc.tipo_de_servicio)){

@@ -20,6 +20,7 @@
   "dato_kilometraje",
   "concepto_gasolina",
   "cl_hoja_de_vida_bien",
+  "responsable",
   "contact_info",
   "customer_address",
   "address_display",
@@ -323,6 +324,12 @@
   {
    "fieldname": "section_break_35",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "responsable",
+   "fieldtype": "Link",
+   "label": "responsable",
+   "options": "Equipo Tecnico"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -334,7 +341,7 @@
    "link_fieldname": "entrada_del_bien"
   }
  ],
- "modified": "2026-04-14 08:17:06.956347",
+ "modified": "2026-06-16 16:18:15.370769",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Entrada de Bienes",

@@ -15,55 +15,55 @@ class GestionMultipledeOrdendeServicio(Document):
 	pass
 
 @frappe.whitelist()
-def print_data(doc, selected_data, type):
+def print_data(doc, selected_data, columns, type, letterhead=None, con_membrete=False):
+
+	if isinstance(selected_data, str):
+		selected_data = json.loads(selected_data)
+
+	if isinstance(columns, str):
+		columns = json.loads(columns)
+
+	if isinstance(doc, str):
+		doc = json.loads(doc)
 	
 	if type == 'PDF':
-		return generate_pdf(doc, selected_data)
+		return generate_pdf(doc, selected_data, columns, letterhead, con_membrete)
 	if type == 'EXCEL':
-		return generate_excel(doc, selected_data)
+		return generate_excel(doc, selected_data, columns)
 
-def generate_excel(doc, selected_data):
-	data = [
-		[
-			"Código de Producto",
-			"Nombre de Producto", 
-			"Hoja de Vida del Bien", 
-			"Estado", 
-			"Ubicación", 
-			"Plan de Mantenimiento", 
-			"Fecha Ultimo Mantenimiento Preventivo", 
-			"Fecha próximo mantenimiento preventivo por periodicidad", 
-			'Fecha última actualización de lectura',
-			'Valor de la última lectura actual',  
-			'Unidad de medida de lectura', 
-			"Nro. Ordenes de Servicio Abiertas", 
-			"Vigencia próximo servicio por periodicidad",
-			'Vigencia próximo servicio por horas/kms',
-		]
-	]	
+def generate_excel(doc, selected_data, columns):
 
-	for row in json.loads(selected_data):
+	safe_columns = []
 
-		data += [
-			[
-				row.get('item_code') if row.get('item_code') else "",
-				row.get('item_name') if row.get('item_name') else "",
-				row.get('hoja_de_vida_del_bien') if row.get('hoja_de_vida_del_bien') else "",
-				row.get('estado') if row.get('estado') else "",
-				row.get('ubicacion') if row.get('ubicacion') else "",
-				row.get('cl_plantilla_de_mantenimiento') if row.get('cl_plantilla_de_mantenimiento') else "",
-				row.get('fecha_ultimo_mantenimiento') if row.get('fecha_ultimo_mantenimiento') else "",
-				row.get('fecha_proximo_mantenimiento') if row.get('fecha_proximo_mantenimiento') else "",
-				row.get('fecha_ultima_actualizacion_de_lectura') if row.get('fecha_ultima_actualizacion_de_lectura') else "",
-				row.get('ultima_lectura_actual') if row.get('ultima_lectura_actual') else "",
-				row.get('unidad_de_medida') if row.get('unidad_de_medida') else "",
-				row.get('nro_ordenes') if row.get('nro_ordenes') else 0,
-				row.get('vig_prox_serv') if row.get('vig_prox_serv') else 0,
-				row.get('vig_prox_serv_horas_kms') if row.get('vig_prox_serv_horas_kms') else 0,
-			]	
-		]
+	# Filtrar columnas válidas
+	for col in columns:
+		if not col:
+			continue
+		if not col.get("fieldname"):
+			continue
+		safe_columns.append(col)
 
-	xlsx_file = make_xlsx(data, "Gestion Multiple de Orden de Servicio")
+	header = []
+	for col in safe_columns:
+		label = col.get("label") or col.get("fieldname")
+		header.append(label)
+
+	data = [header]
+
+	for row in selected_data:
+		row_values = []
+		for col in columns:
+			if not col:
+				continue
+			fieldname = col.get("fieldname")
+
+			if not fieldname:
+				continue
+
+			row_values.append(row.get(fieldname, ""))
+		data.append(row_values)
+
+	xlsx_file = make_xlsx(data, "Gestion Multiple OS")
 
 	# Guardar archivo en File doctype
 	file = frappe.get_doc({
@@ -77,14 +77,16 @@ def generate_excel(doc, selected_data):
 
 	return file.file_url
 
-def generate_pdf(doc, selected_data):
+def generate_pdf(doc, selected_data, columns, letterhead=None, con_membrete=False):
 
 	# Renderizar plantilla Jinja 
 	html = frappe.render_template(
 		"qp_maintenence/templates/print_format/print_format_HVB.html", 
 		{
-			"doc": json.loads(doc), 
-			"selected_data": json.loads(selected_data)
+			"doc": doc, 
+			"selected_data": selected_data,
+			"columns": columns,
+			"letterhead": letterhead if con_membrete else None
 		}) 
 	
 	# Generar PDF 
