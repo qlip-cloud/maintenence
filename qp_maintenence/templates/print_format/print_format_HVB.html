@@ -37,6 +37,32 @@
 
 <br><br><br>
 
+<style>
+    thead {
+        display: table-header-group;
+    }
+    tfoot {
+        display: table-footer-group;
+    }
+    table {
+        page-break-inside: auto;
+        width: 100%;
+        border-collapse: collapse;
+    }
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 4px;
+        font-size: 0.6em;
+    }
+    .page-break {
+        page-break-before: always;
+    }
+</style>
+
 <table border="1" cellspacing="0" cellpadding="2">
     <thead style="font-size: 0.6em;">
         <tr>
@@ -58,8 +84,6 @@
             {% for col in columns %}
                 {% if col.fieldname %}
                     {% set value = row.get(col.fieldname) %}
-
-                    {# --- REGLAS ESPECIALES --- #}
 
                     {% if col.fieldname == "vig_prox_serv" and value %}
                         {% if value > 30 %}

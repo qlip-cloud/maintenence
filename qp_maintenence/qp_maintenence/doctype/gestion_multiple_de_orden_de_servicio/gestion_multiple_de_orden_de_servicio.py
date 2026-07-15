@@ -96,6 +96,7 @@ def generate_pdf(doc, selected_data, columns, letterhead=None, con_membrete=Fals
 			"orientation": "Landscape",
 			"margin-top": "10mm", 
 			"margin-bottom": "10mm",
+			"footer-right": "Página [page] de [topage]",
 			'zoom': '1' 
 		}) 
 	
