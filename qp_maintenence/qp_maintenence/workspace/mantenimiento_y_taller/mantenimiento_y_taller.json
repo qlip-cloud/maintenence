@@ -76,7 +76,7 @@
    "onboard": 0,
    "type": "Link"
   },
-   {
+  {
    "hidden": 0,
    "is_query_report": 0,
    "label": "Tipo de Actividad",
@@ -212,7 +212,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Gesti\u00f3n m\u00faltiple de orden de servicio",
+   "label": "Gestion multiple de orden de servicio",
    "link_to": "Gestion Multiple de Orden de Servicio",
    "link_type": "DocType",
    "onboard": 0,
@@ -220,7 +220,7 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 0,
+   "is_query_report": 1,
    "label": "Calendario Mantenimiento Preventivo",
    "link_to": "Calendario Mantenimiento Preventivo",
    "link_type": "Report",
@@ -245,7 +245,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-10-07 17:56:23.315884",
+ "modified": "2026-10-08 10:58:56.599797",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Mantenimiento y Taller",
