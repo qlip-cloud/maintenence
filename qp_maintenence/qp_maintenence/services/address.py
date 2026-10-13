@@ -1,5 +1,6 @@
 import frappe
 from six import iteritems, string_types
+import json
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
@@ -8,13 +9,15 @@ def handler(doctype, txt, searchfield, start, page_len, filters):
 	condition = ""
 	doc = ""
 
-	for fieldname, value in iteritems(filters):
-		if fieldname in ['customer']:
-			condition += " AND dyl.link_name = {value}".format(value=frappe.db.escape(value))
-			doc = 'Customer'
-		if fieldname in ['supplier']:
-			condition += " AND dyl.link_name = {value}".format(value=frappe.db.escape(value))
-			doc = 'Supplier'
+	if isinstance(filters, string_types):
+		filters = json.loads(filters)
+
+	if filters.get("customer"):
+		condition += " AND dyl.link_name = {value}".format(value=frappe.db.escape(filters.get("customer")))
+		doc = 'Customer'
+	if filters.get("supplier"):
+		condition += " AND dyl.link_name = {value}".format(value=frappe.db.escape(filters.get("supplier")))
+		doc = 'Supplier'
 
 	
 	return frappe.db.sql("""
@@ -26,7 +29,6 @@ def handler(doctype, txt, searchfield, start, page_len, filters):
 		{condition}                 
 		LIMIT %(start)s, %(page_len)s
 		""".format(**{
-		
 			'condition': condition,
 			'doc':doc
 		}), {

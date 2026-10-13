@@ -110,28 +110,228 @@ frappe.ui.form.on('Orden de Servicio', {
 	},
 	customer:function(frm){
 
-		frm.set_query("customer_address", function() {
-            return {
-				query:"qp_maintenence.qp_maintenence.services.address.handler",
-                filters: {"customer": frm.doc.customer}
-            };
-        });
+		frappe.call({
+			method: "qp_maintenence.qp_maintenence.services.address.handler",
+			args: {
+				doctype: "Address",
+				txt: "",
+				searchfield: "name",
+				start: 0,
+				page_len: 1,
+				filters: {
+					customer: frm.doc.customer
+				}
+			},
+			callback: function(r) {
 
-		frm.set_query("contact_person", function() {
-            return {
-				query:"qp_maintenence.qp_maintenence.services.contact.handler",
-                filters: {"customer": frm.doc.customer}
-            };
-        });
+				if (r.message && r.message.length) {
+
+					let address = r.message[0][0];
+
+					frm.set_query("customer_address", function() {
+						return {
+							filters: {
+								name: address
+							}
+						};
+					});
+
+					frm.set_value("customer_address", address);
+				}
+			}
+		});
+
+		frappe.call({
+			method: "qp_maintenence.qp_maintenence.services.contact.handler",
+			args: {
+				doctype: "Contact",
+				txt: "",
+				searchfield: "name",
+				start: 0,
+				page_len: 1,
+				filters: {
+					customer: frm.doc.customer
+				}
+			},
+			callback: function(r) {
+
+				if (r.message && r.message.length) {
+
+					let contact = r.message[0][0];
+
+					frm.set_query("contact_person", function() {
+						return {
+							filters: {
+								name: contact
+							}
+						};
+					});
+
+					frm.set_value("contact_person", contact);
+				}
+				
+			}
+		});
 
         frm.refresh_field('customer_address')
 		frm.refresh_field('contact_person')
 	},
+	cliente_hvc:function(frm){
+
+		if(frm.doc.cliente_hvc){
+			frappe.call({
+				method: "qp_maintenence.qp_maintenence.services.address.handler",
+				args: {
+					doctype: "Address",
+					txt: "",
+					searchfield: "name",
+					start: 0,
+					page_len: 1,
+					filters: {
+						customer: frm.doc.cliente_hvc
+					}
+				},
+				callback: function(r) {
+
+					if (r.message && r.message.length) {
+
+						let address = r.message[0][0];
+
+						frm.set_query("customer_address", function() {
+							return {
+								filters: {
+									name: address
+								}
+							};
+						});
+
+						frm.set_value("customer_address", address);
+					}
+				}
+			});
+
+			frappe.call({
+				method: "qp_maintenence.qp_maintenence.services.contact.handler",
+				args: {
+					doctype: "Contact",
+					txt: "",
+					searchfield: "name",
+					start: 0,
+					page_len: 1,
+					filters: {
+						customer: frm.doc.cliente_hvc
+					}
+				},
+				callback: function(r) {
+
+					if (r.message && r.message.length) {
+
+						let contact = r.message[0][0];
+
+						frm.set_query("contact_person", function() {
+							return {
+								filters: {
+									name: contact
+								}
+							};
+						});
+
+						frm.set_value("contact_person", contact);
+					}
+					
+				}
+			});
+
+			frm.refresh_field('customer_address')
+			frm.refresh_field('contact_person')
+		}
+		
+	},
+	proveedor_hvc:function(frm){
+
+		if(frm.doc.proveedor_hvc){
+			frappe.call({
+				method: "qp_maintenence.qp_maintenence.services.address.handler",
+				args: {
+					doctype: "Address",
+					txt: "",
+					searchfield: "name",
+					start: 0,
+					page_len: 1,
+					filters: {
+						customer: frm.doc.proveedor_hvc
+					}
+				},
+				callback: function(r) {
+
+					if (r.message && r.message.length) {
+
+						let address = r.message[0][0];
+
+						frm.set_query("customer_address", function() {
+							return {
+								filters: {
+									name: address
+								}
+							};
+						});
+
+						frm.set_value("customer_address", address);
+					}
+				}
+			});
+
+			frappe.call({
+				method: "qp_maintenence.qp_maintenence.services.contact.handler",
+				args: {
+					doctype: "Contact",
+					txt: "",
+					searchfield: "name",
+					start: 0,
+					page_len: 1,
+					filters: {
+						customer: frm.doc.proveedor_hvc
+					}
+				},
+				callback: function(r) {
+
+					if (r.message && r.message.length) {
+
+						let contact = r.message[0][0];
+
+						frm.set_query("contact_person", function() {
+							return {
+								filters: {
+									name: contact
+								}
+							};
+						});
+
+						frm.set_value("contact_person", contact);
+					}
+					
+				}
+			});
+
+			frm.refresh_field('customer_address')
+			frm.refresh_field('contact_person')
+		}
+		
+	},
 	customer_address:function(frm){
 		if(frm.doc.customer_address){
 			frappe.db.get_value("Address", frm.doc.customer_address, "*", (r) => {
-				frm.set_value('address_display',
-					`${r.address_line1}\n${r.city}\n${r.state}\n${r.pincode}\n${r.country}`);
+
+				let addr = null
+
+				if( r.address_line1 ) addr += `${r.address_line1}\n`
+				if( r.city ) addr += `${r.city}\n`
+				if( r.state ) addr += `${r.state}\n`
+				if( r.pincode ) addr += `${r.pincode}\n`
+				if( r.country ) addr += `${r.country}\n`
+
+				frm.set_value('address_display', addr); //SI NO LO TIENE NO LO MAPEA
+
 			});
 		}else{
 			frm.set_value('address_display', '')
@@ -142,8 +342,14 @@ frappe.ui.form.on('Orden de Servicio', {
 	contact_person:function(frm){
 		if(frm.doc.contact_person){
 			frappe.db.get_value("Contact", frm.doc.contact_person, "*", (r) => {
-					frm.set_value('contact_display', 
-						`${r.first_name}\nNúmero móvil: ${r.mobile_no}\nDirección de correo electrónico: ${r.email_id}`);
+
+				let cont = null
+
+				if( r.first_name ) cont += `${r.first_name}\n`
+				if( r.mobile_no ) cont += `${r.mobile_no}\n`
+				if( r.email_id ) cont += `${r.email_id}\n`
+
+					frm.set_value('contact_display', cont);
 			});
 		}else{
 			frm.set_value('contact_display', '')
