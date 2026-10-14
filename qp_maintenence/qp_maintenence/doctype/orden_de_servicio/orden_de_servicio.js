@@ -322,7 +322,7 @@ frappe.ui.form.on('Orden de Servicio', {
 		if(frm.doc.customer_address){
 			frappe.db.get_value("Address", frm.doc.customer_address, "*", (r) => {
 
-				let addr = null
+				let addr = ""
 
 				if( r.address_line1 ) addr += `${r.address_line1}\n`
 				if( r.city ) addr += `${r.city}\n`
@@ -343,7 +343,7 @@ frappe.ui.form.on('Orden de Servicio', {
 		if(frm.doc.contact_person){
 			frappe.db.get_value("Contact", frm.doc.contact_person, "*", (r) => {
 
-				let cont = null
+				let cont = ""
 
 				if( r.first_name ) cont += `${r.first_name}\n`
 				if( r.mobile_no ) cont += `${r.mobile_no}\n`
