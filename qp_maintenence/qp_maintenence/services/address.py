@@ -4,7 +4,7 @@ import json
 
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
-def handler(doctype, txt, searchfield, start, page_len, filters):
+def handler(doctype, txt, searchfield, start, page_len, filters, is_shipping):
 
 	condition = ""
 	doc = ""
@@ -18,7 +18,8 @@ def handler(doctype, txt, searchfield, start, page_len, filters):
 	if filters.get("supplier"):
 		condition += " AND dyl.link_name = {value}".format(value=frappe.db.escape(filters.get("supplier")))
 		doc = 'Supplier'
-
+	if is_shipping:
+		condition += " AND is_shipping_address = 1"
 	
 	return frappe.db.sql("""
 		SELECT addr.name

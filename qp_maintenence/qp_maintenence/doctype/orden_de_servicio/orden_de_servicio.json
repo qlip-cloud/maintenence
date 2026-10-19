@@ -41,8 +41,9 @@
   "contact_info",
   "customer_address",
   "address_display",
-  "contact_person",
-  "contact_display",
+  "column_break_36",
+  "shipping_address_name",
+  "shipping_address",
   "datos_de_la_novedad_section",
   "ver_novedades",
   "novedades",
@@ -234,20 +235,9 @@
   },
   {
    "fieldname": "address_display",
-   "fieldtype": "Small Text",
-   "label": "Address"
-  },
-  {
-   "fieldname": "contact_person",
-   "fieldtype": "Link",
-   "label": "Persona de contacto",
-   "options": "Contact"
-  },
-  {
-   "fieldname": "contact_display",
-   "fieldtype": "Small Text",
-   "in_global_search": 1,
-   "label": "Contact"
+   "fieldtype": "Text Editor",
+   "label": "Address",
+   "read_only": 1
   },
   {
    "fieldname": "detalle_del_servicio_realizado",
@@ -442,6 +432,22 @@
    "fieldtype": "Select",
    "label": "Tipo de bien",
    "options": "Equipo\nVeh\u00edculo\nLocativo"
+  },
+  {
+   "fieldname": "shipping_address_name",
+   "fieldtype": "Link",
+   "label": "Nombre de Direcci\u00f3n de Env\u00edo",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "shipping_address",
+   "fieldtype": "Text Editor",
+   "label": "Direcci\u00f3n de Env\u00edo",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_36",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -473,7 +479,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-04-21 12:02:31.836522",
+ "modified": "2026-10-16 16:53:56.435089",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
