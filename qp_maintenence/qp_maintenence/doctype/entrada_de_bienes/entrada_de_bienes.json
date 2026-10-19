@@ -24,8 +24,9 @@
   "contact_info",
   "customer_address",
   "address_display",
-  "contact_person",
-  "contact_display",
+  "column_break_19",
+  "shipping_address_name",
+  "shipping_address",
   "section_break_11",
   "item_code",
   "column_break_13",
@@ -186,21 +187,9 @@
   },
   {
    "fieldname": "address_display",
-   "fieldtype": "Small Text",
-   "label": "Address"
-  },
-  {
-   "fieldname": "contact_person",
-   "fieldtype": "Link",
-   "label": "Contact Person",
-   "options": "Contact",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "contact_display",
-   "fieldtype": "Small Text",
-   "in_global_search": 1,
-   "label": "Contact"
+   "fieldtype": "Text Editor",
+   "label": "Address",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_11",
@@ -330,6 +319,23 @@
    "fieldtype": "Link",
    "label": "responsable",
    "options": "Equipo Tecnico"
+  },
+  {
+   "fieldname": "shipping_address_name",
+   "fieldtype": "Link",
+   "label": "Nombre de Direcci\u00f3n de Env\u00edo",
+   "options": "Address",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "shipping_address",
+   "fieldtype": "Text Editor",
+   "label": "Shipping Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -341,7 +347,7 @@
    "link_fieldname": "entrada_del_bien"
   }
  ],
- "modified": "2026-06-16 16:18:15.370769",
+ "modified": "2026-10-16 18:20:06.420948",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Entrada de Bienes",
