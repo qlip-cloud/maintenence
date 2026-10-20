@@ -533,9 +533,9 @@ function get_address(customer, target_field, is_shipping, frm){
 			start: 0,
 			page_len: 1,
 			filters: {
-				customer: customer
-			},
-			is_shipping:is_shipping
+				customer: customer,
+				is_shipping:is_shipping
+			}			
 		},
 		callback: function(r) {
 

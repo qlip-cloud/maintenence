@@ -437,7 +437,7 @@
    "fieldname": "shipping_address_name",
    "fieldtype": "Link",
    "label": "Nombre de Direcci\u00f3n de Env\u00edo",
-   "options": "Contact"
+   "options": "Address"
   },
   {
    "fieldname": "shipping_address",
@@ -479,7 +479,7 @@
    "link_fieldname": "orden_de_servicio"
   }
  ],
- "modified": "2026-10-16 16:53:56.435089",
+ "modified": "2026-10-20 10:51:39.653340",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Orden de Servicio",
