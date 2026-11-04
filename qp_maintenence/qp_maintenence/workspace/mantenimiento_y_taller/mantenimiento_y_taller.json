@@ -220,6 +220,15 @@
   },
   {
    "hidden": 0,
+   "is_query_report": 1,
+   "label": "Calendario Mantenimientos Preventivo",
+   "link_to": "Calendario Mantenimientos Preventivos",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
    "is_query_report": 0,
    "label": "Configurar",
    "link_type": "DocType",
@@ -236,7 +245,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-04-17 09:16:23.172354",
+ "modified": "2026-10-22 14:10:56.246721",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Mantenimiento y Taller",

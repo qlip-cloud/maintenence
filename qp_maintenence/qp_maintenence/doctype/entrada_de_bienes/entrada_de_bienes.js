@@ -42,48 +42,29 @@ frappe.ui.form.on('Entrada de Bienes', {
 	},
 	cliente:function(frm, cdt, cdn){
 
-		frm.set_query("customer_address", function() {
-            return {
-				query:"qp_maintenence.qp_maintenence.services.address.handler",
-                filters: {"customer": frm.doc.cliente}
-            };
-        });
-
-		frm.set_query("contact_person", function() {
-            return {
-				query:"qp_maintenence.qp_maintenence.services.contact.handler",
-                filters: {"customer": frm.doc.cliente}
-            };
-        });
-
-		
-        frm.refresh_field('customer_address')
-		frm.refresh_field('contact_person')
+		if(frm.doc.cliente){
+			get_address(frm.doc.cliente, "customer_address", false, frm)
+			get_address(frm.doc.cliente, "shipping_address_name", true, frm)
+		}
 	
 	},
 	customer_address:function(frm){
 		if(frm.doc.customer_address){
-			frappe.db.get_value("Address", frm.doc.customer_address, "*", (r) => {
-				frm.set_value('address_display',
-					`${r.address_line1}\n${r.city}\n${r.state}\n${r.pincode}\n${r.country}`);
-			});
+			erpnext.utils.get_address_display(frm, 'customer_address', 'address_display');
 		}else{
 			frm.set_value('address_display', '')
 		}
 
 		frm.refresh_field('address_display')
 	},
-	contact_person:function(frm){
-		if(frm.doc.contact_person){
-			frappe.db.get_value("Contact", frm.doc.contact_person, "*", (r) => {
-					frm.set_value('contact_display', 
-						`${r.first_name}\nNúmero móvil: ${r.mobile_no}\nDirección de correo electrónico: ${r.email_id}`);
-			});
+	shipping_address_name:function(frm){
+		if(frm.doc.shipping_address_name){
+			erpnext.utils.get_address_display(frm, 'shipping_address_name', 'shipping_address');
 		}else{
-			frm.set_value('contact_display', '')
+			frm.set_value('shipping_address', '')
 		}
 
-		frm.refresh_field('contact_display')
+		frm.refresh_field('shipping_address')
 	},
 	item_code:function(frm){
 		if(frm.doc.item_code){
@@ -264,3 +245,39 @@ frappe.ui.form.on('Entrada de Bienes', {
 			
 	}
 });
+
+function get_address(customer, target_field, is_shipping, frm){
+
+	frappe.call({
+		method: "qp_maintenence.qp_maintenence.services.address.handler",
+		async:true,
+		args: {
+			doctype: "Address",
+			txt: "",
+			searchfield: "name",
+			start: 0,
+			page_len: 1,
+			filters: {
+				customer: customer
+			},
+			is_shipping:is_shipping
+		},
+		callback: function(r) {
+
+			if (r.message && r.message.length) {
+
+				let address = r.message[0][0];
+				
+				frm.set_query(target_field, function() {
+					return {
+						filters: {
+							name: address
+						}
+					};
+				});
+
+				frm.set_value(target_field, address);
+			}
+		}
+	});
+}

@@ -45,8 +45,9 @@
   "contact_info",
   "customer_address",
   "address_display",
-  "contact_person",
-  "contact_display",
+  "column_break_39",
+  "shipping_address_name",
+  "shipping_address",
   "contact_phone",
   "contact_mobile",
   "contact_email",
@@ -205,27 +206,15 @@
   {
    "fieldname": "customer_address",
    "fieldtype": "Link",
-   "label": "Direcci\u00f3n",
+   "label": "Direcci\u00f3n del cliente",
    "options": "Address",
    "print_hide": 1
   },
   {
    "fieldname": "address_display",
-   "fieldtype": "Small Text",
-   "label": "Address"
-  },
-  {
-   "fieldname": "contact_person",
-   "fieldtype": "Link",
-   "label": "Contact Person",
-   "options": "Contact",
-   "print_hide": 1
-  },
-  {
-   "fieldname": "contact_display",
-   "fieldtype": "Small Text",
-   "in_global_search": 1,
-   "label": "Contact"
+   "fieldtype": "Text Editor",
+   "label": "Address",
+   "read_only": 1
   },
   {
    "fieldname": "contact_phone",
@@ -450,6 +439,23 @@
    "fieldtype": "Select",
    "label": "Estado del Bien",
    "options": "\nDisponible\nEn mantenimiento\nDeshabilitado"
+  },
+  {
+   "fieldname": "shipping_address_name",
+   "fieldtype": "Link",
+   "label": "Nombre de Direcci\u00f3n de Env\u00edo",
+   "options": "Address",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "shipping_address",
+   "fieldtype": "Text Editor",
+   "label": "Direcci\u00f3n de Env\u00edo",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_39",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -471,7 +477,7 @@
    "link_fieldname": "cl_hoja_de_vida_bien"
   }
  ],
- "modified": "2026-04-21 12:01:38.681725",
+ "modified": "2026-10-16 18:16:13.613178",
  "modified_by": "Administrator",
  "module": "Qp Maintenence",
  "name": "Hoja de Vida del Bien",

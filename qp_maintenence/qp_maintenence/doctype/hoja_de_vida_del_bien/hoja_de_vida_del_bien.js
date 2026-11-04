@@ -31,44 +31,36 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 		});
 	},
 	customer:function(frm){
-
-		frm.set_query("customer_address", function() {
-            return {
-				query:"qp_maintenence.qp_maintenence.services.address.handler",
-                filters: {"customer": frm.doc.customer}
-            };
-        });
-
-		frm.set_query("contact_person", function() {
-            return {
-				query:"qp_maintenence.qp_maintenence.services.contact.handler",
-                filters: {"customer": frm.doc.customer}
-            };
-        });
-		
-        frm.refresh_field('customer_address')
-		frm.refresh_field('contact_person')
-
+		if(frm.doc.customer){
+			get_address(frm.doc.customer, "customer_address", false, frm)
+			get_address(frm.doc.customer, "shipping_address_name", true, frm)
+		}
 	},
 	supplier:function(frm){
 
-		frm.set_query("customer_address", function() {
-            return {
-				query:"qp_maintenence.qp_maintenence.services.address.handler",
-                filters: {"supplier": frm.doc.supplier}
-            };
-        });
-
-		frm.set_query("contact_person", function() {
-            return {
-				query:"qp_maintenence.qp_maintenence.services.contact.handler",
-                filters: {"supplier": frm.doc.supplier}
-            };
-        });
+		if(frm.doc.supplier){
+			get_address(frm.doc.supplier, "customer_address", false, frm)
+			get_address(frm.doc.supplier, "shipping_address_name", true, frm)
+		}
 		
-        frm.refresh_field('customer_address')
-		frm.refresh_field('contact_person')
+	},
+	customer_address:function(frm){
+		if(frm.doc.customer_address){
+			erpnext.utils.get_address_display(frm, 'customer_address', 'address_display');
+		}else{
+			frm.set_value('address_display', '')
+		}
 
+		frm.refresh_field('address_display')
+	},
+	shipping_address_name:function(frm){
+		if(frm.doc.shipping_address_name){
+			erpnext.utils.get_address_display(frm, 'shipping_address_name', 'shipping_address');
+		}else{
+			frm.set_value('shipping_address', '')
+		}
+
+		frm.refresh_field('shipping_address')
 	},
 	is_group:function(frm){
 		if(frm.doc.is_group == 1){
@@ -78,30 +70,6 @@ frappe.ui.form.on('Hoja de Vida del Bien', {
 				};
 			});
 		}
-	},
-	customer_address:function(frm){
-		if(frm.doc.customer_address){
-			frappe.db.get_value("Address", frm.doc.customer_address, "*", (r) => {
-				frm.set_value('address_display',
-					`${r.address_line1}\n${r.city}\n${r.state}\n${r.pincode}\n${r.country}`);
-			});
-		}else{
-			frm.set_value('address_display', '')
-		}
-
-		frm.refresh_field('address_display')
-	},
-	contact_person:function(frm){
-		if(frm.doc.contact_person){
-			frappe.db.get_value("Contact", frm.doc.contact_person, "*", (r) => {
-					frm.set_value('contact_display', 
-						`${r.first_name}\nNúmero móvil: ${r.mobile_no}\nDirección de correo electrónico: ${r.email_id}`);
-			});
-		}else{
-			frm.set_value('contact_display', '')
-		}
-
-		frm.refresh_field('contact_display')
 	},
 	cl_plantilla_datos_tecnicos_de_mantenimiento:function(frm){
 		if(frm.doc.cl_plantilla_datos_tecnicos_de_mantenimiento){
@@ -218,6 +186,42 @@ function refresh_data(){
 					mp_datatable.refresh(r.message);
 				}  
 				else cur_frm.toggle_display('mantenimiento_preventivo_section', false);
+			}
+		}
+	});
+}
+
+function get_address(customer, target_field, is_shipping, frm){
+
+	frappe.call({
+		method: "qp_maintenence.qp_maintenence.services.address.handler",
+		async:true,
+		args: {
+			doctype: "Address",
+			txt: "",
+			searchfield: "name",
+			start: 0,
+			page_len: 1,
+			filters: {
+				customer: customer
+			},
+			is_shipping:is_shipping
+		},
+		callback: function(r) {
+
+			if (r.message && r.message.length) {
+
+				let address = r.message[0][0];
+				
+				frm.set_query(target_field, function() {
+					return {
+						filters: {
+							name: address
+						}
+					};
+				});
+
+				frm.set_value(target_field, address);
 			}
 		}
 	});
